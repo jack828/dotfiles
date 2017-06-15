@@ -1,0 +1,14 @@
+eval "$(thefuck --alias fuck)"
+
+alias l="k"
+alias ka="k -ah"
+
+# Clock SSH Config updater
+SSHConfigBase='~/.ssh/config.base'
+SSHConfigRepo='~/Clock/SSHConfiguration/'
+SSHConfig='~/.ssh/config'
+alias updatesshconfig="cd $SSHConfigRepo && git pull && \
+  cat $SSHConfigRepo/ssh_config.d/* > $SSHConfig && \
+  cat $SSHConfigBase >> $SSHConfig && cd ~\
+"
+

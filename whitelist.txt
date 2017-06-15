@@ -1,0 +1,7 @@
+.gitconfig
+.gitignore_global
+.tmux.conf
+.zshrc
+.aliases
+.vimrc
+.mongorc.js
