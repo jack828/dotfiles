@@ -296,6 +296,9 @@
 "" Plugins
   call plug#begin()
 
+  " Wakatime
+  Plug 'wakatime/vim-wakatime'
+
   " Language support
   Plug 'sheerun/vim-polyglot'
   Plug 'fatih/vim-go'
