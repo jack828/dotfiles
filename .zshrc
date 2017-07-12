@@ -30,9 +30,6 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Mongodb
-export PATH=~/mongodb/bin:$PATH
-
 # For HH - https://github.com/dvorka/hstr
 export HISTFILE=~/.zsh_history  # ensure history file visibility
 export HH_CONFIG=hicolor        # get more colors
@@ -44,3 +41,6 @@ export PATH=${PATH}:~/android-sdk-macosx/platform-tools:~/android-sdk-macosx/too
 
 # FZF 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Mongodb
+export PATH=~/.mongodb/versions/mongodb-current/bin:$PATH
