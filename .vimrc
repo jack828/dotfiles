@@ -204,6 +204,8 @@
   " run mocha with Leader M
   nnoremap <Leader>m <C-w>v :te mocha %<CR>
 
+  " run file in node
+  nnoremap <Leader>n <C-w>v :te node %<CR>
   " show invisible charactars
   set list
 
