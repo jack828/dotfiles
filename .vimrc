@@ -413,13 +413,8 @@
   endif
 
   " Autosave and autoread
-  set autoread
-  augroup autoSaveAndRead
-      autocmd!
-      autocmd TextChanged,InsertLeave,FocusLost * silent! wall
-      autocmd CursorHold * silent! checktime
-  augroup END
-
+  au FocusLost,WinLeave * :silent! wall
+  au FocusGained,BufEnter * :silent! !
   " JS code intell
   Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' }
 
