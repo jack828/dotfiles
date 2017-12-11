@@ -19,11 +19,14 @@ HIST_STAMPS="dd/mm/yyyy"
 
 # Plugins - can be found in ~/.oh-my-zsh/plugins/*
 # k - git clone https://github.com/supercrabtree/k $HOME/.oh-my-zsh/custom/plugins/k
-plugins=(git k)
+# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+plugins=(git k zsh-syntax-highlighting)
+
+# Plugin configs
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets root)
 
 # User configuration
 export PATH="$HOME/npm-global/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
-
 
 source $ZSH/oh-my-zsh.sh
 
