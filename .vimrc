@@ -298,6 +298,13 @@
 "" Plugins
   call plug#begin()
 
+  " Linting
+  Plug 'w0rp/ale'
+  let g:ale_linters = {
+  \   'javascript': [ 'eslint' ],
+  \   'jsx': [ 'eslint' ]
+  \}
+
   " Wakatime
   Plug 'wakatime/vim-wakatime'
 
@@ -360,26 +367,31 @@
 
   " Linting
   if has('nvim')
-    Plug 'neomake/neomake'
+    " Plug 'neomake/neomake'
 
       " make neomake warnings look more like syntastic ones
-      let g:neomake_error_sign = {
-      \ 'text': '>>',
-      \ 'texthl': 'ErrorMsg',
-      \ }
-      hi MyWarningMsg ctermbg=3 ctermfg=0
-      let g:neomake_warning_sign = {
-      \ 'text': '>>',
-      \ 'texthl': 'MyWarningMsg',
-      \ }
+      " let g:neomake_error_sign = {
+      " \ 'text': '>>',
+      " \ 'texthl': 'ErrorMsg',
+      " \ }
+      " hi MyWarningMsg ctermbg=3 ctermfg=0
+      " let g:neomake_warning_sign = {
+      " \ 'text': '>>',
+      " \ 'texthl': 'MyWarningMsg',
+      " \ }
 
-      let g:neomake_javascript_enabled_makers = ['standard']
-      let g:neomake_jsx_enabled_makers = ['eslint']
-      let g:neomake_html_enabled_makers = ['htmlhint']
+      " let g:neomake_javascript_enabled_makers = ['standard']
+      " let g:neomake_jsx_enabled_makers = ['eslint']
+      " let g:neomake_html_enabled_makers = ['htmlhint']
 
       " lint as often as we can
       "autocmd BufWinEnter,InsertLeave,TextChanged,BufReadPre,FileReadPre * update | Neomake
-      autocmd! BufEnter,BufWritePost * Neomake
+      " autocmd! BufEnter,BufWritePost * Neomake
+      " use linters from a project's node_modules when possible
+      " let g:neomake_javascript_jshint_exe = nrun#Which('jshint')
+      " let g:neomake_javascript_jscs_exe = nrun#Which('jscs')
+      " let g:neomake_javascript_eslint_exe = nrun#Which('eslint')
+      " let g:neomake_javascript_standard_exe = nrun#Which('standard')
 
     Plug 'balaclark/vim-switchblade'
   endif
@@ -515,9 +527,3 @@
 "" Set colorscheme
   set background=dark
   colorscheme PaperColor
-
-" use linters from a project's node_modules when possible
-  let g:neomake_javascript_jshint_exe = nrun#Which('jshint')
-  let g:neomake_javascript_jscs_exe = nrun#Which('jscs')
-  let g:neomake_javascript_eslint_exe = nrun#Which('eslint')
-  let g:neomake_javascript_standard_exe = nrun#Which('standard')
