@@ -1,6 +1,7 @@
 eval "$(thefuck --alias fuck)"
 
-alias l="k"
+unalias l
+alias l="exa -abghl --git --color=automatic"
 alias ka="k -ah"
 
 # Clock SSH Config updater
