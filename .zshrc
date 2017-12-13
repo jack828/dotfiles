@@ -1,8 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/jackburgess/.oh-my-zsh
 
-source ~/.aliases
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 ZSH_THEME="powerlevel9k/powerlevel9k"
@@ -47,3 +45,6 @@ export PATH=${PATH}:~/android-sdk-macosx/platform-tools:~/android-sdk-macosx/too
 
 # Mongodb
 export PATH=~/.mongodb/versions/mongodb-current/bin:$PATH
+
+# Source own aliases LAST to override zsh's aliases
+source ~/.aliases
