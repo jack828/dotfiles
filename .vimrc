@@ -525,5 +525,6 @@
   call plug#end()
 
 "" Set colorscheme
+  set termguicolors
   set background=dark
   colorscheme PaperColor

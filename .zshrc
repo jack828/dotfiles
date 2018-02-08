@@ -1,14 +1,14 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/jackburgess/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
-ZSH_THEME="powerlevel9k/powerlevel9k"
 POWERLEVEL9K_MODE='awesome-patched'
+ZSH_THEME="powerlevel9k/powerlevel9k"
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_DIR_BACKGROUND='white'
 
-DEFAULT_USER='jackburgess'
+DEFAULT_USER='jack'
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -46,5 +46,13 @@ export PATH=${PATH}:~/android-sdk-macosx/platform-tools:~/android-sdk-macosx/too
 # Mongodb
 export PATH=~/.mongodb/versions/mongodb-current/bin:$PATH
 
+# NPM global
+NPM_PACKAGES="${HOME}/.npm-global"
+PATH="$NPM_PACKAGES/bin:$PATH"
+unset MANPATH
+export MANPATH="$NPM_PACKAGES/SHARE/MAN:$(manpath)"
+
 # Source own aliases LAST to override zsh's aliases
 source ~/.aliases
+
+source ~/.cargo/env
