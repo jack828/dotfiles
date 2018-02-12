@@ -12,5 +12,3 @@ alias updatesshconfig="cd $SSHConfigRepo && git pull && \
   cat $SSHConfigRepo/ssh_config.d/* > $SSHConfig && \
   cat $SSHConfigBase >> $SSHConfig && cd ~\
 "
-
-alias nvim="/usr/bin/nvim -u ~/.vimrc"
