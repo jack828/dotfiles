@@ -1,7 +1,9 @@
+!! This is now done via gnome-tweak-tool
+
 ! FN & Control_L swapped in BIOS
 ! Swap Alt_L & Control_L
-keycode 37 = Alt_L
-keycode 64 = Control_L
+! keycode 37 = Alt_L
+! keycode 64 = Control_L
 
 ! Remap Caps_Lock to Escape
-keycode 66 = Escape
+! keycode 66 = Escape
