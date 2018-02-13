@@ -56,6 +56,3 @@ export MANPATH="$NPM_PACKAGES/SHARE/MAN:$(manpath)"
 source ~/.aliases
 
 source ~/.cargo/env
-
-# Custom keybindings
-xmodmap ~/.Xmodmap
