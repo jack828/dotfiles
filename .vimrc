@@ -547,3 +547,6 @@
       exe 'NeoCompleteUnlock'
     endif
   endfunction
+
+" stop the command popup window from appearing. literally why
+  map q: :q
