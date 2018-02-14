@@ -305,6 +305,8 @@
   \   'jsx': [ 'eslint' ]
   \}
 
+  let g:ale_sign_column_always = 1
+
   " Wakatime
   Plug 'wakatime/vim-wakatime'
 
