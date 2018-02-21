@@ -23,9 +23,6 @@ plugins=(git k zsh-syntax-highlighting)
 # Plugin configs
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets root)
 
-# User configuration
-export PATH="$HOME/npm-global/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
-
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -37,10 +34,10 @@ export HH_CONFIG=hicolor        # get more colors
 bindkey -s "\C-r" "\eqhh\n"     # bind hh to Ctrl-r (for Vi mode check doc)
 
 # For android sdk
-export ANDROID_HOME=~/android-sdk-macosx/
-export PATH=${PATH}:~/android-sdk-macosx/platform-tools:~/android-sdk-macosx/tools
+# export ANDROID_HOME=~/android-sdk-macosx/
+# export PATH=${PATH}:~/android-sdk-macosx/platform-tools:~/android-sdk-macosx/tools
 
-# FZF 
+# FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Mongodb
