@@ -375,7 +375,7 @@
   " Autocomplete
   if has('nvim')
     " https://gregjs.com/vim/2016/configuring-the-deoplete-asynchronous-keyword-completion-plugin-with-tern-for-vim/
-    Plug 'Shougo/deoplete.nvim'
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     "Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
 
       let g:deoplete#enable_at_startup = 1
@@ -508,20 +508,12 @@
 
 " Disable Deoplete when selecting multiple cursors starts
   function! Multiple_cursors_before()
-    if exists('*deoplete#disable')
-      exe 'call deoplete#disable()'
-    elseif exists(':NeoCompleteLock') == 2
-      exe 'NeoCompleteLock'
-    endif
+    let b:deoplete_disable_auto_complete = 1
   endfunction
 
 " Enable Deoplete when selecting multiple cursors ends
   function! Multiple_cursors_after()
-    if exists('*deoplete#enable')
-      exe 'call deoplete#enable()'
-    elseif exists(':NeoCompleteUnlock') == 2
-      exe 'NeoCompleteUnlock'
-    endif
+    let b:deoplete_disable_auto_complete = 0
   endfunction
 
 " stop the command popup window from appearing. literally why
