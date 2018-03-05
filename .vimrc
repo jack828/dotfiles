@@ -191,8 +191,8 @@
   nnoremap <Leader>q :bp\|bd #<CR>
 
   " buffer fun
-  " nnoremap gh :bp<CR>
-  " nnoremap gl :bn<CR>
+  nnoremap gh :bp<CR>
+  nnoremap gl :bn<CR>
   nnoremap g<Left> :bp<CR>
   nnoremap g<Right> :bn<CR>
   nnoremap <Leader>i :b
