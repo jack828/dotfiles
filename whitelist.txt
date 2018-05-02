@@ -6,3 +6,5 @@
 .vimrc
 .mongorc.js
 .Xmodmap
+bin/
+
