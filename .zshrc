@@ -53,6 +53,9 @@ export MANPATH="$NPM_PACKAGES/SHARE/MAN:$(manpath)"
 # For Robo3T
 export PATH=/usr/local/robo3t/bin:$PATH
 
+# Customising htop, wooo
+export HTOPRC=~/.htoprc
+
 # Source own aliases LAST to override zsh's aliases
 source ~/.aliases
 
