@@ -8,4 +8,4 @@
 .Xmodmap
 .htoprc
 bin/
-
+.config/kitty/kitty.conf
