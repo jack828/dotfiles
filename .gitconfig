@@ -1,23 +1,24 @@
 [user]
-	name = Jack Burgess
-	email = jackburgess124@gmail.com
-	username = jack828
+  name = Jack Burgess
+  email = jackburgess124@gmail.com
+  username = jack828
+  signingkey = 5078DE7F5C4CA72B
 [push]
-	default = simple
+  default = simple
 [alias]
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	ci = commit
-	co = checkout
-	st = status
-	br = branch
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  ci = commit
+  co = checkout
+  st = status
+  br = branch
 [color]
-	diff = auto
-	status = auto
-	branch = auto
+  diff = auto
+  status = auto
+  branch = auto
 [core]
-	whitespace = -trailing-space
-	excludesfile = /Users/jackburgess/.gitignore_global
-	editor = nvim
+  whitespace = -trailing-space
+  excludesfile = /Users/jackburgess/.gitignore_global
+  editor = nvim
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	trustExitCode = true
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  trustExitCode = true
