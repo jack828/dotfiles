@@ -19,6 +19,5 @@
   whitespace = -trailing-space
   excludesfile = /Users/jackburgess/.gitignore_global
   editor = nvim
-[difftool "sourcetree"]
-  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-  trustExitCode = true
+[commit]
+  gpgsign = true
