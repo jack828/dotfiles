@@ -34,8 +34,8 @@ export HH_CONFIG=hicolor        # get more colors
 bindkey -s "\C-r" "\eqhh\n"     # bind hh to Ctrl-r (for Vi mode check doc)
 
 # For android sdk
-export ANDROID_HOME=~/Android/Sdk/
-export PATH=${PATH}:~/Android/Sdk/platform-tools:~/Android/Sdk/tools
+export ANDROID_HOME=/home/jack/Android/Sdk/
+export PATH=${PATH}:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$ANDROID_HOME/build-tools
 export PATH=${PATH}:/opt/gradle/gradle-4.6/bin
 
 # FZF
