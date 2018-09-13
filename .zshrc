@@ -38,6 +38,9 @@ export ANDROID_HOME=/home/jack/Android/Sdk/
 export PATH=${PATH}:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$ANDROID_HOME/build-tools
 export PATH=${PATH}:/opt/gradle/gradle-4.6/bin
 
+# Allow locally installed npm packages to be in path
+export PATH=${PATH}:./node_modules/.bin
+
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
