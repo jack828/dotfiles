@@ -1,12 +1,9 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-POWERLEVEL9K_MODE='awesome-patched'
-ZSH_THEME="powerlevel9k/powerlevel9k"
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_DIR_BACKGROUND='white'
+# ZSH Theme
+# https://github.com/denysdovhan/spaceship-prompt#oh-my-zsh
+ZSH_THEME="spaceship"
 
 DEFAULT_USER='jack'
 
