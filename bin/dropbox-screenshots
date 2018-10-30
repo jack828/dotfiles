@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+# Take a screenshot of an area of the screen, upload it to dropbox and put the url into the clipboard
+
+FILENAME=~/Dropbox/Screenshots/Screenshot\ `date +%Y-%m-%d-%H:%M`.png
+
+gnome-screenshot -a -f "$FILENAME"
+
+URL=`dropbox sharelink "$FILENAME"`
+
+echo $URL | clip
+
+notify-send "Copied $URL to clipboard"
