@@ -1,0 +1,3 @@
+curl-headers () {
+  /usr/bin/curl -sSl -D - $1 -o /dev/null
+}

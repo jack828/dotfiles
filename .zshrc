@@ -59,4 +59,7 @@ export HTOPRC=~/.htoprc
 # Source own aliases LAST to override zsh's aliases
 source ~/.aliases
 
+# Rust stuff
 source ~/.cargo/env
+
+source ~/.commands

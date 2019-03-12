@@ -3,6 +3,7 @@
 .tmux.conf
 .zshrc
 .aliases
+.commands
 .vimrc
 .mongorc.js
 .Xmodmap
