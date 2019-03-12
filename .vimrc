@@ -307,6 +307,8 @@
 
   let g:ale_sign_column_always = 1
 
+  Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+
   " Wakatime
   Plug 'wakatime/vim-wakatime'
 
