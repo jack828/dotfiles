@@ -1,16 +1,11 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+DEFAULT_USER='jack'
+
 # ZSH Theme
 # https://github.com/denysdovhan/spaceship-prompt#oh-my-zsh
 ZSH_THEME="spaceship"
-
-DEFAULT_USER='jack'
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="dd/mm/yyyy"
 
 # Plugins - can be found in ~/.oh-my-zsh/plugins/*
 # k - git clone https://github.com/supercrabtree/k $HOME/.oh-my-zsh/custom/plugins/k
@@ -21,6 +16,9 @@ plugins=(git k zsh-syntax-highlighting)
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets root)
 
 source $ZSH/oh-my-zsh.sh
+
+# History
+HIST_STAMPS="dd/mm/yyyy"
 
 # Increase history file limit
 # https://github.com/bamos/zsh-history-analysis/blob/master/README.md#increasing-the-history-file-size
@@ -65,4 +63,5 @@ source ~/.aliases
 # Rust stuff
 source ~/.cargo/env
 
+# Custom commands
 source ~/.commands
