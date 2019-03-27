@@ -22,8 +22,11 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets root)
 
 source $ZSH/oh-my-zsh.sh
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+# Increase history file limit
+# https://github.com/bamos/zsh-history-analysis/blob/master/README.md#increasing-the-history-file-size
+export HISTSIZE=1000000000
+export SAVEHIST=$HISTSIZE
+setopt EXTENDED_HISTORY
 
 # For HH - https://github.com/dvorka/hstr
 export HISTFILE=~/.zsh_history  # ensure history file visibility
