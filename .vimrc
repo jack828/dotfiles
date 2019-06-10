@@ -82,6 +82,11 @@
   " Always save upper case variables to viminfo file.
   set viminfo^=!
 
+  " Spellcheck - English is hard
+  set spell
+  set spelllang=en_gb
+  set spellfile=$HOME/spell/en.utf-8.add
+
   " Enable backup and undo files by default.
   let s:dir = has('win32') ? '$APPDATA/Vim' : isdirectory($HOME.'/Library') ? '~/Library/Vim' : empty($XDG_DATA_HOME) ? '~/.local/share/vim' : '$XDG_DATA_HOME/vim'
   let &backupdir = expand(s:dir) . '/backup//'
