@@ -493,12 +493,25 @@
   " auto close brackets
   Plug 'rstacruz/vim-closer'
 
+  " Code screenshots
+  Plug 'kristijanhusak/vim-carbon-now-sh'
+
+  let g:carbon_now_sh_options = {
+    \ 'bg': 'rgba(255%2C255%2C255%2C1)',
+    \ 't': 'tomorrow-night-bright',
+    \ 'l': 'javascript',
+    \ 'ln': 'false',
+    \ 'fm': 'Fira Code',
+    \ 'fs': '14px'
+    \ }
+
+  vnoremap <Leader>c :CarbonNowSh<CR>
+
   " make gui only color schemes work in terminal
   Plug 'godlygeek/csapprox'
 
   " colorscheme
   Plug 'NLKNguyen/papercolor-theme'
-  " Plug 'larsbs/vimterial'
 
   call plug#end()
 
