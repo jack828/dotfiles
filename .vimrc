@@ -82,11 +82,6 @@
   " Always save upper case variables to viminfo file.
   set viminfo^=!
 
-  " Spellcheck - English is hard
-  set spell
-  set spelllang=en_gb
-  set spellfile=$HOME/spell/en.utf-8.add
-
   " Enable backup and undo files by default.
   let s:dir = has('win32') ? '$APPDATA/Vim' : isdirectory($HOME.'/Library') ? '~/Library/Vim' : empty($XDG_DATA_HOME) ? '~/.local/share/vim' : '$XDG_DATA_HOME/vim'
   let &backupdir = expand(s:dir) . '/backup//'
@@ -512,29 +507,44 @@
 
   vnoremap <Leader>c :CarbonNowSh<CR>
 
-  " make gui only color schemes work in terminal
+  " Make gui only color schemes work in terminal
   Plug 'godlygeek/csapprox'
 
-  " colorscheme
+  " Colour scheme
   Plug 'NLKNguyen/papercolor-theme'
 
   call plug#end()
 
-"" Set colorscheme
+  " Set colour scheme
   set termguicolors
   set background=dark
   colorscheme PaperColor
 
 
-" Disable Deoplete when selecting multiple cursors starts
+  " Spellcheck - English is hard
+  " set spell
+  " set spelllang=en_gb
+  " set spellfile=$HOME/spell/en.utf-8.add
+
+  " highlight clear SpellBad
+  " highlight clear SpellRare
+  " highlight clear SpellCap
+  " highlight clear SpellLocal
+  " highlight SpellBad cterm=undercurl gui=undercurl guifg=#72b7b5
+  " highlight SpellRare cterm=undercurl gui=undercurl guifg=#72b7b5
+  " highlight SpellCap cterm=undercurl gui=undercurl guifg=#72b7b5
+  " highlight SpellLocal cterm=undercurl gui=undercurl guifg=#72b7b5
+
+
+  " Disable Deoplete when selecting multiple cursors starts
   function! Multiple_cursors_before()
     let b:deoplete_disable_auto_complete = 1
   endfunction
 
-" Enable Deoplete when selecting multiple cursors ends
+  " Enable Deoplete when selecting multiple cursors ends
   function! Multiple_cursors_after()
     let b:deoplete_disable_auto_complete = 0
   endfunction
 
-" stop the command popup window from appearing. literally why
+  " stop the command popup window from appearing. literally why
   map q: :q
