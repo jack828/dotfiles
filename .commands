@@ -1,3 +1,9 @@
+# Get only headers from curl
 curl-headers () {
   /usr/bin/curl -sSl -D - $1 -o /dev/null
+}
+
+# Set fan speed - 0-7, auto, full-speed
+fan () {
+  echo level $1 | sudo tee /proc/acpi/ibm/fan > /dev/null
 }
