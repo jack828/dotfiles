@@ -65,3 +65,7 @@ source ~/.cargo/env
 
 # Custom commands
 source ~/.commands
+
+# ESP8266 Programming
+export PATH=$PATH:$HOME/esp8266/esp-open-sdk/xtensa-lx106-elf/bin
+export ESP_OPEN_RTOS_PATH=$HOME/esp8266/esp-open-rtos
