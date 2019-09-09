@@ -47,7 +47,7 @@ export PATH=~/.mongodb/versions/mongodb-current/bin:$PATH
 
 # NPM global
 NPM_PACKAGES="${HOME}/.npm-global"
-PATH="$NPM_PACKAGES/bin:$PATH"
+PATH="$PATH:$NPM_PACKAGES/bin"
 unset MANPATH
 export MANPATH="$NPM_PACKAGES/SHARE/MAN:$(manpath)"
 
