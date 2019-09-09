@@ -201,8 +201,9 @@
   nnoremap <Leader>z :tabnew %<CR>
   nnoremap <Leader>Z :tabclose<CR>
 
-  " run mocha with Leader M
-  nnoremap <Leader>m <C-w>v :te mocha -r jsdom-global/register -r ./test/babel-compiler -r ./test/enzyme-setup %<CR>
+  " run tests with Leader M
+  " Requires a `yarn run-test` command in package.json
+  nnoremap <Leader>m <C-w>v :te yarn run-test %<CR>
 
   " run file in node
   nnoremap <Leader>n <C-w>v :te node %<CR>
