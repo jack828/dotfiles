@@ -514,10 +514,6 @@
   " Colour scheme
   Plug 'NLKNguyen/papercolor-theme'
 
-  " Syntax highlighting
-  Plug 'pangloss/vim-javascript'
-  Plug 'mxw/vim-jsx'
-
   call plug#end()
 
   " Set colour scheme
