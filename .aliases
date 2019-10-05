@@ -4,6 +4,9 @@ unalias l
 alias l="exa -abghl --git --color=automatic"
 alias ka="k -ah"
 
+# yep
+alias nivm nvim
+
 # Clock SSH Config updater
 SSHConfigBase='~/.ssh/config.base'
 SSHConfigRepo='~/Clock/SSHConfiguration/'
