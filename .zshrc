@@ -69,3 +69,6 @@ export ESP_OPEN_RTOS_PATH=$HOME/esp8266/esp-open-rtos
 
 # Superior
 export EDITOR=nvim
+
+# For git review commands
+export REVIEW_BASE=master

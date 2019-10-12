@@ -3,23 +3,38 @@
   email = jackburgess124@gmail.com
   username = jack828
   signingkey = 5078DE7F5C4CA72B
+
 [push]
   default = simple
+
 [alias]
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   ci = commit
   co = checkout
   st = status
   br = branch
+  # the SHA to compare diffs against
+  review-base = !git merge-base HEAD \"$REVIEW_BASE\"
+  # list files which have changed since review_base
+  files = !git diff --name-only $(git review-base)
+  # Same as above, but with a diff stat instead of just names
+  # (better for interactive use)
+  stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
+  # split-diff style review using vim-fugitive Gdiff
+  review = !$EDITOR -p $(git files) +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
+  reviewone = !$EDITOR -p +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
+
 [color]
   diff = auto
   status = auto
   branch = auto
+
 [core]
   whitespace = -trailing-space
-  excludesfile = /Users/jackburgess/.gitignore_global
   editor = nvim
+
 [commit]
   gpgsign = true
+
 [gpg]
   program = /usr/bin/gpg2
