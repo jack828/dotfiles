@@ -8,9 +8,8 @@ DEFAULT_USER='jack'
 ZSH_THEME="spaceship"
 
 # Plugins - can be found in ~/.oh-my-zsh/plugins/*
-# k - git clone https://github.com/supercrabtree/k $HOME/.oh-my-zsh/custom/plugins/k
 # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-plugins=(git k zsh-syntax-highlighting)
+plugins=(git zsh-syntax-highlighting)
 
 # Plugin configs
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets root)
@@ -28,8 +27,6 @@ setopt EXTENDED_HISTORY
 
 # For HH - https://github.com/dvorka/hstr
 export HISTFILE=~/.zsh_history  # ensure history file visibility
-export HH_CONFIG=hicolor        # get more colors
-bindkey -s "\C-r" "\eqhh\n"     # bind hh to Ctrl-r (for Vi mode check doc)
 
 # For android sdk
 export ANDROID_HOME=/home/jack/Android/Sdk/
@@ -69,3 +66,6 @@ source ~/.commands
 # ESP8266 Programming
 export PATH=$PATH:$HOME/esp8266/esp-open-sdk/xtensa-lx106-elf/bin
 export ESP_OPEN_RTOS_PATH=$HOME/esp8266/esp-open-rtos
+
+# Superior
+export EDITOR=nvim

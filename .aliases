@@ -1,8 +1,8 @@
-eval "$(thefuck --alias fuck)"
+# eval "$(thefuck --alias fuck)"
+alias fuck='TF_CMD=$(TF_ALIAS=fuck PYTHONIOENCODING=utf-8 TF_SHELL_ALIASES=$(alias) thefuck $(fc -ln -1 | tail -n 1)) && eval $TF_CMD && print -s $TF_CMD'
 
 unalias l
 alias l="exa -abghl --git --color=automatic"
-alias ka="k -ah"
 
 # yep
 alias nivm nvim
