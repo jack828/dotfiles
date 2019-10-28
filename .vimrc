@@ -526,18 +526,16 @@
 
 
   " Spellcheck - English is hard
-  " set spell
-  " set spelllang=en_gb
-  " set spellfile=$HOME/spell/en.utf-8.add
+  set spell
+  set spelllang=en_gb
+  set spellfile=$HOME/spell/en.utf-8.add
 
-  " highlight clear SpellBad
-  " highlight clear SpellRare
-  " highlight clear SpellCap
-  " highlight clear SpellLocal
-  " highlight SpellBad cterm=undercurl gui=undercurl guifg=#72b7b5
-  " highlight SpellRare cterm=undercurl gui=undercurl guifg=#72b7b5
-  " highlight SpellCap cterm=undercurl gui=undercurl guifg=#72b7b5
-  " highlight SpellLocal cterm=undercurl gui=undercurl guifg=#72b7b5
+  highlight clear SpellBad
+  highlight clear SpellRare
+  highlight clear SpellCap
+  highlight clear SpellLocal
+  highlight SpellBad cterm=undercurl gui=undercurl term=undercurl guifg=#a70000
+  highlight SpellLocal cterm=undercurl gui=undercurl term=undercurl guifg=#a70000
 
 
   " Disable Deoplete when selecting multiple cursors starts
