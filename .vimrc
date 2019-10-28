@@ -514,6 +514,9 @@
   " Colour scheme
   Plug 'NLKNguyen/papercolor-theme'
 
+  " Colour previews
+  Plug 'ap/vim-css-color'
+
   call plug#end()
 
   " Set colour scheme
