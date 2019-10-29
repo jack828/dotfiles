@@ -36,7 +36,7 @@
   set hlsearch
 
   " Use `Ctrl-L` to clear the highlighting of :set hlsearch.
-  nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+  nnoremap <silent> <C-C> :nohlsearch<CR><C-L>
 
   " Always show window statuses, even if there's only one.
   set laststatus=2
@@ -516,6 +516,10 @@
 
   " Colour previews
   Plug 'ap/vim-css-color'
+
+
+  " Painless vim/tmux pane navigation
+  Plug 'christoomey/vim-tmux-navigator'
 
   call plug#end()
 
