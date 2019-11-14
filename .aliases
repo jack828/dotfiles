@@ -15,3 +15,6 @@ alias updatesshconfig="cd $SSHConfigRepo && git pull && \
   cat $SSHConfigRepo/ssh_config.d/* > $SSHConfig && \
   cat $SSHConfigBase >> $SSHConfig && cd ~\
 "
+
+# So graphicsmagick works
+unalias gm
