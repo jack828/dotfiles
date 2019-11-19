@@ -31,6 +31,7 @@ int main () {
 
   /* Load Avg */
   /* Fan Speed */
+
   /* VPN Status */
   fputs("#[fg=colour231,bg=colour237]", stdout);
 
@@ -43,7 +44,6 @@ int main () {
   }
 
   /* Day Month, Year */
-
   char day[3];
   char month[10];
   char year[5];
@@ -51,7 +51,7 @@ int main () {
   struct tm *info;
 
   time(&rawtime);
-  info = localtime( &rawtime );
+  info = localtime(&rawtime);
 
   strftime(day, sizeof(day), "%d", info);
   strftime(month, sizeof(month), "%B", info);
@@ -66,7 +66,6 @@ int main () {
   );
 
   /* Time 24HR */
-
   char time[6];
   strftime(time, sizeof(time), "%R", info);
 
