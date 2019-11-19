@@ -4,7 +4,7 @@
 
 int main () {
   /* Power */
-  fputs("#[fg=colour231,bg=colour237] ", stdout);
+  fputs("#[fg=colour231,bg=colour236] ", stdout);
 
   FILE* acOnlineFile = fopen("/sys/class/power_supply/AC/online", "r");
   char acOnline = fgetc(acOnlineFile);
@@ -27,9 +27,16 @@ int main () {
   fgets(cpuTemp, 3, cpuTempFile);
   fclose(cpuTempFile);
 
-  fprintf(stdout, "#[fg=colour231,bg=colour236] %s°C ", cpuTemp);
+  fprintf(stdout, "#[fg=colour231,bg=colour237] %s°C ", cpuTemp);
 
   /* Load Avg */
+  FILE* loadAvgFile = fopen("/proc/loadavg", "r");
+  char loadAvg[5];
+  fgets(loadAvg, 5, loadAvgFile);
+  fclose(loadAvgFile);
+
+  fprintf(stdout, "#[fg=colour231,bg=colour236] %s ", loadAvg);
+
   /* Fan Speed */
 
   /* VPN Status */
