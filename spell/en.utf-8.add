@@ -138,3 +138,13 @@ autosize
 lastLoginDate
 px
 max
+formErrorsDelegate
+showErrors
+parseError
+responseText
+clearErrors
+apiId
+bunyanProcess
+isClosed
+festivalService
+eventService
