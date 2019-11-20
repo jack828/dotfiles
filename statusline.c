@@ -1,10 +1,27 @@
 #include "stdio.h"
-#include <sys/stat.h>
+#include "stdlib.h"
 #include "time.h"
+#include "string.h"
+#include <sys/stat.h>
+#include <ctype.h>
+
+void stripNonDigits(char* input, int length) {
+  char* output = malloc(length);
+  int index = 0;
+  char* sPtr = input;
+
+  for (; *sPtr != '\0'; sPtr++) {
+    if (isdigit(*sPtr)) {
+      output[index++] = *sPtr;
+    }
+  }
+
+  strcpy(input, output);
+}
 
 int main () {
   /* Power */
-  fputs("#[fg=colour231,bg=colour236] ", stdout);
+  fputs("#[fg=colour231,bg=colour237] ", stdout);
 
   FILE* acOnlineFile = fopen("/sys/class/power_supply/AC/online", "r");
   char acOnline = fgetc(acOnlineFile);
@@ -27,7 +44,7 @@ int main () {
   fgets(cpuTemp, 3, cpuTempFile);
   fclose(cpuTempFile);
 
-  fprintf(stdout, "#[fg=colour231,bg=colour237] %s°C ", cpuTemp);
+  fprintf(stdout, "#[fg=colour231,bg=colour236] %s°C ", cpuTemp);
 
   /* Load Avg */
   FILE* loadAvgFile = fopen("/proc/loadavg", "r");
@@ -35,7 +52,30 @@ int main () {
   fgets(loadAvg, 5, loadAvgFile);
   fclose(loadAvgFile);
 
-  fprintf(stdout, "#[fg=colour231,bg=colour236] %s ", loadAvg);
+  fprintf(stdout, "#[fg=colour231,bg=colour237] %s ", loadAvg);
+
+  /* Memory Usage */
+
+  FILE* memoryFile = fopen("/proc/meminfo", "r");
+  char* memoryTotalLine = NULL;
+  char* memoryFreeLine = NULL;
+  char* memoryAvailableLine = NULL;
+  size_t size = 0;
+  getline(&memoryTotalLine, &size, memoryFile);
+  /* We don't actually care about this one, but it's next */
+  getline(&memoryFreeLine, &size, memoryFile);
+  getline(&memoryAvailableLine, &size, memoryFile);
+  fclose(memoryFile);
+
+  stripNonDigits(memoryTotalLine, strlen(memoryTotalLine));
+  stripNonDigits(memoryAvailableLine, strlen(memoryAvailableLine));
+
+  double memoryTotal = strtod(memoryTotalLine, NULL);
+  double memoryAvailable = strtod(memoryAvailableLine, NULL);
+  double freeMemoryPercentage = (memoryAvailable / memoryTotal) * 100;
+  double usedMemoryPercentage = 100 - freeMemoryPercentage;
+
+  fprintf(stdout, "#[fg=colour231,bg=colour236] %2.f%% ", usedMemoryPercentage);
 
   /* Fan Speed */
 
