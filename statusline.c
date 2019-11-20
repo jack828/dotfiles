@@ -75,7 +75,18 @@ int main () {
   double freeMemoryPercentage = (memoryAvailable / memoryTotal) * 100;
   double usedMemoryPercentage = 100 - freeMemoryPercentage;
 
-  fprintf(stdout, "#[fg=colour231,bg=colour236] %2.f%% ", usedMemoryPercentage);
+  fputs("#[fg=", stdout);
+  if (usedMemoryPercentage > 75) {
+    /* Red */
+    fputs("colour196", stdout);
+  } else if (usedMemoryPercentage > 50) {
+    /* Orange */
+    fputs("colour214", stdout);
+  } else {
+    /* Green */
+    fputs("colour118", stdout);
+  }
+  fprintf(stdout, ",bg=colour236] %2.f%% ", usedMemoryPercentage);
 
   /* Fan Speed */
 
