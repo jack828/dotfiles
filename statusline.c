@@ -19,6 +19,10 @@ void stripNonDigits(char* input, int length) {
   strcpy(input, output);
 }
 
+void resetStyles() {
+  fputs("#[default]", stdout);
+}
+
 int main () {
   /* Power */
   fputs("#[bg=colour237]", stdout);
@@ -47,7 +51,8 @@ int main () {
       /* Red */
       fputs("#[fg=colour196,reverse]", stdout);
     }
-    fprintf(stdout, " %2d %% #[default]", batteryLevel);
+    fprintf(stdout, " %2d %% ", batteryLevel);
+    resetStyles();
   }
 
   /* CPU Temp */
@@ -98,20 +103,22 @@ int main () {
     /* Green */
     fputs("#[fg=colour118]", stdout);
   }
-  fprintf(stdout, " %2.f%% #[default]", usedMemoryPercentage);
+  fprintf(stdout, " %2.f%% ", usedMemoryPercentage);
+  resetStyles();
 
   /* Fan Speed */
 
   /* VPN Status */
-  fputs("#[fg=colour231,bg=colour237]", stdout);
+  fputs("#[bg=colour237,bold]", stdout);
 
   struct stat buffer;
   int exists = stat("/proc/net/dev_snmp6/wg0", &buffer);
   if (exists == 0) {
-    fputs("#[fg=colour118,bold] VPN ↑ ", stdout);
+    fputs("#[fg=colour118] VPN ↑ ", stdout);
   } else {
-    fputs("#[fg=colour196,bold] VPN ↓ ", stdout);
+    fputs("#[fg=colour196] VPN ↓ ", stdout);
   }
+  resetStyles();
 
   /* Day Month, Year */
   char day[3];
