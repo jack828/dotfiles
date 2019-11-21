@@ -25,7 +25,7 @@ void resetStyles() {
 
 int main () {
   /* Power */
-  fputs("#[bg=colour237]", stdout);
+  fputs("#[bg=colour236]", stdout);
 
   FILE* acOnlineFile = fopen("/sys/class/power_supply/AC/online", "r");
   char acOnline = fgetc(acOnlineFile);
@@ -63,7 +63,7 @@ int main () {
 
   int cpuTemp = atoi(cpuTempString);
 
-  fputs("#[bg=colour236]", stdout);
+  fputs("#[bg=colour237]", stdout);
   if (cpuTemp > 80) {
     /* Red */
     fputs("#[fg=colour196,reverse]", stdout);
@@ -83,7 +83,7 @@ int main () {
   fgets(loadAvg, 5, loadAvgFile);
   fclose(loadAvgFile);
 
-  fprintf(stdout, "#[fg=colour231,bg=colour237] %s ", loadAvg);
+  fprintf(stdout, "#[fg=colour231,bg=colour236] %s ", loadAvg);
 
   /* Memory Usage */
 
@@ -106,7 +106,7 @@ int main () {
   double freeMemoryPercentage = (memoryAvailable / memoryTotal) * 100;
   double usedMemoryPercentage = 100 - freeMemoryPercentage;
 
-  fputs("#[bg=colour236]", stdout);
+  fputs("#[bg=colour237]", stdout);
   if (usedMemoryPercentage > 75) {
     /* Red */
     fputs("#[fg=colour196,reverse]", stdout);
@@ -121,6 +121,19 @@ int main () {
   resetStyles();
 
   /* Fan Speed */
+  FILE* fanFile = fopen("/proc/acpi/ibm/fan", "r");
+  char* fanStatusLine = NULL;
+  char* fanSpeedLine = NULL;
+  /* We don't actually care about this one, but it's first */
+  getline(&fanStatusLine, &size, fanFile);
+  getline(&fanSpeedLine, &size, fanFile);
+  fclose(fanFile);
+
+  stripNonDigits(fanSpeedLine, strlen(fanSpeedLine));
+  int fanSpeed = atoi(fanSpeedLine);
+
+
+  fprintf(stdout, "#[fg=colour231,bg=colour236] %4d ", fanSpeed);
 
   /* VPN Status */
   fputs("#[bg=colour237,bold]", stdout);
