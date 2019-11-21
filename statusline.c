@@ -21,21 +21,33 @@ void stripNonDigits(char* input, int length) {
 
 int main () {
   /* Power */
-  fputs("#[fg=colour231,bg=colour237] ", stdout);
+  fputs("#[bg=colour237]", stdout);
 
   FILE* acOnlineFile = fopen("/sys/class/power_supply/AC/online", "r");
   char acOnline = fgetc(acOnlineFile);
   fclose(acOnlineFile);
 
   if (acOnline == '1') {
-    fputs("#[fg=colour118,bold]AC ⌁ #[default]", stdout);
+    fputs("#[fg=colour118,bold] AC ⌁ #[default]", stdout);
   } else {
     FILE* batteryLevelFile = fopen("/sys/class/power_supply/BAT0/capacity", "r");
-    char batteryLevel[3];
-    fgets(batteryLevel, 3, batteryLevelFile);
+    char batteryLevelString[3];
+    fgets(batteryLevelString, 3, batteryLevelFile);
     fclose(batteryLevelFile);
 
-    fprintf(stdout, "%3s%% ", batteryLevel);
+    int batteryLevel = atoi(batteryLevelString);
+
+    if (batteryLevel > 75) {
+      /* Green */
+      fputs("#[fg=colour118]", stdout);
+    } else if (batteryLevel > 50) {
+      /* Orange */
+      fputs("#[fg=colour214]", stdout);
+    } else {
+      /* Red */
+      fputs("#[fg=colour196,reverse]", stdout);
+    }
+    fprintf(stdout, " %2d %% #[default]", batteryLevel);
   }
 
   /* CPU Temp */
