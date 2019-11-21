@@ -57,11 +57,25 @@ int main () {
 
   /* CPU Temp */
   FILE* cpuTempFile = fopen("/sys/class/hwmon/hwmon1/temp1_input", "r");
-  char cpuTemp[3];
-  fgets(cpuTemp, 3, cpuTempFile);
+  char cpuTempString[3];
+  fgets(cpuTempString, 3, cpuTempFile);
   fclose(cpuTempFile);
 
-  fprintf(stdout, "#[fg=colour231,bg=colour236] %s°C ", cpuTemp);
+  int cpuTemp = atoi(cpuTempString);
+
+  fputs("#[bg=colour236]", stdout);
+  if (cpuTemp > 80) {
+    /* Red */
+    fputs("#[fg=colour196,reverse]", stdout);
+  } else if (cpuTemp > 50) {
+    /* Orange */
+    fputs("#[fg=colour214]", stdout);
+  } else {
+    /* Green */
+    fputs("#[fg=colour118]", stdout);
+  }
+  fprintf(stdout, " %d°C ", cpuTemp);
+  resetStyles();
 
   /* Load Avg */
   FILE* loadAvgFile = fopen("/proc/loadavg", "r");
