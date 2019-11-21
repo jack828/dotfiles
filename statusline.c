@@ -28,7 +28,7 @@ int main () {
   fclose(acOnlineFile);
 
   if (acOnline == '1') {
-    fputs("#[fg=colour118,bold]AC ⌁ ", stdout);
+    fputs("#[fg=colour118,bold]AC ⌁ #[default]", stdout);
   } else {
     FILE* batteryLevelFile = fopen("/sys/class/power_supply/BAT0/capacity", "r");
     char batteryLevel[3];
