@@ -132,7 +132,6 @@ int main () {
   stripNonDigits(fanSpeedLine, strlen(fanSpeedLine));
   int fanSpeed = atoi(fanSpeedLine);
 
-
   fprintf(stdout, "#[fg=colour231,bg=colour236] %4d ", fanSpeed);
 
   /* VPN Status */
