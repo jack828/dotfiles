@@ -517,6 +517,8 @@
   " Colour previews
   Plug 'ap/vim-css-color'
 
+  " Register magic
+  Plug 'junegunn/vim-peekaboo'
 
   " Painless vim/tmux pane navigation
   Plug 'christoomey/vim-tmux-navigator'
