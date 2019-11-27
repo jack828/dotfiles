@@ -34,4 +34,36 @@ This assumes the following files are available and match the format expected:
 | /proc/acpi/ibm/fan | Fan info, RPM on line 2 |
 | /proc/net/dev_snmp6/wg0 | Used to infer VPN status, using WireGuard |
 
-```
+
+## Cheatsheet
+
+Awww sheet, you want to use my dotfiles?
+
+### TMUX
+
+`prefix` is set to `C-a`.
+
+Plugins:
+ - tmux-plugins/tpm (plugins)
+ - tmux-plugins/tmux-sensible (sensible defaults)
+ - tmux-plugins/tmux-resurrect (setup persistence pt 1)
+ - tmux-plugins/tmux-continuum (setup persistence pt 2)
+ - tmux-plugins/tmux-sessionist (session management)
+ - tmux-plugins/tmux-pain-control (easy pane bindings)
+ - christoomey/vim-tmux-navigator (vim & tmux navigation)
+
+| Command | Action |
+|---------|--------|
+| `prefix + I` | Install plugins |
+| `prefix + r` | Reload .tmux.conf |
+| `prefix + g` | Switch session with fuzzy matcher |
+| `prefix + s` | View session list |
+| `prefix + S` | Swap to most recent session |
+| `prefix + C` | Create new session |
+| `prefix + c` | Create new window |
+| `prefix + X` | Kill current session |
+| `prefix + #` | Switch to window no. # (where # is a number) |
+| `prefix + -` | Split window horizontally |
+| `prefix + \|` | Split window vertically |
+| `prefix + z` | Zoom/unzoom a pane |
+| `prefix + ` | todo... |
