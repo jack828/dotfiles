@@ -51,6 +51,9 @@ export MANPATH="$NPM_PACKAGES/SHARE/MAN:$(manpath)"
 # For Robo3T
 export PATH=/usr/local/robo3t/bin:$PATH
 
+# Pip packages
+export PATH=/home/jack/.local/bin:$PATH
+
 # Customising htop, wooo
 export HTOPRC=~/.htoprc
 
