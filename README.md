@@ -15,10 +15,19 @@ Compile the statusline binary: (you will need `gcc` and `strip`)
 $ make
 ```
 
+Deploy dotfiles
 
 ```
 $ ./bin/setup
 ```
+
+Install TPM
+
+```
+$ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+Inside TMUX, run `prefix + I` to install plugins.
 
 ## Statusline
 
