@@ -455,7 +455,7 @@
     map <Leader>h <Plug>(easymotion-linebackward)
 
     " search whole file
-    nmap s <Plug>(easymotion-w)
+    nmap s <Plug>(easymotion-bd-w)
 
   " Really nice prompt
   Plug 'itchyny/lightline.vim'
