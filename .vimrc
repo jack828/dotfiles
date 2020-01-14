@@ -29,13 +29,13 @@
   set ttimeout
   set ttimeoutlen=100
 
-  " Enable case-insensitive incremential search.
+  " Enable case-insensitive incremental search.
   set incsearch
 
   " Enable search highlighting.
   set hlsearch
 
-  " Use `Ctrl-L` to clear the highlighting of :set hlsearch.
+  " Use `Ctrl-C` to clear the highlighting of :set hlsearch.
   nnoremap <silent> <C-C> :nohlsearch<CR><C-L>
 
   " Always show window statuses, even if there's only one.
@@ -88,7 +88,7 @@
   let &undodir = expand(s:dir) . '/undo//'
   set undofile
 
-  " Allow color schemes to do bright colors without forcing bold.
+  " Allow colour schemes to do bright colours without forcing bold.
   if &t_Co == 8 && $TERM !~# '^linux'
     set t_Co=16
   endif
@@ -488,7 +488,9 @@
   " Close all other buffers
   Plug 'schickling/vim-bufonly'
 
+  " Close all but current
     nnoremap go :BufOnly<CR>
+  " Close all
     nnoremap goa :BufOnly<CR>:bd<CR>
 
   " auto close brackets
