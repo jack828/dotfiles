@@ -207,7 +207,7 @@
 
   " run file in node
   nnoremap <Leader>n <C-w>v :te node %<CR>
-  " show invisible charactars
+  " show invisible characters
   set list
 
   " Allow saving of files as sudo when I forgot to start vim using sudo.
@@ -218,7 +218,6 @@
   set ttyfast
 
   nnoremap rp viwpyiw
-  "nnoremap rp viw"_dp
 
   " this is going to hurt...
   " nnoremap <Left> :echoe "Use h"<CR>
@@ -229,6 +228,9 @@
   " hopefully this will ease the pain...
   inoremap jj <Esc>j
   inoremap kk <Esc>k
+
+  " Close quickfix
+  nmap <Insert> :ccl<CR>
 
 "" Saved Macros
   " select function
