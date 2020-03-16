@@ -5,7 +5,7 @@ unalias l
 alias l="exa -abghl --git --color=automatic"
 
 # yep
-alias nivm nvim
+alias nivm=nvim
 
 # Clock SSH Config updater
 SSHConfigBase='~/.ssh/config.base'
