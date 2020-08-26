@@ -36,8 +36,8 @@
   export PATH=${PATH}:./node_modules/.bin
 
   # NPM global
-  NPM_PACKAGES="${HOME}/.npm-global"
-  PATH="$PATH:$NPM_PACKAGES/bin"
+  export NPM_PACKAGES="${HOME}/.npm-global"
+  export PATH="$PATH:$NPM_PACKAGES/bin"
   unset MANPATH
   export MANPATH="$NPM_PACKAGES/SHARE/MAN:$(manpath)"
 
