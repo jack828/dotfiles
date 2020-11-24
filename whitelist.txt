@@ -5,6 +5,7 @@ statusline
 .zshrc
 .aliases
 .commands
+.secrets
 .vimrc
 .mongorc.js
 .Xmodmap

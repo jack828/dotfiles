@@ -29,6 +29,10 @@ $ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 Inside TMUX, run `prefix + I` to install plugins.
 
+## Secrets
+
+To use the `wp` function you'll need to copy `.secrets.tpl` to `.secrets` and edit accordingly.
+
 ## Statusline
 
 This assumes the following files are available and match the format expected:

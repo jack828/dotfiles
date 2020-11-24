@@ -7,3 +7,16 @@ curl-headers () {
 fan () {
   echo level $1 | sudo tee /proc/acpi/ibm/fan > /dev/null
 }
+
+# Push notifications helper using wirepusher.com
+wp () {
+  if [ $# -eq 0 ]
+    then
+      curl "https://wirepusher.com/send?id=$WIRE_PUSHER_ID&title=Command Finished&message=Exit code $?"
+  elif [ -z "$2" ]
+    then
+      curl "https://wirepusher.com/send?id=$WIRE_PUSHER_ID&title=$1&message=Exit code $?"
+  else
+    curl "https://wirepusher.com/send?id=$WIRE_PUSHER_ID&title=$1&message=$2"
+  fi
+}
