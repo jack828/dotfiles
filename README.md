@@ -21,6 +21,8 @@ Deploy dotfiles
 $ ./bin/setup
 ```
 
+### TMUX
+
 Install TPM
 
 ```
@@ -28,6 +30,15 @@ $ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
 Inside TMUX, run `prefix + I` to install plugins.
+
+### NVIM
+
+Install neovim and required packages
+
+```
+$ <install neovim according to their instructions>
+$ sudo apt install -y python3-pip && pip3 install neovim msgpack --upgrade
+```
 
 ## Secrets
 
