@@ -35,8 +35,8 @@ int main () {
     fputs("#[fg=colour118,bold] AC ⌁ #[default]", stdout);
   } else {
     FILE* batteryLevelFile = fopen("/sys/class/power_supply/BAT0/capacity", "r");
-    char batteryLevelString[3];
-    fgets(batteryLevelString, 3, batteryLevelFile);
+    char batteryLevelString[4];
+    fgets(batteryLevelString, 4, batteryLevelFile);
     fclose(batteryLevelFile);
 
     int batteryLevel = atoi(batteryLevelString);
