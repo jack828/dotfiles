@@ -6,6 +6,7 @@ alias l="exa -abghl --git --color=automatic"
 
 # yep
 alias nivm=nvim
+alias mivn=nvim
 
 # Clock SSH Config updater
 SSHConfigBase='~/.ssh/config.base'
