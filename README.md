@@ -37,8 +37,10 @@ Install neovim and required packages
 
 ```
 $ <install neovim according to their instructions>
-$ sudo apt install -y python3-pip && pip3 install neovim msgpack --upgrade
+$ sudo apt install -y silversearcher-ag python3-pip && pip3 install neovim msgpack --upgrade
 ```
+
+You may need to add `source ~/.vimrc` to `~/.config/nvim/init.vim`
 
 ## Secrets
 
