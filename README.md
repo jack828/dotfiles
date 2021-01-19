@@ -92,4 +92,6 @@ Plugins:
 | `prefix + -` | Split window horizontally |
 | `prefix + \|` | Split window vertically |
 | `prefix + z` | Zoom/unzoom a pane |
+| `prefix + C-s` | Save sessions |
+| `prefix + C-r` | Restore sessions |
 | `prefix + ` | todo... |
