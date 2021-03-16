@@ -306,11 +306,16 @@
   let g:ale_linters = {
   \   'javascript': [ 'eslint' ],
   \   'jsx': [ 'eslint' ]
-  \}
+  \ }
 
   let g:ale_sign_column_always = 1
 
-  Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+  Plug 'prettier/vim-prettier', {
+    \   'do': 'yarn install',
+    \   'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql']
+    \ }
+    let g:prettier#autoformat = 0
+    let g:prettier#exec_cmd_async = 1
 
   " Wakatime
   Plug 'wakatime/vim-wakatime'
