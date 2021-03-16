@@ -51,6 +51,9 @@
   " Enable `Ctrl-N` and `Ctrl-P` to scroll through matches.
   set wildmenu
 
+  " For autocompletion, complete as much as you can.
+  set wildmode=longest,full
+
   " When 'wrap' is on, display last line even if it doesn't fit.
   set display+=lastline
 
@@ -126,9 +129,6 @@
   vmap k gk
   nmap j gj
   nmap k gk
-
-  " For autocompletion, complete as much as you can.
-  set wildmode=longest,full
 
   " Show line numbers on the sidebar.
   set number
@@ -527,26 +527,19 @@
   " Painless vim/tmux pane navigation
   Plug 'christoomey/vim-tmux-navigator'
 
+  " Spleling is hard
+  Plug 'kamykn/spelunker.vim'
+
+  set nospell
+  set spelllang=en_gb
+  set spellfile=$HOME/spell/en.utf-8.add
+
   call plug#end()
 
   " Set colour scheme
   set termguicolors
   set background=dark
   colorscheme PaperColor
-
-
-  " Spellcheck - English is hard
-  set spell
-  set spelllang=en_gb
-  set spellfile=$HOME/spell/en.utf-8.add
-
-  highlight clear SpellBad
-  highlight clear SpellRare
-  highlight clear SpellCap
-  highlight clear SpellLocal
-  highlight SpellBad cterm=undercurl gui=undercurl term=undercurl guifg=#a70000
-  highlight SpellLocal cterm=undercurl gui=undercurl term=undercurl guifg=#a70000
-
 
   " Disable Deoplete when selecting multiple cursors starts
   function! Multiple_cursors_before()
