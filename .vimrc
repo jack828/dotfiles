@@ -38,6 +38,9 @@
   " Use `Ctrl-C` to clear the highlighting of :set hlsearch.
   nnoremap <silent> <C-C> :nohlsearch<CR><C-L>
 
+  " I use # but rarely * (because # is fewer keypresses)
+  nnoremap # *
+
   " Always show window statuses, even if there's only one.
   set laststatus=2
 
