@@ -389,7 +389,6 @@
   if has('nvim')
     " https://gregjs.com/vim/2016/configuring-the-deoplete-asynchronous-keyword-completion-plugin-with-tern-for-vim/
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    "Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
 
       let g:deoplete#enable_at_startup = 1
       let g:deoplete#file#enable_buffer_path = 1
@@ -433,10 +432,9 @@
     nnoremap <Leader>b :Gblame<CR>
 
   " Multiple cursors
-  Plug 'terryma/vim-multiple-cursors'
-
-  " Move lines (don't know how to use)
-  "Plug 'matze/vim-move'
+  Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
+    " Prevent newline when selecting completion with <CR>
+    autocmd User visual_multi_mappings imap <buffer><expr> <CR> pumvisible() ? "\<C-Y>" : "\<Plug>(VM-I-Return)"
 
   let g:move_key_modifier = 'C'
 
@@ -470,12 +468,6 @@
   " Really nice prompt
   Plug 'itchyny/lightline.vim'
 
-  " Add '.' powers to plugins
-  Plug 'tpope/vim-repeat'
-
-  " Edit surrounding quotes, etc.
-  Plug 'tpope/vim-surround'
-
     let g:lightline = {
         \ 'colorscheme': 'PaperColor',
         \ 'active': {
@@ -494,6 +486,12 @@
         \ 'separator': { 'left': '', 'right': '' },
         \ 'subseparator': { 'left': '', 'right': '' }
       \ }
+
+  " Add '.' powers to plugins
+  Plug 'tpope/vim-repeat'
+
+  " Edit surrounding quotes, etc.
+  Plug 'tpope/vim-surround'
 
   " Close all other buffers
   Plug 'schickling/vim-bufonly'
@@ -544,20 +542,11 @@
 
   call plug#end()
 
+
   " Set colour scheme
   set termguicolors
   set background=dark
   colorscheme PaperColor
-
-  " Disable Deoplete when selecting multiple cursors starts
-  function! Multiple_cursors_before()
-    let b:deoplete_disable_auto_complete = 1
-  endfunction
-
-  " Enable Deoplete when selecting multiple cursors ends
-  function! Multiple_cursors_after()
-    let b:deoplete_disable_auto_complete = 0
-  endfunction
 
   " stop the command popup window from appearing. literally why
   map q: :q
