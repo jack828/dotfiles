@@ -308,7 +308,9 @@
   Plug 'w0rp/ale'
   let g:ale_linters = {
   \   'javascript': [ 'eslint' ],
-  \   'jsx': [ 'eslint' ]
+  \   'jsx': [ 'eslint' ],
+  \   'pug': [ 'pug-lint' ],
+  \   'jade': [ 'pug-lint' ]
   \ }
 
   let g:ale_sign_column_always = 1
