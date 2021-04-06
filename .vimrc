@@ -333,6 +333,8 @@
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
   Plug 'junegunn/fzf.vim'
 
+    let g:fzf_layout = { 'down': '40%' }
+
     map <c-x><c-k> <Plug>(fzf-complete-word)
     imap <c-x><c-j> <Plug>(fzf-complete-file-ag)
     imap <c-x><c-l> <Plug>(fzf-complete-line)
