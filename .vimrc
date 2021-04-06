@@ -543,9 +543,15 @@
   set nospell
   set spelllang=en_gb
   set spellfile=$HOME/spell/en.utf-8.add
+  " TODO fix
+  " highlight SpelunkerSpellBad cterm=undercurl term=undercurl gui=undercurl ctermfg=247 guifg=#a70000
+  " highlight SpelunkerComplexOrCompoundWord cterm=undercurl term=undercurl gui=undercurl ctermfg=247 guifg=#a70000
+  " highlight SpellBad cterm=undercurl gui=undercurl term=undercurl guifg=#a70000
+  " highlight SpellLocal cterm=undercurl gui=undercurl term=undercurl guifg=#a70000
+  " highlight SpelunkerSpellBad cterm=underline ctermfg=247 gui=underline guifg=#9e9e9e
+  " highlight SpelunkerComplexOrCompoundWord cterm=underline ctermfg=NONE gui=underline guifg=NONE
 
   call plug#end()
-
 
   " Set colour scheme
   set termguicolors
