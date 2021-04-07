@@ -35,12 +35,16 @@ Inside TMUX, run `prefix + I` to install plugins.
 ### NVIM
 
 Install neovim nightly (>=0.5) and required packages
+ - apt: silversearcher-ag
+ - pip: neovim msgpack
+ - github: bat@^0.18.0
 
 ```
 $ chmod u+x ./nvim.appimage
 $ mv ./nvim.appimage ~/.local/bin/nvim
 $ sudo apt install -y silversearcher-ag python3-pip && pip3 install neovim msgpack --upgrade
 $ yarn global add typescript-language-server
+$ <download and install github packages>
 ```
 
 ## Secrets
