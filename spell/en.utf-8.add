@@ -167,3 +167,5 @@ prepublish
 unix
 jack828
 dedupe
+debounce
+debounced
