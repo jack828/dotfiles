@@ -268,6 +268,7 @@
     " use true colours in the terminal
     set termguicolors
 
+    " TODO deprecated
     " makes the cursor a pipe in insert-mode, and a block in normal-mode
     :let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
@@ -326,8 +327,9 @@
   Plug 'wakatime/vim-wakatime'
 
   " Language support
-  Plug 'sheerun/vim-polyglot'
-  Plug 'fatih/vim-go'
+  " if !has('nvim-0.5')
+    Plug 'sheerun/vim-polyglot'
+  " endif
 
   " Fuzzy file search
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
@@ -392,7 +394,7 @@
   " Autocomplete
   if has('nvim')
     " https://gregjs.com/vim/2016/configuring-the-deoplete-asynchronous-keyword-completion-plugin-with-tern-for-vim/
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
       let g:deoplete#enable_at_startup = 1
       let g:deoplete#file#enable_buffer_path = 1
@@ -526,7 +528,7 @@
   Plug 'godlygeek/csapprox'
 
   " Colour scheme
-  Plug 'NLKNguyen/papercolor-theme'
+  Plug 'glepnir/zephyr-nvim', { 'branch': 'main' }
 
   " Colour previews
   Plug 'ap/vim-css-color'
@@ -551,12 +553,28 @@
   " highlight SpelunkerSpellBad cterm=underline ctermfg=247 gui=underline guifg=#9e9e9e
   " highlight SpelunkerComplexOrCompoundWord cterm=underline ctermfg=NONE gui=underline guifg=NONE
 
+
+  if has('nvim-0.5')
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+    Plug 'shougo/deoplete-lsp'
+    Plug 'ojroques/nvim-lspfuzzy', { 'branch': 'main' }
+  endif
+
   call plug#end()
 
   " Set colour scheme
   set termguicolors
   set background=dark
-  colorscheme PaperColor
+  colorscheme zephyr
 
   " stop the command popup window from appearing. literally why
   map q: :q
+
+" LUA
+" oooh shiny new lua
+
+  if has('nvim-0.5')
+    lua require('treesitter')
+    lua require('lsp')
+  endif

@@ -4,6 +4,7 @@ Some stolen from:
  - [balaclark](https://github.com/balaclark/dotfiles)
  - [benjaminparnell](https://github.com/benjaminparnell/dotfiles)
  - [asheboy](https://github.com/Asheboy/dotfiles)
+ - [Miguel M](https://git.parata.xyz/eot/dotfiles/) (top quality dotfiles)
 
 Huge thank you's to the vim-ers and tmux-ers at [Clock Limited](https://github.com/clocklimited) for the support in getting my setup working smoothly.
 
@@ -33,14 +34,14 @@ Inside TMUX, run `prefix + I` to install plugins.
 
 ### NVIM
 
-Install neovim and required packages
+Install neovim nightly (>=0.5) and required packages
 
 ```
-$ <install neovim according to their instructions>
+$ chmod u+x ./nvim.appimage
+$ mv ./nvim.appimage ~/.local/bin/nvim
 $ sudo apt install -y silversearcher-ag python3-pip && pip3 install neovim msgpack --upgrade
+$ yarn global add typescript-language-server
 ```
-
-You may need to add `source ~/.vimrc` to `~/.config/nvim/init.vim`
 
 ## Secrets
 

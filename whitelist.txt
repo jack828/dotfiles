@@ -6,10 +6,10 @@ statusline
 .aliases
 .commands
 .secrets
-.vimrc
 .mongorc.js
 .Xmodmap
 .htoprc
 bin/
 .config/kitty/kitty.conf
+.config/nvim/
 spell
