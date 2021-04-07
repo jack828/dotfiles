@@ -332,7 +332,7 @@
   " endif
 
   " Fuzzy file search
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
 
     let g:fzf_layout = { 'down': '40%' }
