@@ -47,6 +47,19 @@ $ yarn global add typescript-language-server
 $ <download and install github packages>
 ```
 
+Once in vim, install the [language servers](https://github.com/kabouzeid/nvim-lspinstall#bundled-installers):
+
+```
+:LspInstall typescript
+:LspInstall html
+:LspInstall json
+:LspInstall cmake
+:LspInstall cpp
+:LspInstall css
+:LspInstall yaml
+...etc...
+```
+
 ## Secrets
 
 To use the `wp` function you'll need to copy `.secrets.tpl` to `.secrets` and edit accordingly.

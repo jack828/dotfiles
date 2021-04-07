@@ -528,7 +528,7 @@
   Plug 'godlygeek/csapprox'
 
   " Colour scheme
-  Plug 'glepnir/zephyr-nvim', { 'branch': 'main' }
+  Plug 'glepnir/zephyr-nvim'
 
   " Colour previews
   Plug 'ap/vim-css-color'
@@ -558,7 +558,8 @@
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
     Plug 'shougo/deoplete-lsp'
-    Plug 'ojroques/nvim-lspfuzzy', { 'branch': 'main' }
+    Plug 'ojroques/nvim-lspfuzzy'
+    Plug 'kabouzeid/nvim-lspinstall'
   endif
 
   call plug#end()

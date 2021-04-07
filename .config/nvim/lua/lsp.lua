@@ -1,5 +1,6 @@
 local nvim_lsp = require("lspconfig")
 local lspfuzzy = require("lspfuzzy")
+local lspinstall = require("lspinstall")
 
 -- Make the LSP client use FZF instead of the quickfix list
 lspfuzzy.setup {}
@@ -50,9 +51,10 @@ local on_attach = function(client, bufnr)
   end
 end
 
--- Use a loop to conveniently both setup defined servers
--- and map buffer local keybindings when the language server attaches
-local servers = { "tsserver", "ccls", "cssls", "html", "vimls" }
+-- setup installed language servers
+lspinstall.setup()
+local servers = lspinstall.installed_servers()
+
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
