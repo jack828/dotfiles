@@ -47,6 +47,12 @@
   " Show the line and column number of the cursor position.
   set ruler
 
+  " Rulers to visually identify line length
+  set colorcolumn=80,120
+
+  " Always show sign column, prevents layout shift
+  set signcolumn=yes
+
   " Show the size of block one selected in visual mode.
   set showcmd
 
@@ -184,8 +190,6 @@
   vnoremap <silent> p p`]
   nnoremap <silent> p p`]
 
-  set colorcolumn=80,120
-
   nnoremap H ^
   nnoremap L $
 
@@ -305,31 +309,11 @@
 "" Plugins
   call plug#begin()
 
-  " Linting
-  Plug 'w0rp/ale'
-  let g:ale_linters = {
-  \   'javascript': [ 'eslint' ],
-  \   'jsx': [ 'eslint' ],
-  \   'pug': [ 'pug-lint' ],
-  \   'jade': [ 'pug-lint' ]
-  \ }
-
-  let g:ale_sign_column_always = 1
-
-  Plug 'prettier/vim-prettier', {
-    \   'do': 'yarn install',
-    \   'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql']
-    \ }
-    let g:prettier#autoformat = 0
-    let g:prettier#exec_cmd_async = 1
-
   " Wakatime
   Plug 'wakatime/vim-wakatime'
 
   " Language support
-  " if !has('nvim-0.5')
-    Plug 'sheerun/vim-polyglot'
-  " endif
+  Plug 'sheerun/vim-polyglot'
 
   " Fuzzy file search
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
@@ -385,11 +369,6 @@
 
   " npm-which support in vim, used to configure vim to use locally installed linters
   Plug 'jaawerth/nrun.vim', { 'do': 'type npm && npm install --global npm-which' }
-
-  " Linting
-  if has('nvim')
-    Plug 'balaclark/vim-switchblade'
-  endif
 
   " Autocomplete
   if has('nvim')

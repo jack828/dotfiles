@@ -1,0 +1,71 @@
+version: 2
+log-file: /tmp/efm.log
+log-level: 1
+root-markers:
+  - .git/
+
+tools:
+  eslint: &eslint
+    lint-command: 'eslint -f unix --stdin'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m'
+    format-stdin: true
+    root-markers:
+      - .eslintrc
+      - .eslintrc.js
+      - .eslintrc.json
+
+  prettier: &prettier
+    format-command: 'prettier'
+    root-markers:
+      - .prettierrc
+      - .prettierrc.js
+      - .prettierrc.json
+      - .prettierrc.yml
+      - .prettierrc.yaml
+      - .prettier.config.js
+      - .prettier.config.cjs
+
+  pug-lint: &pug-lint
+    lint-command: 'pug-lint --reporter inline'
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%f:%l:%c %m'
+    root-markers:
+      - .pug-lintrc
+      - .pug-lintrc.js
+      - .pug-lintrc.json
+
+  luacheck: &luacheck
+    lint-command: 'luacheck --globals vim --filename ${INPUT} --formatter plain -'
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m'
+
+languages:
+  javascript:
+    - <<: *eslint
+    - <<: *prettier
+
+  javascriptreact:
+    - <<: *eslint
+    - <<: *prettier
+
+  jade:
+    - <<: *pug-lint
+
+  pug:
+    - <<: *pug-lint
+
+  typescript:
+    - <<: *eslint
+    - <<: *prettier
+
+  typescriptreact:
+    - <<: *eslint
+    - <<: *prettier
+
+  lua:
+    - <<: *luacheck

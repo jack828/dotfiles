@@ -10,6 +10,7 @@ statusline
 .Xmodmap
 .htoprc
 bin/
-.config/kitty/kitty.conf
+.config/kitty/
 .config/nvim/
+.config/efm-langserver/
 spell

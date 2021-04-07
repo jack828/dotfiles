@@ -19,7 +19,7 @@ treesitter.setup {
     -- false will disable the whole extension
     enabled = true,
     -- list of languages that will be disabled
-    disable = {},
+    disable = {}
   },
   indent = {
     enable = true

@@ -38,12 +38,14 @@ Install neovim nightly (>=0.5) and required packages
  - apt: silversearcher-ag
  - pip: neovim msgpack
  - github: bat@^0.18.0
+ - snap: go
 
 ```
 $ chmod u+x ./nvim.appimage
 $ mv ./nvim.appimage ~/.local/bin/nvim
-$ sudo apt install -y silversearcher-ag python3-pip && pip3 install neovim msgpack --upgrade
-$ yarn global add typescript-language-server
+$ sudo apt install -y silversearcher-ag python3-pip
+$ pip3 install neovim msgpack --upgrade
+$ sudo snap install go --classic
 $ <download and install github packages>
 ```
 
@@ -58,6 +60,9 @@ Once in vim, install the [language servers](https://github.com/kabouzeid/nvim-ls
 :LspInstall css
 :LspInstall yaml
 ...etc...
+
+# This one is for linting
+:LspInstall efm
 ```
 
 ## Secrets
