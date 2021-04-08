@@ -400,28 +400,16 @@
   " Autosave and autoread
   au FocusLost,WinLeave * :silent! wall
   au FocusGained,BufEnter * :silent! !
-  " JS code intell
-  Plug 'ternjs/tern_for_vim', { 'do': 'npm install', 'for': 'javascript' }
-
-    let g:tern_show_argument_hints = 'on_hold'
-    let g:tern_show_signature_in_pum = 1
-    autocmd FileType javascript nnoremap <silent> <buffer> tf :TernDef<CR>
-    autocmd FileType javascript nnoremap <silent> <buffer> tr :TernRefs<CR>
-    autocmd FileType javascript nnoremap <silent> <buffer> tR :TernRename<CR>
-    autocmd FileType javascript setlocal omnifunc=tern#Complete
 
   " Git integration
   Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-fugitive'
-
     nnoremap <Leader>b :Gblame<CR>
 
   " Multiple cursors
   Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
     " Prevent newline when selecting completion with <CR>
     autocmd User visual_multi_mappings imap <buffer><expr> <CR> pumvisible() ? "\<C-Y>" : "\<Plug>(VM-I-Return)"
-
-  let g:move_key_modifier = 'C'
 
   " Show buffers as tabs
   Plug 'ap/vim-buftabline'
@@ -430,7 +418,6 @@
 
   " Copy current file path
   Plug 'bag-man/copypath.vim'
-
     nnoremap cp :CopyRelativePath<CR>
 
   " :e file:108 (I enjoy manually looking for files)
