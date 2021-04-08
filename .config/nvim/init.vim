@@ -418,7 +418,6 @@
 
   " Faster keyboard nav within files
   Plug 'easymotion/vim-easymotion'
-
     "let g:EasyMotion_do_mapping = 0
     let g:EasyMotion_smartcase = 1
 
@@ -432,7 +431,6 @@
 
   " Really nice prompt
   Plug 'itchyny/lightline.vim'
-
     let g:lightline = {
         \ 'colorscheme': 'PaperColor',
         \ 'active': {
@@ -460,7 +458,6 @@
 
   " Close all other buffers
   Plug 'schickling/vim-bufonly'
-
   " Close all but current
     nnoremap go :BufOnly<CR>
   " Close all
@@ -471,17 +468,15 @@
 
   " Code screenshots
   Plug 'kristijanhusak/vim-carbon-now-sh'
-
-  let g:carbon_now_sh_options = {
-    \ 'bg': 'rgba(255%2C255%2C255%2C1)',
-    \ 't': 'tomorrow-night-bright',
-    \ 'l': 'javascript',
-    \ 'ln': 'false',
-    \ 'fm': 'Fira Code',
-    \ 'fs': '14px'
-    \ }
-
-  vnoremap <Leader>c :CarbonNowSh<CR>
+    let g:carbon_now_sh_options = {
+      \ 'bg': 'rgba(255%2C255%2C255%2C1)',
+      \ 't': 'tomorrow-night-bright',
+      \ 'l': 'javascript',
+      \ 'ln': 'false',
+      \ 'fm': 'Fira Code',
+      \ 'fs': '14px'
+      \ }
+    vnoremap <Leader>c :CarbonNowSh<CR>
 
   " Make gui only color schemes work in terminal
   Plug 'godlygeek/csapprox'
@@ -500,19 +495,18 @@
 
   " Spleling is hard
   Plug 'kamykn/spelunker.vim'
+    set nospell
+    set spelllang=en_gb
+    set spellfile=$HOME/spell/en.utf-8.add
+    " TODO fix
+    " highlight SpelunkerSpellBad cterm=undercurl term=undercurl gui=undercurl ctermfg=247 guifg=#a70000
+    " highlight SpelunkerComplexOrCompoundWord cterm=undercurl term=undercurl gui=undercurl ctermfg=247 guifg=#a70000
+    " highlight SpellBad cterm=undercurl gui=undercurl term=undercurl guifg=#a70000
+    " highlight SpellLocal cterm=undercurl gui=undercurl term=undercurl guifg=#a70000
+    " highlight SpelunkerSpellBad cterm=underline ctermfg=247 gui=underline guifg=#9e9e9e
+    " highlight SpelunkerComplexOrCompoundWord cterm=underline ctermfg=NONE gui=underline guifg=NONE
 
-  set nospell
-  set spelllang=en_gb
-  set spellfile=$HOME/spell/en.utf-8.add
-  " TODO fix
-  " highlight SpelunkerSpellBad cterm=undercurl term=undercurl gui=undercurl ctermfg=247 guifg=#a70000
-  " highlight SpelunkerComplexOrCompoundWord cterm=undercurl term=undercurl gui=undercurl ctermfg=247 guifg=#a70000
-  " highlight SpellBad cterm=undercurl gui=undercurl term=undercurl guifg=#a70000
-  " highlight SpellLocal cterm=undercurl gui=undercurl term=undercurl guifg=#a70000
-  " highlight SpelunkerSpellBad cterm=underline ctermfg=247 gui=underline guifg=#9e9e9e
-  " highlight SpelunkerComplexOrCompoundWord cterm=underline ctermfg=NONE gui=underline guifg=NONE
-
-
+  " LSP - install nvim 0.5 and this will change your life
   if has('nvim-0.5')
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
