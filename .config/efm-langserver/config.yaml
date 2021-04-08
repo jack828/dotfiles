@@ -44,6 +44,20 @@ tools:
     lint-formats:
       - '%f:%l:%c: %m'
 
+  html-prettier: &html-prettier
+    format-command: 'prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser html'
+
+  css-prettier: &css-prettier
+    format-command: 'prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser css'
+
+  json-jq: &json-jq
+    lint-command: 'jq .'
+    lint-stdin: true
+    lint-ignore-exit-code: true
+
+  json-prettier: &json-prettier
+    format-command: 'prettier ${--tab-width:tabWidth} --parser json'
+
 languages:
   javascript:
     - <<: *eslint
@@ -69,3 +83,13 @@ languages:
 
   lua:
     - <<: *luacheck
+
+  html:
+    - <<: *html-prettier
+
+  css:
+    - <<: *css-prettier
+
+  json:
+    - <<: *json-jq
+    - <<: *json-prettier
