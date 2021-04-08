@@ -318,7 +318,6 @@
   " Fuzzy file search
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
-
     let g:fzf_layout = { 'down': '40%' }
 
     map <c-x><c-k> <Plug>(fzf-complete-word)
@@ -341,7 +340,6 @@
 
   " Find in project
   Plug 'rking/ag.vim'
-
     nnoremap \ :Ag!<SPACE>
 
   " Better nodejs support
@@ -350,14 +348,12 @@
   " File navigator
   Plug 'scrooloose/nerdtree'
   Plug 'jistr/vim-nerdtree-tabs'
-
     let NERDTreeShowHidden=0
     silent! nmap <Tab><Tab> :NERDTreeToggle<CR>
     silent! nmap <Leader>f :NERDTreeFind<CR>
 
   " Comment code
   Plug 'scrooloose/nerdcommenter'
-
     " add space after comment char, e.g. // my comment
     let NERDSpaceDelims=1
 
@@ -366,9 +362,6 @@
 
   " Strip whitespace etc.
   Plug 'editorconfig/editorconfig-vim'
-
-  " npm-which support in vim, used to configure vim to use locally installed linters
-  Plug 'jaawerth/nrun.vim', { 'do': 'type npm && npm install --global npm-which' }
 
   " Autocomplete
   if has('nvim')
