@@ -56,7 +56,16 @@ lspinstall.setup()
 local servers = lspinstall.installed_servers()
 
 for _, lsp in ipairs(servers) do
-  if lsp ~= 'efm' then
+  if lsp == 'tsserver' then
+    nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    javascript = {
+      suggestionActions = {
+        enabled = false
+      }
+    }
+  }
+  elseif lsp ~= 'efm' then
     nvim_lsp[lsp].setup { on_attach = on_attach }
   end
 end
