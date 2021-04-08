@@ -432,7 +432,7 @@
   " Really nice prompt
   Plug 'itchyny/lightline.vim'
     let g:lightline = {
-        \ 'colorscheme': 'PaperColor',
+        \ 'colorscheme': 'edge',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
         \ },
@@ -482,7 +482,9 @@
   Plug 'godlygeek/csapprox'
 
   " Colour scheme
-  Plug 'glepnir/zephyr-nvim'
+  Plug 'sainnhe/edge'
+    let g:edge_style = 'aura'
+    let g:edge_enable_italic = 1
 
   " Colour previews
   Plug 'ap/vim-css-color'
@@ -520,7 +522,7 @@
   " Set colour scheme
   set termguicolors
   set background=dark
-  colorscheme zephyr
+  colorscheme edge
 
   " stop the command popup window from appearing. literally why
   map q: :q
