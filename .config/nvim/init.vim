@@ -348,7 +348,7 @@
   " File navigator
   Plug 'scrooloose/nerdtree'
   Plug 'jistr/vim-nerdtree-tabs'
-    let NERDTreeShowHidden=0
+    let NERDTreeShowHidden=1
     silent! nmap <Tab><Tab> :NERDTreeToggle<CR>
     silent! nmap <Leader>f :NERDTreeFind<CR>
 
