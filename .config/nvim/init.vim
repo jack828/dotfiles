@@ -314,6 +314,7 @@
 
   " Language support
   Plug 'sheerun/vim-polyglot'
+    let g:polyglot_disabled = ['autoindent']
 
   " Fuzzy file search
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
