@@ -327,16 +327,7 @@
 
     nnoremap <silent> <Leader>o :Files<CR>
     nnoremap <silent> <Leader>g :GFiles?<CR>
-    nnoremap <silent> <Leader>ag :Ag<CR>
-    nnoremap <silent> <Leader>* :Ag!<CR>
     nnoremap <silent> <Leader><Enter> :Buffers<CR>
-
-    " Use FZF to fuzzy find tags
-    command! -bar Tags if !empty(tagfiles()) | call fzf#run({
-    \   'source': "sed '/^\\!/d;s/\t.*//' " . join(tagfiles()) . ' | uniq',
-    \   'sink':   'tag',
-    \ })
-    nnoremap <leader>. :Tags<cr>
     nnoremap <Leader>o :FZF<CR>
 
   " Find in project
