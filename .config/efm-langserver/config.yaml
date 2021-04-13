@@ -19,7 +19,8 @@ tools:
       - .eslintrc.json
 
   prettier: &prettier
-    format-command: 'prettier'
+    format-command: 'prettier --write --stdin-filepath ${INPUT}'
+    format-stdin: true
     root-markers:
       - .prettierrc
       - .prettierrc.js
@@ -46,10 +47,10 @@ tools:
       - '%f:%l:%c: %m'
 
   html-prettier: &html-prettier
-    format-command: 'prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser html'
+    format-command: 'prettier --write ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser html'
 
   css-prettier: &css-prettier
-    format-command: 'prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser css'
+    format-command: 'prettier --write ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser css'
 
   json-jq: &json-jq
     lint-command: 'jq .'
@@ -57,7 +58,7 @@ tools:
     lint-ignore-exit-code: true
 
   json-prettier: &json-prettier
-    format-command: 'prettier ${--tab-width:tabWidth} --parser json'
+    format-command: 'prettier --write ${--tab-width:tabWidth} --parser json'
 
 languages:
   javascript:
