@@ -7,7 +7,7 @@ lint-debounce: 1s
 
 tools:
   eslint: &eslint
-    lint-command: 'eslint -f unix --stdin'
+    lint-command: 'eslint -f unix --stdin --stdin-filename ${INPUT}'
     lint-ignore-exit-code: true
     lint-stdin: true
     lint-formats:
