@@ -59,13 +59,13 @@ lspinstall.setup()
 local servers = lspinstall.installed_servers()
 
 for _, lsp in ipairs(servers) do
-  if lsp == 'tsserver' then
+  if lsp == 'typescript' then
     nvim_lsp[lsp].setup {
     on_attach = function(client, bufnr)
       client.resolved_capabilities.document_formatting = false
 
       on_attach(client, bufnr)
-    end,
+    end
   }
   elseif lsp == 'efm' then
     local eslint = {
