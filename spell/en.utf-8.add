@@ -169,3 +169,5 @@ jack828
 dedupe
 debounce
 debounced
+promisify
+RegExp
