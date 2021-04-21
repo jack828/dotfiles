@@ -66,11 +66,6 @@ for _, lsp in ipairs(servers) do
 
       on_attach(client, bufnr)
     end,
-    javascript = {
-      suggestionActions = {
-        enabled = false
-      }
-    }
   }
   elseif lsp == 'efm' then
     local eslint = {
