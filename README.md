@@ -65,6 +65,13 @@ Once in vim, install the [language servers](https://github.com/kabouzeid/nvim-ls
 :LspInstall efm
 ```
 
+#### NVIM 0.5 + Lua Issues
+
+ - Lint is triggered whilst easymotion is in progress
+ - Prettier `formatting_sync` doesn't respect `.prettierrc`
+ - Prettier has a hissy fit when an IIFE is used and toggles formatting
+ - Linting with `<leader>p` sometimes pastes in extra characters
+
 ## Secrets
 
 To use the `wp` function you'll need to copy `.secrets.tpl` to `.secrets` and edit accordingly.
