@@ -31,8 +31,8 @@ local on_attach = function(client, bufnr)
 
   -- Linting
   if client.resolved_capabilities.document_formatting then
-    buf_set_keymap("n", "<space>p", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-    buf_set_keymap("n", "<space>P", "<cmd>lua vim.lsp.buf.formatting_sync({}, 1000)<CR>", opts)
+    buf_set_keymap("n", "<space>p", "<cmd>lua vim.lsp.buf.formatting_sync({}, 1000)<CR><cmd>w<CR>", opts)
+    buf_set_keymap("n", "<space>P", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
     -- vim.cmd [[autocmd BufWritePre *.jsx,*.jsx lua vim.lsp.buf.formatting_sync(nil, 1500)]]
   end
   -- elseif client.resolved_capabilities.document_range_formatting then
@@ -75,7 +75,7 @@ for _, lsp in ipairs(servers) do
       lintFormats = { '%f:%l:%c: %m' }
     }
     local prettier = {
-      formatCommand = './node_modules/.bin/prettier --stdin-filepath ${INPUT}',
+      formatCommand = './node_modules/.bin/prettier --config-precedence prefer-file --stdin-filepath ${INPUT}',
       formatStdin = true
     }
     local prettierHtml = {
