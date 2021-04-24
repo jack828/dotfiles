@@ -469,11 +469,6 @@
   " Make gui only color schemes work in terminal
   Plug 'godlygeek/csapprox'
 
-  " Colour scheme
-  Plug 'sainnhe/edge'
-    let g:edge_style = 'aura'
-    let g:edge_enable_italic = 1
-
   " Colour previews
   Plug 'ap/vim-css-color'
 
@@ -503,14 +498,28 @@
     Plug 'shougo/deoplete-lsp'
     Plug 'ojroques/nvim-lspfuzzy'
     Plug 'kabouzeid/nvim-lspinstall'
+
+    " Colour scheme
+    Plug 'sainnhe/edge'
+      let g:edge_style = 'aura'
+      let g:edge_enable_italic = 1
+
+  else
+    " Colour scheme (for losers not on 0.5)
+    Plug 'NLKNguyen/papercolor-theme'
   endif
 
   call plug#end()
 
   " Set colour scheme
   set termguicolors
-  set background=dark
-  colorscheme edge
+  if has('nvim-0.5')
+    set background=dark
+    colorscheme edge
+  else
+    set background=dark
+    colorscheme papercolor
+  endif
 
   " stop the command popup window from appearing. literally why
   map q: :q
