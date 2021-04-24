@@ -411,13 +411,8 @@
 
   " Faster keyboard nav within files
   Plug 'easymotion/vim-easymotion'
-    "let g:EasyMotion_do_mapping = 0
+    let g:EasyMotion_do_mapping = 0
     let g:EasyMotion_smartcase = 1
-
-    map <Leader>l <Plug>(easymotion-lineforward)
-    map <Leader>j <Plug>(easymotion-j)
-    map <Leader>k <Plug>(easymotion-k)
-    map <Leader>h <Plug>(easymotion-linebackward)
 
     " search whole file
     nmap s <Plug>(easymotion-bd-w)
