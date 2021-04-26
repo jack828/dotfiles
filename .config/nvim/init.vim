@@ -420,7 +420,7 @@
   " Really nice prompt
   Plug 'itchyny/lightline.vim'
     let g:lightline = {
-        \ 'colorscheme': 'material',
+        \ 'colorscheme': 'auto',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
         \ },
