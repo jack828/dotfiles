@@ -420,7 +420,7 @@
   " Really nice prompt
   Plug 'itchyny/lightline.vim'
     let g:lightline = {
-        \ 'colorscheme': 'edge',
+        \ 'colorscheme': 'material',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
         \ },
@@ -500,9 +500,8 @@
     Plug 'kabouzeid/nvim-lspinstall'
 
     " Colour scheme
-    Plug 'sainnhe/edge'
-      let g:edge_style = 'aura'
-      let g:edge_enable_italic = 1
+    Plug 'marko-cerovac/material.nvim'
+      let g:material_style = 'darker'
 
   else
     " Colour scheme (for losers not on 0.5)
@@ -515,7 +514,7 @@
   set termguicolors
   if has('nvim-0.5')
     set background=dark
-    colorscheme edge
+    colorscheme material
   else
     set background=dark
     colorscheme papercolor
