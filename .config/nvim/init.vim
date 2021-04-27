@@ -466,9 +466,6 @@
       \ }
     vnoremap <Leader>c :CarbonNowSh<CR>
 
-  " Make gui only color schemes work in terminal
-  Plug 'godlygeek/csapprox'
-
   " Colour previews
   Plug 'ap/vim-css-color'
 
