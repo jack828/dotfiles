@@ -417,10 +417,14 @@
     " search whole file
     nmap s <Plug>(easymotion-bd-w)
 
-  " Really nice prompt
-  Plug 'itchyny/lightline.vim'
-    let g:lightline = {
-        \ 'colorscheme': 'auto',
+  " Statusbar
+  if has('nvim-0.5')
+    Plug 'hoob3rt/lualine.nvim'
+  else
+    Plug 'itchyny/lightline.vim'
+      " I don't really know what most of this config does!
+      let g:lightline = {
+        \ 'colorscheme': 'papercolor',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
         \ },
@@ -437,6 +441,7 @@
         \ 'separator': { 'left': '', 'right': '' },
         \ 'subseparator': { 'left': '', 'right': '' }
       \ }
+  endif
 
   " Add '.' powers to plugins
   Plug 'tpope/vim-repeat'
@@ -526,4 +531,5 @@
   if has('nvim-0.5')
     lua require('treesitter')
     lua require('lsp')
+    lua require('statusline')
   endif
