@@ -485,13 +485,6 @@
     set nospell
     set spelllang=en_gb
     set spellfile=$HOME/spell/en.utf-8.add
-    " TODO fix
-    " highlight SpelunkerSpellBad cterm=undercurl term=undercurl gui=undercurl ctermfg=247 guifg=#a70000
-    " highlight SpelunkerComplexOrCompoundWord cterm=undercurl term=undercurl gui=undercurl ctermfg=247 guifg=#a70000
-    " highlight SpellBad cterm=undercurl gui=undercurl term=undercurl guifg=#a70000
-    " highlight SpellLocal cterm=undercurl gui=undercurl term=undercurl guifg=#a70000
-    " highlight SpelunkerSpellBad cterm=underline ctermfg=247 gui=underline guifg=#9e9e9e
-    " highlight SpelunkerComplexOrCompoundWord cterm=underline ctermfg=NONE gui=underline guifg=NONE
 
   " LSP - install nvim 0.5 and this will change your life
   if has('nvim-0.5')
@@ -521,6 +514,9 @@
     set background=dark
     colorscheme papercolor
   endif
+
+  highlight SpelunkerSpellBad cterm=undercurl ctermfg=196 gui=undercurl guifg=#a70000
+  highlight SpelunkerComplexOrCompoundWord cterm=undercurl ctermfg=196 gui=undercurl guifg=#a70000
 
   " stop the command popup window from appearing. literally why
   map q: :q
