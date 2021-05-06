@@ -101,6 +101,11 @@ for _, lsp in ipairs(servers) do
       lintStdin = true,
       lintIgnoreExitCode = true,
     }
+    local luacheck = {
+      lintCommand = 'luacheck --globals vim --filename ${INPUT} --formatter plain -',
+      lintStdin = true,
+      lintFormats = { '%f:%l:%c: %m' }
+    }
 
 
     nvim_lsp[lsp].setup {
@@ -125,19 +130,20 @@ for _, lsp in ipairs(servers) do
           json = { jsonLint, prettierJson },
           html = { prettierHtml },
           css = { prettierCss },
-
+          lua = { luacheck }
         }
       },
       filetypes = {
-        'javascriptreact',
         'javascript',
-        'typescriptreact',
+        'javascriptreact',
         'typescript',
+        'typescriptreact',
         'pug',
         'jade',
         'json',
+        'html',
         'css',
-        'html'
+        'lua'
       }
     }
   else
