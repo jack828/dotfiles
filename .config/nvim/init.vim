@@ -390,7 +390,7 @@
   " Git integration
   Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-fugitive'
-    nnoremap <Leader>b :Gblame<CR>
+    nnoremap <Leader>b :Git blame<CR>
 
   " Multiple cursors
   Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
