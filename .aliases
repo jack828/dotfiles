@@ -25,4 +25,4 @@ alias cowsayr='cowsay -f $(shuf -en1 /usr/share/cowsay/cows/*.cow)'
 
 # Fuzzy branch switching
 # zsh only
-alias gb='print -z git checkout $(git branch --sort=-committerdate | grep -v "^\*" | fzf --height=20% --reverse --info=inline)'
+alias gb='print -z gco $(git branch --sort=-committerdate | grep -v "^\*" | fzf --height=20% --reverse --info=inline)'
