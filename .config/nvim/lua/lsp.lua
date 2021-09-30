@@ -59,14 +59,19 @@ lspinstall.setup()
 local servers = lspinstall.installed_servers()
 
 for _, lsp in ipairs(servers) do
-  if lsp == 'typescript' then
+  if lsp == 'cpp' then
     nvim_lsp[lsp].setup {
-    on_attach = function(client, bufnr)
-      client.resolved_capabilities.document_formatting = false
+      filetypes = {"c", "cpp", "objc", "objcpp", "arduino", "ino"},
+      on_attach = on_attach,
+    }
+  elseif lsp == 'typescript' then
+    nvim_lsp[lsp].setup {
+      on_attach = function(client, bufnr)
+        client.resolved_capabilities.document_formatting = false
 
-      on_attach(client, bufnr)
-    end
-  }
+        on_attach(client, bufnr)
+      end
+    }
   elseif lsp == 'efm' then
     local eslint = {
       lintCommand = './node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}',
