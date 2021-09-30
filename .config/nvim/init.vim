@@ -357,30 +357,11 @@
 
   " Autocomplete
   if has('nvim')
-    " https://gregjs.com/vim/2016/configuring-the-deoplete-asynchronous-keyword-completion-plugin-with-tern-for-vim/
-    Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/nvim-cmp'
 
-      let g:deoplete#enable_at_startup = 1
-      let g:deoplete#file#enable_buffer_path = 1
-      if !exists('g:deoplete#omni#input_patterns')
-        let g:deoplete#omni#input_patterns = {}
-      endif
-
-      " Close after completing or leaving insert mode
-      autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-      " omnifuncs
-      augroup omnifuncs
-        autocmd!
-        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-      augroup end
-
-      " Tab autocomplete
-      inoremap <silent><expr> <Leader><Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
+    set completeopt=menu,menuone,noselect
   endif
 
   " Autosave and autoread
@@ -526,6 +507,7 @@
 
   if has('nvim-0.5')
     lua require('treesitter')
+    lua require('completion')
     lua require('lsp')
     lua require('statusline')
   endif

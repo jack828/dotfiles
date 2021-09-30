@@ -1,4 +1,5 @@
 local nvim_lsp = require("lspconfig")
+local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local lspfuzzy = require("lspfuzzy")
 local lspinstall = require("lspinstall")
 
@@ -63,9 +64,11 @@ for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
       filetypes = {"c", "cpp", "objc", "objcpp", "arduino", "ino"},
       on_attach = on_attach,
+      capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
     }
   elseif lsp == 'typescript' then
     nvim_lsp[lsp].setup {
+      capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities()),
       on_attach = function(client, bufnr)
         client.resolved_capabilities.document_formatting = false
 
@@ -119,6 +122,7 @@ for _, lsp in ipairs(servers) do
         , '-logfile', '/tmp/efm-lua.log', '-loglevel', '5'
       },
       on_attach = on_attach,
+      capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities()),
       init_options = {
         documentFormatting = true
       },
@@ -152,6 +156,9 @@ for _, lsp in ipairs(servers) do
       }
     }
   else
-    nvim_lsp[lsp].setup { on_attach = on_attach }
+    nvim_lsp[lsp].setup {
+      on_attach = on_attach,
+      capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    }
   end
 end
