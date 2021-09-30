@@ -484,6 +484,9 @@
     Plug 'NLKNguyen/papercolor-theme'
   endif
 
+  " Every now and then you should check
+  " Plug 'tweekmonster/startuptime.vim'
+
   call plug#end()
 
   " Set colour scheme
