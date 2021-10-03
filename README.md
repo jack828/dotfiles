@@ -59,11 +59,18 @@ Once in vim, install the [language servers](https://github.com/kabouzeid/nvim-ls
 :LspInstall cpp
 :LspInstall css
 :LspInstall yaml
+:LspInstall bash
 ...etc...
 
 # This one is for linting
 :LspInstall efm
 ```
+
+#### LSP External Dependencies
+
+A number of progams suppliment LSP setup in either linting or formatting:
+ - apt: shellshock
+ - go: mvdan.cc/sh/v3/cmd/shfmt@latest
 
 #### NVIM 0.5 + Lua Issues
 

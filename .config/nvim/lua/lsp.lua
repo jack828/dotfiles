@@ -82,6 +82,13 @@ for _, lsp in ipairs(servers) do
       lintStdin = true,
       lintFormats = { '%f:%l:%c: %m' }
     }
+    -- TODO
+    local stylint = {
+      lintCommand = './node_modules/.bin/stylint ${INPUT}',
+      lintIgnoreExitCode = true,
+      lintStdin = true,
+      lintFormats = { '%f:%l:%c: %m' }
+    }
     local prettier = {
       formatCommand = './node_modules/.bin/prettier --config-precedence prefer-file --stdin-filepath ${INPUT}',
       formatStdin = true
@@ -115,6 +122,19 @@ for _, lsp in ipairs(servers) do
       lintFormats = { '%f:%l:%c: %m' }
     }
 
+    local shellcheck = {
+      lintCommand = 'shellcheck -f gcc -x',
+      lintSource = 'shellcheck',
+      lintFormats = {
+        '%f:%l:%c: %trror: %m',
+        '%f:%l:%c: %tarning: %m',
+        '%f:%l:%c: %tote: %m',
+      }
+    }
+    local shfmt = {
+      formatCommand = 'shfmt -ci -s -bn -i 2',
+      formatStdin = true
+    }
 
     nvim_lsp[lsp].setup {
       cmd = {
@@ -139,7 +159,9 @@ for _, lsp in ipairs(servers) do
           json = { jsonLint, prettierJson },
           html = { prettierHtml },
           css = { prettierCss },
-          lua = { luacheck }
+          lua = { luacheck },
+          sh = { shellcheck, shfmt },
+          zsh = { shellcheck, shfmt }
         }
       },
       filetypes = {
@@ -152,7 +174,9 @@ for _, lsp in ipairs(servers) do
         'json',
         'html',
         'css',
-        'lua'
+        'lua',
+        'sh',
+        'zsh'
       }
     }
   else
