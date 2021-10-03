@@ -2,7 +2,7 @@
   [ -f ~/.secrets ] && source ~/.secrets
 
 # ZSH
-  # Path to your oh-my-zsh installation.
+  # Path to oh-my-zsh installation
   export ZSH=$HOME/.oh-my-zsh
 
   DEFAULT_USER='jack'
@@ -45,7 +45,7 @@
   export MANPATH="$NPM_PACKAGES/SHARE/MAN:$(manpath)"
 
 # ESP32
-export PATH="/home/jack/esp/esp-idf/components/:${PATH}"
+  export PATH="/home/jack/esp/esp-idf/components/:${PATH}"
 
 # ESP8266 Programming
   export PATH=$PATH:$HOME/esp8266/esp-open-sdk/xtensa-lx106-elf/bin
@@ -61,14 +61,14 @@ export PATH="/home/jack/esp/esp-idf/components/:${PATH}"
   # Pip packages
     export PATH=/home/jack/.local/bin:$PATH
 
-  # Customising htop, wooo
-    export HTOPRC=~/.htoprc
-
-  # Rust stuff
+  # Rust packages
     source ~/.cargo/env
 
-  # LaTeX
-    export PATH=/usr/local/texlive/2019/bin/x86_64-linux:$PATH
+  # GO
+    export PATH=/home/jack/go/bin:$PATH
+
+  # Customising htop, wooo
+    export HTOPRC=~/.htoprc
 
   # FZF
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
