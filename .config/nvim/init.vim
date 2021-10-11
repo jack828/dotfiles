@@ -197,23 +197,23 @@
   " closes current buffer, but doesn't close the split that it is in
   nnoremap <Leader>q :bp\|bd #<CR>
 
-  " buffer fun
+  " buffer navigation fun
   nnoremap gh :bp<CR>
   nnoremap gl :bn<CR>
   nnoremap g<Left> :bp<CR>
   nnoremap g<Right> :bn<CR>
-  nnoremap <Leader>i :b
 
   " 'zoom' current split
   nnoremap <Leader>z :tabnew %<CR>
   nnoremap <Leader>Z :tabclose<CR>
 
-  " run tests with Leader M
+  " Run tests using yarn
   " Requires a `yarn run-test` command in package.json
   nnoremap <Leader>m <C-w>v :te yarn run-test %<CR>
 
-  " run file in node
+  " Run file in node
   nnoremap <Leader>n <C-w>v :te node %<CR>
+
   " show invisible characters
   set list
 
@@ -314,6 +314,7 @@
 
   " Language support
   Plug 'sheerun/vim-polyglot'
+    " interferes with treesitter indents
     let g:polyglot_disabled = ['autoindent']
 
   " Fuzzy file search
@@ -356,7 +357,7 @@
   Plug 'editorconfig/editorconfig-vim'
 
   " Autocomplete
-  if has('nvim')
+  if has('nvim-0.5')
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/nvim-cmp'
