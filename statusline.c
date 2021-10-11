@@ -1,9 +1,9 @@
 #include "stdio.h"
 #include "stdlib.h"
-#include "time.h"
 #include "string.h"
-#include <sys/stat.h>
+#include "time.h"
 #include <ctype.h>
+#include <sys/stat.h>
 
 #define AC_STATUS_FILE "/sys/class/power_supply/AC/online"
 #define BATTERY_LEVEL_FILE "/sys/class/power_supply/BAT0/capacity"
@@ -13,10 +13,10 @@
 #define FAN_STATUS_FILE "/proc/acpi/ibm/fan"
 #define WIREGUARD_INTERFACE_FILE "/proc/net/dev_snmp6/wg0"
 
-void stripNonDigits(char* input, int length) {
-  char* output = malloc(length);
+void stripNonDigits(char *input, int length) {
+  char *output = malloc(length);
   int index = 0;
-  char* sPtr = input;
+  char *sPtr = input;
 
   for (; *sPtr != '\0'; sPtr++) {
     if (isdigit(*sPtr)) {
@@ -27,22 +27,20 @@ void stripNonDigits(char* input, int length) {
   strcpy(input, output);
 }
 
-void resetStyles() {
-  fputs("#[default]", stdout);
-}
+void resetStyles() { fputs("#[default]", stdout); }
 
-int main () {
+int main() {
   /* Power */
   fputs("#[bg=colour236]", stdout);
 
-  FILE* acStatusFile = fopen(AC_STATUS_FILE, "r");
+  FILE *acStatusFile = fopen(AC_STATUS_FILE, "r");
   char acStatus = fgetc(acStatusFile);
   fclose(acStatusFile);
 
   if (acStatus == '1') {
     fputs("#[fg=colour118,bold] AC ⌁ #[default]", stdout);
   } else {
-    FILE* batteryLevelFile = fopen(BATTERY_LEVEL_FILE, "r");
+    FILE *batteryLevelFile = fopen(BATTERY_LEVEL_FILE, "r");
 
     char batteryLevelString[4];
     fgets(batteryLevelString, 4, batteryLevelFile);
@@ -65,7 +63,7 @@ int main () {
   }
 
   /* CPU Temp */
-  FILE* cpuTempFile = fopen(CPU_TEMP_FILE, "r");
+  FILE *cpuTempFile = fopen(CPU_TEMP_FILE, "r");
   char cpuTempString[3];
   fgets(cpuTempString, 3, cpuTempFile);
   fclose(cpuTempFile);
@@ -87,7 +85,7 @@ int main () {
   resetStyles();
 
   /* Load Avg */
-  FILE* loadAvgFile = fopen(LOAD_AVG_FILE, "r");
+  FILE *loadAvgFile = fopen(LOAD_AVG_FILE, "r");
   char loadAvg[5];
   fgets(loadAvg, 5, loadAvgFile);
   fclose(loadAvgFile);
@@ -95,11 +93,10 @@ int main () {
   fprintf(stdout, "#[fg=colour231,bg=colour236] %s ", loadAvg);
 
   /* Memory Usage */
-
-  FILE* memoryFile = fopen(MEMORY_INFO_FILE, "r");
-  char* memoryTotalLine = NULL;
-  char* memoryFreeLine = NULL;
-  char* memoryAvailableLine = NULL;
+  FILE *memoryFile = fopen(MEMORY_INFO_FILE, "r");
+  char *memoryTotalLine = NULL;
+  char *memoryFreeLine = NULL;
+  char *memoryAvailableLine = NULL;
   size_t size = 0;
   getline(&memoryTotalLine, &size, memoryFile);
   /* We don't actually care about this one, but it's next */
@@ -130,9 +127,9 @@ int main () {
   resetStyles();
 
   /* Fan Speed */
-  FILE* fanFile = fopen(FAN_STATUS_FILE, "r");
-  char* fanStatusLine = NULL;
-  char* fanSpeedLine = NULL;
+  FILE *fanFile = fopen(FAN_STATUS_FILE, "r");
+  char *fanStatusLine = NULL;
+  char *fanSpeedLine = NULL;
   /* We don't actually care about this one, but it's first */
   getline(&fanStatusLine, &size, fanFile);
   getline(&fanSpeedLine, &size, fanFile);
@@ -169,13 +166,11 @@ int main () {
   strftime(month, sizeof(month), "%B", info);
   strftime(year, sizeof(year), "%Y", info);
 
-  fprintf(
-    stdout,
-    "#[fg=colour146,bold,bg=colour236] %s #[fg=colour176,bold,bg=colour236]%s, #[fg=colour173,bold,bg=colour236]%s#[fg=default] ",
-    day,
-    month,
-    year
-  );
+  fprintf(stdout,
+          "#[fg=colour146,bold,bg=colour237] %s "
+          "#[fg=colour176,bold,bg=colour236]%s, "
+          "#[fg=colour173,bold,bg=colour236]%s#[fg=default] ",
+          day, month, year);
 
   /* Time 24HR */
   char time[6];
