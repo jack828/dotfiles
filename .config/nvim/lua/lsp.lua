@@ -121,7 +121,6 @@ for _, lsp in ipairs(servers) do
       lintStdin = true,
       lintFormats = { '%f:%l:%c: %m' }
     }
-
     local shellcheck = {
       lintCommand = 'shellcheck -f gcc -x',
       lintSource = 'shellcheck',
@@ -134,6 +133,21 @@ for _, lsp in ipairs(servers) do
     local shfmt = {
       formatCommand = 'shfmt -ci -s -bn -i 2',
       formatStdin = true
+    }
+
+    local languages = {
+      javascript = { eslint, prettier },
+      javascriptreact = { eslint, prettier },
+      typescript = { eslint, prettier },
+      typescriptreact = { eslint, prettier },
+      pug = { pugLint },
+      jade = { pugLint },
+      json = { jsonLint, prettierJson },
+      html = { prettierHtml },
+      css = { prettierCss },
+      lua = { luacheck },
+      sh = { shellcheck, shfmt },
+      zsh = { shellcheck, shfmt }
     }
 
     nvim_lsp[lsp].setup {
@@ -149,35 +163,9 @@ for _, lsp in ipairs(servers) do
       settings = {
         rootMarkers = { '.git/' },
         lintDebounce = 1000000000, -- 1s in nanoseconds
-        languages = {
-          javascript = { eslint, prettier },
-          javascriptreact = { eslint, prettier },
-          typescript = { eslint, prettier },
-          typescriptreact = { eslint, prettier },
-          pug = { pugLint },
-          jade = { pugLint },
-          json = { jsonLint, prettierJson },
-          html = { prettierHtml },
-          css = { prettierCss },
-          lua = { luacheck },
-          sh = { shellcheck, shfmt },
-          zsh = { shellcheck, shfmt }
-        }
+        languages = languages
       },
-      filetypes = {
-        'javascript',
-        'javascriptreact',
-        'typescript',
-        'typescriptreact',
-        'pug',
-        'jade',
-        'json',
-        'html',
-        'css',
-        'lua',
-        'sh',
-        'zsh'
-      }
+      filetypes = vim.tbl_keys(languages)
     }
   else
     nvim_lsp[lsp].setup {
