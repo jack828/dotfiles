@@ -5,6 +5,14 @@
 #include <sys/stat.h>
 #include <ctype.h>
 
+#define AC_STATUS_FILE "/sys/class/power_supply/AC/online"
+#define BATTERY_LEVEL_FILE "/sys/class/power_supply/BAT0/capacity"
+#define CPU_TEMP_FILE "/sys/class/hwmon/hwmon1/temp1_input"
+#define LOAD_AVG_FILE "/proc/loadavg"
+#define MEMORY_INFO_FILE "/proc/meminfo"
+#define FAN_STATUS_FILE "/proc/acpi/ibm/fan"
+#define WIREGUARD_INTERFACE_FILE "/proc/net/dev_snmp6/wg0"
+
 void stripNonDigits(char* input, int length) {
   char* output = malloc(length);
   int index = 0;
@@ -27,14 +35,15 @@ int main () {
   /* Power */
   fputs("#[bg=colour236]", stdout);
 
-  FILE* acOnlineFile = fopen("/sys/class/power_supply/AC/online", "r");
-  char acOnline = fgetc(acOnlineFile);
-  fclose(acOnlineFile);
+  FILE* acStatusFile = fopen(AC_STATUS_FILE, "r");
+  char acStatus = fgetc(acStatusFile);
+  fclose(acStatusFile);
 
-  if (acOnline == '1') {
+  if (acStatus == '1') {
     fputs("#[fg=colour118,bold] AC ⌁ #[default]", stdout);
   } else {
-    FILE* batteryLevelFile = fopen("/sys/class/power_supply/BAT0/capacity", "r");
+    FILE* batteryLevelFile = fopen(BATTERY_LEVEL_FILE, "r");
+
     char batteryLevelString[4];
     fgets(batteryLevelString, 4, batteryLevelFile);
     fclose(batteryLevelFile);
@@ -56,7 +65,7 @@ int main () {
   }
 
   /* CPU Temp */
-  FILE* cpuTempFile = fopen("/sys/class/hwmon/hwmon1/temp1_input", "r");
+  FILE* cpuTempFile = fopen(CPU_TEMP_FILE, "r");
   char cpuTempString[3];
   fgets(cpuTempString, 3, cpuTempFile);
   fclose(cpuTempFile);
@@ -78,7 +87,7 @@ int main () {
   resetStyles();
 
   /* Load Avg */
-  FILE* loadAvgFile = fopen("/proc/loadavg", "r");
+  FILE* loadAvgFile = fopen(LOAD_AVG_FILE, "r");
   char loadAvg[5];
   fgets(loadAvg, 5, loadAvgFile);
   fclose(loadAvgFile);
@@ -87,7 +96,7 @@ int main () {
 
   /* Memory Usage */
 
-  FILE* memoryFile = fopen("/proc/meminfo", "r");
+  FILE* memoryFile = fopen(MEMORY_INFO_FILE, "r");
   char* memoryTotalLine = NULL;
   char* memoryFreeLine = NULL;
   char* memoryAvailableLine = NULL;
@@ -121,7 +130,7 @@ int main () {
   resetStyles();
 
   /* Fan Speed */
-  FILE* fanFile = fopen("/proc/acpi/ibm/fan", "r");
+  FILE* fanFile = fopen(FAN_STATUS_FILE, "r");
   char* fanStatusLine = NULL;
   char* fanSpeedLine = NULL;
   /* We don't actually care about this one, but it's first */
@@ -138,7 +147,7 @@ int main () {
   fputs("#[bg=colour237,bold]", stdout);
 
   struct stat buffer;
-  int exists = stat("/proc/net/dev_snmp6/wg0", &buffer);
+  int exists = stat(WIREGUARD_INTERFACE_FILE, &buffer);
   if (exists == 0) {
     fputs("#[fg=colour118] VPN ↑ ", stdout);
   } else {
