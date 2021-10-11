@@ -471,7 +471,6 @@
   if has('nvim-0.5')
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-    Plug 'shougo/deoplete-lsp'
     Plug 'ojroques/nvim-lspfuzzy'
     Plug 'kabouzeid/nvim-lspinstall'
 
