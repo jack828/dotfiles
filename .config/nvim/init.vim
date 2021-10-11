@@ -467,7 +467,7 @@
     set spelllang=en_gb
     set spellfile=$HOME/spell/en.utf-8.add
 
-  " LSP - install nvim 0.5 and this will change your life
+  " LSP - install nvim 0.5+ and this will change your life
   if has('nvim-0.5')
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
@@ -477,27 +477,26 @@
     " Colour scheme
     Plug 'marko-cerovac/material.nvim'
       let g:material_style = 'darker'
-
   else
-    " Colour scheme (for losers not on 0.5)
+    " Colour scheme (for losers not on 0.5+)
     Plug 'NLKNguyen/papercolor-theme'
   endif
 
-  " Every now and then you should check
+  " Every now and then you should check :StartupTime
   " Plug 'tweekmonster/startuptime.vim'
 
   call plug#end()
 
   " Set colour scheme
   set termguicolors
+  set background=dark
   if has('nvim-0.5')
-    set background=dark
     colorscheme material
   else
-    set background=dark
     colorscheme papercolor
   endif
 
+  " Set spell colours _after_ colourscheme
   highlight SpelunkerSpellBad cterm=undercurl ctermfg=196 gui=undercurl guifg=#a70000
   highlight SpelunkerComplexOrCompoundWord cterm=undercurl ctermfg=196 gui=undercurl guifg=#a70000
 
