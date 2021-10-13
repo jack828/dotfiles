@@ -18,8 +18,8 @@
 #define ORANGE "colour214"
 #define GREEN "colour118"
 #define WHITE "colour231"
-#define LIGHT_BG "colour236"
-#define DARK_BG "colour237"
+#define LIGHT_BG "colour237"
+#define DARK_BG "colour236"
 #define TEXT WHITE
 
 // Modify input string and only keep [0-9]
@@ -43,7 +43,7 @@ int main() {
   /*
    * Power
    */
-  fputs("#[bg=" DARK_BG "]", stdout);
+  fputs("#[bg=" LIGHT_BG "]", stdout);
 
   FILE *acStatusFile = fopen(AC_STATUS_FILE, "r");
   char acStatus = fgetc(acStatusFile);
@@ -68,8 +68,8 @@ int main() {
       fputs("#[fg=" RED ",reverse]", stdout);
     }
     fprintf(stdout, " %2d %% ", batteryLevel);
-    resetStyles();
   }
+  resetStyles();
 
   /*
    * CPU Temp
