@@ -21,6 +21,8 @@
 #define LIGHT_BG "colour236"
 #define DARK_BG "colour237"
 #define TEXT WHITE
+
+// Modify input string and only keep [0-9]
 void stripNonDigits(char *input, int length) {
   char *output = malloc(length);
   int index = 0;
@@ -38,7 +40,9 @@ void stripNonDigits(char *input, int length) {
 void resetStyles() { fputs("#[default]", stdout); }
 
 int main() {
-  /* Power */
+  /*
+   * Power
+   */
   fputs("#[bg=" DARK_BG "]", stdout);
 
   FILE *acStatusFile = fopen(AC_STATUS_FILE, "r");
@@ -67,7 +71,9 @@ int main() {
     resetStyles();
   }
 
-  /* CPU Temp */
+  /*
+   * CPU Temp
+   */
   FILE *cpuTempFile = fopen(CPU_TEMP_FILE, "r");
   char cpuTempString[3];
   fgets(cpuTempString, 3, cpuTempFile);
@@ -86,7 +92,9 @@ int main() {
   fprintf(stdout, " %d°C ", cpuTemp);
   resetStyles();
 
-  /* Load Avg */
+  /*
+   * Load Avg
+   */
   FILE *loadAvgFile = fopen(LOAD_AVG_FILE, "r");
   char loadAvg[5];
   fgets(loadAvg, 5, loadAvgFile);
@@ -94,7 +102,9 @@ int main() {
 
   fprintf(stdout, "#[fg=" WHITE ",bg=" LIGHT_BG "] %s ", loadAvg);
 
-  /* Memory Usage */
+  /*
+   * Memory Usage
+   */
   FILE *memoryFile = fopen(MEMORY_INFO_FILE, "r");
   char *memoryTotalLine = NULL;
   char *memoryFreeLine = NULL;
@@ -125,7 +135,9 @@ int main() {
   fprintf(stdout, " %2.f%% ", usedMemoryPercentage);
   resetStyles();
 
-  /* Fan Speed */
+  /*
+   * Fan Speed
+   */
   FILE *fanFile = fopen(FAN_STATUS_FILE, "r");
   char *fanStatusLine = NULL;
   char *fanSpeedLine = NULL;
@@ -139,7 +151,9 @@ int main() {
 
   fprintf(stdout, "#[fg=" WHITE ",bg=" LIGHT_BG "] %4d ", fanSpeed);
 
-  /* VPN Status */
+  /*
+   * VPN Status
+   */
   fputs("#[bg=" LIGHT_BG ",bold]", stdout);
 
   struct stat buffer;
@@ -151,7 +165,9 @@ int main() {
   }
   resetStyles();
 
-  /* Day Month, Year */
+  /*
+   * Day Month, Year
+   */
   char day[3];
   char month[10];
   char year[5];
@@ -171,7 +187,9 @@ int main() {
           "#[fg=colour173,bold,bg=" DARK_BG "]%s#[fg=default] ",
           day, month, year);
 
-  /* Time 24HR */
+  /*
+   * Time 24HR
+   */
   char time[6];
   strftime(time, sizeof(time), "%R", info);
 
