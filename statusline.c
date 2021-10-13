@@ -168,8 +168,8 @@ int main() {
 
   fprintf(stdout,
           "#[fg=colour146,bold,bg=colour237] %s "
-          "#[fg=colour176,bold,bg=colour236]%s, "
-          "#[fg=colour173,bold,bg=colour236]%s#[fg=default] ",
+          "#[fg=colour176,bold,bg=colour237]%s, "
+          "#[fg=colour173,bold,bg=colour237]%s#[fg=default] ",
           day, month, year);
 
   /* Time 24HR */
