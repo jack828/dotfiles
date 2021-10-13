@@ -13,6 +13,14 @@
 #define FAN_STATUS_FILE "/proc/acpi/ibm/fan"
 #define WIREGUARD_INTERFACE_FILE "/proc/net/dev_snmp6/wg0"
 
+// COLOURS
+#define RED "colour196"
+#define ORANGE "colour214"
+#define GREEN "colour118"
+#define WHITE "colour231"
+#define LIGHT_BG "colour236"
+#define DARK_BG "colour237"
+#define TEXT WHITE
 void stripNonDigits(char *input, int length) {
   char *output = malloc(length);
   int index = 0;
@@ -31,14 +39,14 @@ void resetStyles() { fputs("#[default]", stdout); }
 
 int main() {
   /* Power */
-  fputs("#[bg=colour236]", stdout);
+  fputs("#[bg=" DARK_BG "]", stdout);
 
   FILE *acStatusFile = fopen(AC_STATUS_FILE, "r");
   char acStatus = fgetc(acStatusFile);
   fclose(acStatusFile);
 
   if (acStatus == '1') {
-    fputs("#[fg=colour118,bold] AC ⌁ #[default]", stdout);
+    fputs("#[fg=" GREEN ",bold] AC ⌁ #[default]", stdout);
   } else {
     FILE *batteryLevelFile = fopen(BATTERY_LEVEL_FILE, "r");
 
@@ -49,14 +57,11 @@ int main() {
     int batteryLevel = atoi(batteryLevelString);
 
     if (batteryLevel > 75) {
-      /* Green */
-      fputs("#[fg=colour118]", stdout);
+      fputs("#[fg=" GREEN "]", stdout);
     } else if (batteryLevel > 50) {
-      /* Orange */
-      fputs("#[fg=colour214]", stdout);
+      fputs("#[fg=" ORANGE "]", stdout);
     } else {
-      /* Red */
-      fputs("#[fg=colour196,reverse]", stdout);
+      fputs("#[fg=" RED ",reverse]", stdout);
     }
     fprintf(stdout, " %2d %% ", batteryLevel);
     resetStyles();
@@ -70,16 +75,13 @@ int main() {
 
   int cpuTemp = atoi(cpuTempString);
 
-  fputs("#[bg=colour237]", stdout);
+  fputs("#[bg=" DARK_BG "]", stdout);
   if (cpuTemp > 80) {
-    /* Red */
-    fputs("#[fg=colour196,reverse]", stdout);
+    fputs("#[fg=" RED ",reverse]", stdout);
   } else if (cpuTemp > 50) {
-    /* Orange */
-    fputs("#[fg=colour214]", stdout);
+    fputs("#[fg=" ORANGE "]", stdout);
   } else {
-    /* Green */
-    fputs("#[fg=colour118]", stdout);
+    fputs("#[fg=" GREEN "]", stdout);
   }
   fprintf(stdout, " %d°C ", cpuTemp);
   resetStyles();
@@ -90,7 +92,7 @@ int main() {
   fgets(loadAvg, 5, loadAvgFile);
   fclose(loadAvgFile);
 
-  fprintf(stdout, "#[fg=colour231,bg=colour236] %s ", loadAvg);
+  fprintf(stdout, "#[fg=" WHITE ",bg=" LIGHT_BG "] %s ", loadAvg);
 
   /* Memory Usage */
   FILE *memoryFile = fopen(MEMORY_INFO_FILE, "r");
@@ -112,16 +114,13 @@ int main() {
   double freeMemoryPercentage = (memoryAvailable / memoryTotal) * 100;
   double usedMemoryPercentage = 100 - freeMemoryPercentage;
 
-  fputs("#[bg=colour237]", stdout);
+  fputs("#[bg=" DARK_BG "]", stdout);
   if (usedMemoryPercentage > 75) {
-    /* Red */
-    fputs("#[fg=colour196,reverse]", stdout);
+    fputs("#[fg=" RED ",reverse]", stdout);
   } else if (usedMemoryPercentage > 50) {
-    /* Orange */
-    fputs("#[fg=colour214]", stdout);
+    fputs("#[fg=" ORANGE "]", stdout);
   } else {
-    /* Green */
-    fputs("#[fg=colour118]", stdout);
+    fputs("#[fg=" GREEN "]", stdout);
   }
   fprintf(stdout, " %2.f%% ", usedMemoryPercentage);
   resetStyles();
@@ -138,17 +137,17 @@ int main() {
   stripNonDigits(fanSpeedLine, strlen(fanSpeedLine));
   int fanSpeed = atoi(fanSpeedLine);
 
-  fprintf(stdout, "#[fg=colour231,bg=colour236] %4d ", fanSpeed);
+  fprintf(stdout, "#[fg=" WHITE ",bg=" LIGHT_BG "] %4d ", fanSpeed);
 
   /* VPN Status */
-  fputs("#[bg=colour237,bold]", stdout);
+  fputs("#[bg=" LIGHT_BG ",bold]", stdout);
 
   struct stat buffer;
   int exists = stat(WIREGUARD_INTERFACE_FILE, &buffer);
   if (exists == 0) {
-    fputs("#[fg=colour118] VPN ↑ ", stdout);
+    fputs("#[fg=" GREEN "] VPN ↑ ", stdout);
   } else {
-    fputs("#[fg=colour196] VPN ↓ ", stdout);
+    fputs("#[fg=" RED "] VPN ↓ ", stdout);
   }
   resetStyles();
 
@@ -167,9 +166,9 @@ int main() {
   strftime(year, sizeof(year), "%Y", info);
 
   fprintf(stdout,
-          "#[fg=colour146,bold,bg=colour237] %s "
-          "#[fg=colour176,bold,bg=colour237]%s, "
-          "#[fg=colour173,bold,bg=colour237]%s#[fg=default] ",
+          "#[fg=colour146,bold,bg=" DARK_BG "] %s "
+          "#[fg=colour176,bold,bg=" DARK_BG "]%s, "
+          "#[fg=colour173,bold,bg=" DARK_BG "]%s#[fg=default] ",
           day, month, year);
 
   /* Time 24HR */
