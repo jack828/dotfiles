@@ -17,14 +17,14 @@
 #define WIRELESS_INTERFACE "wlp3s0"
 #define WIRELESS_FILE "/proc/net/wireless"
 
-// COLOURS
-#define RED "colour196"
-#define ORANGE "colour214"
-#define YELLOW "colour226"
-#define GREEN "colour118"
-#define WHITE "colour231"
-#define LIGHT_BG "colour237"
-#define DARK_BG "colour236"
+// COLOURS https://jonasjacek.github.io/colors/
+#define RED "colour196"      // #FF0000
+#define ORANGE "colour214"   // #FFAF00
+#define YELLOW "colour226"   // #FFFF00
+#define GREEN "colour118"    // #87FF00
+#define WHITE "colour231"    // #FFFFFF
+#define LIGHT_BG "colour237" // #303030
+#define DARK_BG "colour236"  // #3A3A3A
 #define TEXT WHITE
 
 // Modify input string and only keep [0-9]
