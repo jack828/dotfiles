@@ -179,3 +179,15 @@ onboarding
 center
 querystring
 stringify
+fwrite
+fputs
+getline
+memset
+stderr
+fputc
+stat
+strftime
+localtime
+strtok
+strlen
+strtod
