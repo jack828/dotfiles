@@ -95,7 +95,9 @@ This assumes the following files are available and match the format expected:
 | /proc/meminfo | Memory usage - expects Total mem on line 1, available on line 3 |
 | /proc/acpi/ibm/fan | Fan info, RPM on line 2 |
 | /proc/net/dev_snmp6/wg0 | Used to infer VPN status, using WireGuard |
+| /proc/net/wireless | Used to get wireless signal level |
 
+In addition to this you must be on Linux with a wireless driver compatible with ioctl `SIOCGIWESSID` to obtain ESSID.
 
 ## Cheatsheet
 
