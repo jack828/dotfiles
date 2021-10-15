@@ -216,7 +216,7 @@ int main() {
     }
 
     if (signal > 70) {
-      fputs("#[fg=" RED ",reverse]", stdout);
+      fputs("#[fg=" RED "]", stdout);
     } else if (signal > 60) {
       fputs("#[fg=" ORANGE "]", stdout);
     } else if (signal > 50) {
