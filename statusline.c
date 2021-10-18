@@ -1,11 +1,11 @@
-#include "stdio.h"
-#include "stdlib.h"
-#include "string.h"
-#include "time.h"
 #include <ctype.h>
 #include <linux/wireless.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/ioctl.h>
 #include <sys/stat.h>
+#include <time.h>
 
 #define AC_STATUS_FILE "/sys/class/power_supply/AC/online"
 #define BATTERY_LEVEL_FILE "/sys/class/power_supply/BAT0/capacity"
@@ -14,6 +14,7 @@
 #define MEMORY_INFO_FILE "/proc/meminfo"
 #define FAN_STATUS_FILE "/proc/acpi/ibm/fan"
 #define WIREGUARD_INTERFACE_FILE "/proc/net/dev_snmp6/wg0"
+#define ETHERNET_INTERFACE "enp0s31f6"
 #define WIRELESS_INTERFACE "wlp3s0"
 #define WIRELESS_FILE "/proc/net/wireless"
 
@@ -26,6 +27,25 @@
 #define LIGHT_BG "colour237" // #303030
 #define DARK_BG "colour236"  // #3A3A3A
 #define TEXT WHITE
+
+int8_t interfaceStatus(const char *interface) {
+  int8_t length = 15                  // path start
+                  + strlen(interface) // interface
+                  + 8                 // path end
+                  + 1;                // null character
+  char *interfaceStatusFilePath = malloc(length);
+  strcat(interfaceStatusFilePath, "/sys/class/net/");
+  strcat(interfaceStatusFilePath, interface);
+  strcat(interfaceStatusFilePath, "/carrier");
+
+  FILE *statusFile = fopen(interfaceStatusFilePath, "r");
+  char status[2];
+  fgets(status, 2, statusFile);
+  fclose(statusFile);
+  free(interfaceStatusFilePath);
+
+  return atoi(status);
+}
 
 // Modify input string and only keep [0-9]
 void stripNonDigits(char *input, int length) {
@@ -161,73 +181,81 @@ int main() {
    */
   fprintf(stdout, "#[fg=" WHITE ",bg=" DARK_BG "]");
 
-  FILE *wirelessFile = fopen(WIRELESS_FILE, "r");
-  char *wirelessHeaderLine = NULL;
-  char *wirelessInterfaceLine = NULL;
-  size_t wirelessSize = 0;
-  /* Two header lines */
-  getline(&wirelessHeaderLine, &wirelessSize, wirelessFile);
-  getline(&wirelessHeaderLine, &wirelessSize, wirelessFile);
+  int8_t ethernetStatus = interfaceStatus(ETHERNET_INTERFACE);
+  int8_t wirelessStatus = interfaceStatus(WIRELESS_INTERFACE);
+  if (ethernetStatus) {
+    // TODO any neat stats we can get?
+    fputs("#[fg=" GREEN "] WIRED ↑ ", stdout);
+  } else if (wirelessStatus) {
+    FILE *wirelessFile = fopen(WIRELESS_FILE, "r");
+    char *wirelessHeaderLine = NULL;
+    char *wirelessInterfaceLine = NULL;
+    size_t wirelessSize = 0;
+    /* Two header lines */
+    getline(&wirelessHeaderLine, &wirelessSize, wirelessFile);
+    getline(&wirelessHeaderLine, &wirelessSize, wirelessFile);
 
-  // TODO support more than one interface, we blindly assume that the one we
-  // care about is the first and only
-  // TODO also support ethernet detection
-  getline(&wirelessInterfaceLine, &wirelessSize, wirelessFile);
-  // In my case, this line looks like this:
-  // wlp3s0: 0000   67.  -43.  -256        0      0      0      0    303 0
-  //
-  // Since we only care about the 4th column (-43)
-  // If we split the string by ".", we only need index 1, and we can discard
-  // unwanted data.
-  fclose(wirelessFile);
+    // TODO support more than one interface, we blindly assume that the one we
+    // care about is the first and only
+    getline(&wirelessInterfaceLine, &wirelessSize, wirelessFile);
+    // In my case, this line looks like this:
+    // wlp3s0: 0000   67.  -43.  -256        0      0      0      0    303 0
+    //
+    // Since we only care about the 4th column (-43)
+    // If we split the string by ".", we only need index 1, and we can discard
+    // unwanted data.
+    fclose(wirelessFile);
 
-  if (strlen(wirelessInterfaceLine) == 0) {
-    // if not connected show OFFLINE \/
-    fputs("#[fg=" RED ",reverse] OFFLINE ↓ ", stdout);
-  } else {
-    // RSSI (signal quality in dBm) first
-    char *token = strtok(wirelessInterfaceLine, ".");
-    token = strtok(NULL, ".");
-    stripNonDigits(token, strlen(token));
-
-    // This is a negative number, but we discard the `-`
-    int signal = atoi(token);
-
-    struct iwreq wreq;
-    int sockfd;
-    char *id[32];
-
-    // Allocate memory for the request
-    memset(&wreq, 0, sizeof(struct iwreq));
-    // Assign our interface name to the request
-    sprintf(wreq.ifr_name, WIRELESS_INTERFACE);
-
-    // Open socket for ioctl
-    if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
-      fprintf(stderr, "FAILED 1");
-      exit(1);
-    }
-
-    wreq.u.essid.pointer = id;
-    wreq.u.essid.length = 32;
-    if (ioctl(sockfd, SIOCGIWESSID, &wreq) == -1) {
-      fprintf(stderr, "FAILED 2");
-      exit(2);
-    }
-
-    if (signal > 70) {
-      fputs("#[fg=" RED "]", stdout);
-    } else if (signal > 60) {
-      fputs("#[fg=" ORANGE "]", stdout);
-    } else if (signal > 50) {
-      fputs("#[fg=" YELLOW "]", stdout);
+    if (strlen(wirelessInterfaceLine) == 0) {
+      // Should not really get here buuut
+      fputs("#[fg=" RED ",reverse] OFFLINE ↓ ", stdout);
     } else {
-      fputs("#[fg=" GREEN "]", stdout);
+      // RSSI (signal quality in dBm) first
+      char *token = strtok(wirelessInterfaceLine, ".");
+      token = strtok(NULL, ".");
+      stripNonDigits(token, strlen(token));
+
+      // This is a negative number, but we discard the `-`
+      int signal = atoi(token);
+
+      struct iwreq wreq;
+      int sockfd;
+      char *id[32];
+
+      // Allocate memory for the request
+      memset(&wreq, 0, sizeof(struct iwreq));
+      // Assign our interface name to the request
+      sprintf(wreq.ifr_name, WIRELESS_INTERFACE);
+
+      // Open socket for ioctl
+      if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
+        fprintf(stderr, "FAILED 1");
+        exit(1);
+      }
+
+      wreq.u.essid.pointer = id;
+      wreq.u.essid.length = 32;
+      if (ioctl(sockfd, SIOCGIWESSID, &wreq) == -1) {
+        fprintf(stderr, "FAILED 2");
+        exit(2);
+      }
+
+      if (signal > 70) {
+        fputs("#[fg=" RED "]", stdout);
+      } else if (signal > 60) {
+        fputs("#[fg=" ORANGE "]", stdout);
+      } else if (signal > 50) {
+        fputs("#[fg=" YELLOW "]", stdout);
+      } else {
+        fputs("#[fg=" GREEN "]", stdout);
+      }
+      fputc(' ', stdout);
+      fwrite(wreq.u.essid.pointer, 1, wreq.u.essid.length, stdout);
+      fprintf(stdout, " %d", signal);
+      fputs("#[fg=" GREEN "] ↑ ", stdout);
     }
-    fputc(' ', stdout);
-    fwrite(wreq.u.essid.pointer, 1, wreq.u.essid.length, stdout);
-    fprintf(stdout, " %d", signal);
-    fputs("#[fg=" GREEN "] ↑ ", stdout);
+  } else {
+    fputs("#[fg=" RED ",reverse] OFFLINE ↓ ", stdout);
   }
   resetStyles();
 
