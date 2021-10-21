@@ -1,5 +1,6 @@
 #include <ctype.h>
 #include <linux/wireless.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -17,6 +18,22 @@
 #define ETHERNET_INTERFACE "enp0s31f6"
 #define WIRELESS_INTERFACE "wlp3s0"
 #define WIRELESS_FILE "/proc/net/wireless"
+
+// Not actually my location, but close enough
+#define LAT 55.116889
+#define LNG -4.436861
+
+// Trigonometry for sun position calculations
+#define PI 3.1415926535897932384
+#define RADEG (180.0 / PI)
+#define DEGRAD (PI / 180.0)
+#define sind(x) sin((x)*DEGRAD)
+#define cosd(x) cos((x)*DEGRAD)
+#define tand(x) tan((x)*DEGRAD)
+#define atand(x) (RADEG * atan(x))
+#define asind(x) (RADEG * asin(x))
+#define acosd(x) (RADEG * acos(x))
+#define atan2d(y, x) (RADEG * atan2(y, x))
 
 // COLOURS https://jonasjacek.github.io/colors/
 #define RED "colour196"      // #FF0000
@@ -301,7 +318,94 @@ int main() {
   char time[6];
   strftime(time, sizeof(time), "%R", info);
 
-  fprintf(stdout, "#[fg=colour234,bold,bg=colour12] %s ", time);
+  // B REDY 4 SUM QUIK MAFFS
+
+  // https://stjarnhimlen.se/comp/ppcomp.html#3
+  // Compute day number by converting calendar date to Julian Day Number
+  // tm_year is indexed from 1900
+  // tm_mon are indexed from 0
+  // Needs to be INTEGER division hence the floor
+  double d =
+      (367 * (info->tm_year + 1900) -
+       floor((7 * ((info->tm_year + 1900) +
+                   floor(((info->tm_mon + 1) + 9) / 12.0))) /
+             4.0) +
+       floor((275 * (info->tm_mon + 1)) / 9.0) + (info->tm_mday) - 730530);
+
+  // Sun rise/set - https://stjarnhimlen.se/comp/riset.html
+  // Sun's orbital elements from https://stjarnhimlen.se/comp/ppcomp.html#4.1
+  double w = 282.9404 + 4.70935E-5 * d;   // argument of perihelion
+  double e = 0.016709 - 1.151E-9 * d;     // eccentricity
+  double M = 356.0470 + 0.9856002585 * d; // mean anomaly
+  double ecl = 23.4393 - 3.563E-7 * d;    // obliquity of the ecliptic
+  // https://stjarnhimlen.se/comp/ppcomp.html#5
+  double E = M + e * RADEG * sind(M) * (1.0 + e * cosd(M)); // eccentric anomaly
+  double x = cosd(E) - e;
+  double y = sqrt(1.0 - e * e) * sind(E);
+  double r = sqrt(x * x + y * y); // distance
+  double v = atan2d(y, x);        // true anomaly
+  double sunTrueLongitude = v + w;
+  if (sunTrueLongitude >= 360.0) {
+    sunTrueLongitude -= 360.0;
+  }
+  /* Convert sunTrueLongitude,r to ecliptic rectangular geocentric coordinates
+   * xs,ys: */
+  double xs = r * cosd(sunTrueLongitude);
+  double ys = r * sind(sunTrueLongitude);
+
+  /* To convert this to equatorial, rectangular, geocentric coordinates,
+   * compute: */
+  double xe = xs;
+  double ye = ys * cosd(ecl);
+  double ze = ys * sind(ecl);
+  /* Finally, compute the Sun's Right Ascension (RA) and Declination (Dec): */
+  double rightAscension = atan2d(ye, xe);
+  double declination = atan2d(ze, sqrt(xe * xe + ye * ye));
+  double sunMeanLongitude = M + w;
+  // Sidereal time at Greenwich at 00:00 Universal Time
+  double GMST0 = sunMeanLongitude + 180.0;
+
+  double universalTime =
+      (info->tm_hour -
+       info->tm_gmtoff / 3600.0) // remove offset (seconds) from hours
+      + (info->tm_min / 60.0);
+  double localSiderealTime = GMST0 + (universalTime * 15.04107) + LNG;
+
+  double localHourAngle = localSiderealTime - rightAscension;
+
+  double sunAngle = asind(sind(LAT) * sind(declination) +
+                          cosd(LAT) * cosd(declination) * cosd(localHourAngle));
+
+  char *textColour;
+  char *bgColour;
+
+  if (sunAngle < -18) {
+    // night
+    textColour = WHITE;
+    bgColour = "colour16"; // #000000
+  } else if (sunAngle >= -18 && sunAngle < -12) {
+    // astronomical twilight
+    textColour = WHITE;
+    bgColour = "colour19"; // #0000AF
+  } else if (sunAngle >= -18 && sunAngle < -6) {
+    // nautical twilight
+    textColour = WHITE;
+    bgColour = "colour21"; // #0000FF
+  } else if (sunAngle >= -6 && sunAngle < -0.833) {
+    // civil twilight
+    textColour = WHITE;
+    bgColour = "colour27"; // #005FFF
+  } else if (sunAngle >= -0.833 && sunAngle < 0) {
+    // sunrise/sunset
+    textColour = WHITE;
+    bgColour = "colour167"; // #d75f5f
+  } else if (sunAngle > 0) {
+    // day
+    textColour = DARK_BG;
+    bgColour = "colour4"; // #00AFFF
+  }
+
+  fprintf(stdout, "#[fg=%s,bold,bg=%s] %s ", textColour, bgColour, time);
 
   return 0;
 }
