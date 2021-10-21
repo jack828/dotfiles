@@ -92,7 +92,7 @@ int main() {
   fclose(acStatusFile);
 
   if (acStatus == '1') {
-    fputs("#[fg=" GREEN ",bold] AC ⌁ #[default]", stdout);
+    fputs("#[fg=" GREEN ",bold] AC ⌁ ", stdout);
   } else {
     FILE *batteryLevelFile = fopen(BATTERY_LEVEL_FILE, "r");
 
