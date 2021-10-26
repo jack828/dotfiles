@@ -74,7 +74,8 @@
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Superior
-  export EDITOR=nvim
+  export EDITOR=/home/jack/.local/bin/nvim
+  export SUDO_EDITOR=/home/jack/.local/bin/nvim
 
 # For git review commands
 # see .gitconfig
