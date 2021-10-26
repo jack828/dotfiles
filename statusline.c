@@ -228,8 +228,8 @@ int main() {
       fputs("#[fg=" RED ",reverse] OFFLINE ↓ ", stdout);
     } else {
       // RSSI (signal quality in dBm) first
-      char *token = strtok(wirelessInterfaceLine, ".");
-      token = strtok(NULL, ".");
+      char *token = strtok(wirelessInterfaceLine, "."); // index 0
+      token = strtok(NULL, ".");                        // index 1
       stripNonDigits(token, strlen(token));
 
       // This is a negative number, but we discard the `-`
