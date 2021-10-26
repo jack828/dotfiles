@@ -21,13 +21,13 @@
   source $ZSH/oh-my-zsh.sh
 
 # History
-  HIST_STAMPS="dd/mm/yyyy"
-
-# Increase history file limit
+  # Increase history file limit
   # https://github.com/bamos/zsh-history-analysis/blob/master/README.md#increasing-the-history-file-size
+  # https://unix.stackexchange.com/a/273863
   export HISTSIZE=1000000000
   export SAVEHIST=$HISTSIZE
-  setopt EXTENDED_HISTORY
+  setopt EXTENDED_HISTORY   # Write the history file in the ":start:elapsed;command" format.
+  setopt INC_APPEND_HISTORY # Write to the history file immediately, not when the shell exits.
 
 # Android SDK
   export ANDROID_HOME=/home/jack/Android/Sdk/
