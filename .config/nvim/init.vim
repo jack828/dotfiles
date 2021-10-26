@@ -403,7 +403,7 @@
 
   " Statusbar
   if has('nvim-0.5')
-    Plug 'hoob3rt/lualine.nvim'
+    Plug 'nvim-lualine/lualine.nvim'
   else
     Plug 'itchyny/lightline.vim'
       " I don't really know what most of this config does!
