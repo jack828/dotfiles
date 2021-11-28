@@ -463,7 +463,7 @@
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
     Plug 'ojroques/nvim-lspfuzzy'
-    Plug 'kabouzeid/nvim-lspinstall'
+    Plug 'williamboman/nvim-lsp-installer'
 
     " Colour scheme
     Plug 'marko-cerovac/material.nvim'

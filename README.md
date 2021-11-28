@@ -52,14 +52,7 @@ $ <download and install github packages>
 Once in vim, install the [language servers](https://github.com/kabouzeid/nvim-lspinstall#bundled-installers):
 
 ```
-:LspInstall typescript
-:LspInstall html
-:LspInstall json
-:LspInstall cmake
-:LspInstall cpp
-:LspInstall css
-:LspInstall yaml
-:LspInstall bash
+:LspInstall tsserver cssls yamlls clangd bashls html jsonls
 ...etc...
 
 # This one is for linting

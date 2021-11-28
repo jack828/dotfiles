@@ -1,7 +1,6 @@
-local nvim_lsp = require("lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local lspfuzzy = require("lspfuzzy")
-local lspinstall = require("lspinstall")
+local lsp_installer = require("nvim-lsp-installer")
 
 -- Make the LSP client use FZF instead of the quickfix list
 lspfuzzy.setup {}
@@ -56,121 +55,126 @@ local on_attach = function(client, bufnr)
 end
 
 -- setup installed language servers
-lspinstall.setup()
-local servers = lspinstall.installed_servers()
+lsp_installer.on_server_ready(function(server)
+    local opts
 
-for _, lsp in ipairs(servers) do
-  if lsp == 'cpp' then
-    nvim_lsp[lsp].setup {
-      filetypes = {"c", "cpp", "objc", "objcpp", "arduino", "ino"},
-      on_attach = on_attach,
-      capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
-    }
-  elseif lsp == 'typescript' then
-    nvim_lsp[lsp].setup {
-      capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-      on_attach = function(client, bufnr)
-        client.resolved_capabilities.document_formatting = false
-
-        on_attach(client, bufnr)
-      end
-    }
-  elseif lsp == 'efm' then
-    local eslint = {
-      lintCommand = './node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}',
-      lintIgnoreExitCode = true,
-      lintStdin = true,
-      lintFormats = { '%f:%l:%c: %m' }
-    }
-    -- TODO
-    local stylint = {
-      lintCommand = './node_modules/.bin/stylint ${INPUT}',
-      lintIgnoreExitCode = true,
-      lintStdin = true,
-      lintFormats = { '%f:%l:%c: %m' }
-    }
-    local prettier = {
-      formatCommand = './node_modules/.bin/prettier --config-precedence prefer-file --stdin-filepath ${INPUT}',
-      formatStdin = true
-    }
-    local prettierHtml = {
-      formatCommand = './node_modules/.bin/prettier --write ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser html --stdin-filepath ${INPUT}',
-      formatStdin = true
-    }
-    local prettierCss = {
-      formatCommand = './node_modules/.bin/prettier --write ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser css --stdin-filepath ${INPUT}',
-      formatStdin = true
-    }
-    local prettierJson = {
-      formatCommand = './node_modules/.bin/prettier --write ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser json --stdin-filepath ${INPUT}',
-      formatStdin = true
-    }
-    local pugLint = {
-      lintCommand = './node_modules/.bin/pug-lint --reporter inline',
-      lintIgnoreExitCode = true,
-      lintFormats = { '%f:%l:%c %m' },
-      rootMarkers = { '.pug-lintrc', '.pug-lintrc.js', '.pug-lintrc.json' }
-    }
-    local jsonLint = {
-      lintCommand = 'jq .',
-      lintStdin = true,
-      lintIgnoreExitCode = true,
-    }
-    local luacheck = {
-      lintCommand = 'luacheck --globals vim --filename ${INPUT} --formatter plain -',
-      lintStdin = true,
-      lintFormats = { '%f:%l:%c: %m' }
-    }
-    local shellcheck = {
-      lintCommand = 'shellcheck -f gcc -x',
-      lintSource = 'shellcheck',
-      lintFormats = {
-        '%f:%l:%c: %trror: %m',
-        '%f:%l:%c: %tarning: %m',
-        '%f:%l:%c: %tote: %m',
+    if server.name == 'cpp' then
+      opts = {
+        filetypes = {"c", "cpp", "objc", "objcpp", "arduino", "ino"},
+        on_attach = on_attach,
+        capabilities = cmp_nvim_lsp.update_capabilities(
+          vim.lsp.protocol.make_client_capabilities()
+        )
       }
-    }
-    local shfmt = {
-      formatCommand = 'shfmt -ci -s -bn -i 2',
-      formatStdin = true
-    }
+    elseif server.name == 'typescript' then
+      opts = {
+        capabilities = cmp_nvim_lsp.update_capabilities(
+          vim.lsp.protocol.make_client_capabilities()
+        ),
+        on_attach = function(client, bufnr)
+          client.resolved_capabilities.document_formatting = false
 
-    local languages = {
-      javascript = { eslint, prettier },
-      javascriptreact = { eslint, prettier },
-      typescript = { eslint, prettier },
-      typescriptreact = { eslint, prettier },
-      pug = { pugLint },
-      jade = { pugLint },
-      json = { jsonLint, prettierJson },
-      html = { prettierHtml },
-      css = { prettierCss },
-      lua = { luacheck },
-      sh = { shellcheck, shfmt },
-      zsh = { shellcheck, shfmt }
-    }
+          on_attach(client, bufnr)
+        end
+      }
+    elseif server.name == 'efm' then
+      local eslint = {
+        lintCommand = './node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}',
+        lintIgnoreExitCode = true,
+        lintStdin = true,
+        lintFormats = { '%f:%l:%c: %m' }
+      }
+      -- TODO
+      local stylint = {
+        lintCommand = './node_modules/.bin/stylint ${INPUT}',
+        lintIgnoreExitCode = true,
+        lintStdin = true,
+        lintFormats = { '%f:%l:%c: %m' }
+      }
+      local prettier = {
+        formatCommand = './node_modules/.bin/prettier --config-precedence prefer-file --stdin-filepath ${INPUT}',
+        formatStdin = true
+      }
+      local prettierHtml = {
+        formatCommand = './node_modules/.bin/prettier --write ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser html --stdin-filepath ${INPUT}',
+        formatStdin = true
+      }
+      local prettierCss = {
+        formatCommand = './node_modules/.bin/prettier --write ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser css --stdin-filepath ${INPUT}',
+        formatStdin = true
+      }
+      local prettierJson = {
+        formatCommand = './node_modules/.bin/prettier --write ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser json --stdin-filepath ${INPUT}',
+        formatStdin = true
+      }
+      local pugLint = {
+        lintCommand = './node_modules/.bin/pug-lint --reporter inline',
+        lintIgnoreExitCode = true,
+        lintFormats = { '%f:%l:%c %m' },
+        rootMarkers = { '.pug-lintrc', '.pug-lintrc.js', '.pug-lintrc.json' }
+      }
+      local jsonLint = {
+        lintCommand = 'jq .',
+        lintStdin = true,
+        lintIgnoreExitCode = true,
+      }
+      local luacheck = {
+        lintCommand = 'luacheck --globals vim --filename ${INPUT} --formatter plain -',
+        lintStdin = true,
+        lintFormats = { '%f:%l:%c: %m' }
+      }
+      local shellcheck = {
+        lintCommand = 'shellcheck -f gcc -x',
+        lintSource = 'shellcheck',
+        lintFormats = {
+          '%f:%l:%c: %trror: %m',
+          '%f:%l:%c: %tarning: %m',
+          '%f:%l:%c: %tote: %m',
+        }
+      }
+      local shfmt = {
+        formatCommand = 'shfmt -ci -s -bn -i 2',
+        formatStdin = true
+      }
 
-    nvim_lsp[lsp].setup {
-      cmd = {
-        '/home/jack/.local/share/nvim/lspinstall/efm/efm-langserver'
-        , '-logfile', '/tmp/efm-lua.log', '-loglevel', '5'
-      },
-      on_attach = on_attach,
-      capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-      init_options = {
-        documentFormatting = true
-      },
-      settings = {
-        rootMarkers = { '.git/' },
-        lintDebounce = 1000000000, -- 1s in nanoseconds
-        languages = languages
-      },
-      filetypes = vim.tbl_keys(languages)
-    }
-  else
-    nvim_lsp[lsp].setup {
-      on_attach = on_attach,
-      capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
-    }
-  end
-end
+      local languages = {
+        javascript = { eslint, prettier },
+        javascriptreact = { eslint, prettier },
+        typescript = { eslint, prettier },
+        typescriptreact = { eslint, prettier },
+        pug = { pugLint },
+        jade = { pugLint },
+        json = { jsonLint, prettierJson },
+        html = { prettierHtml },
+        css = { prettierCss },
+        lua = { luacheck },
+        sh = { shellcheck, shfmt },
+        zsh = { shellcheck, shfmt }
+      }
+
+      opts = {
+        on_attach = on_attach,
+        capabilities = cmp_nvim_lsp.update_capabilities(
+          vim.lsp.protocol.make_client_capabilities()
+        ),
+        init_options = {
+          documentFormatting = true
+        },
+        settings = {
+          rootMarkers = { '.git/' },
+          lintDebounce = 1000000000, -- 1s in nanoseconds
+          languages = languages
+        },
+        filetypes = vim.tbl_keys(languages)
+      }
+    else
+      opts = {
+        on_attach = on_attach,
+        capabilities = cmp_nvim_lsp.update_capabilities(
+          vim.lsp.protocol.make_client_capabilities()
+        )
+      }
+    end
+
+    server:setup(opts)
+end)
