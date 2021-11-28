@@ -4,6 +4,9 @@
   username = jack828
   signingkey = 5078DE7F5C4CA72B
 
+[diff]
+  algorithm = histogram
+
 [push]
   default = simple
   followTags = true
