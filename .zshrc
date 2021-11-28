@@ -73,6 +73,11 @@
   # FZF
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+  # Ruby ruby rubaaaaaaaayyyy
+    export GEM_HOME=$HOME/.gems
+    export GEM_PATH=$HOME/.gems
+    export PATH=$HOME/.gems/bin:$PATH
+
 # Superior
   export EDITOR=/home/jack/.local/bin/nvim
   export SUDO_EDITOR=/home/jack/.local/bin/nvim
