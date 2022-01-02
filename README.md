@@ -67,7 +67,6 @@ A number of progams suppliment LSP setup in either linting or formatting:
 
 #### NVIM 0.5 + Lua Issues
 
- - Lint is triggered whilst easymotion is in progress
  - Prettier has a hissy fit when an IIFE is used and toggles formatting
  - Linting with `<leader>p` sometimes pastes in extra characters
 
