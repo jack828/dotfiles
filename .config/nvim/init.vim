@@ -29,6 +29,9 @@
   set ttimeout
   set ttimeoutlen=100
 
+  " write swap file after 250ms - quicker CursorHold
+  set updatetime=250
+
   " Enable case-insensitive incremental search.
   set incsearch
 
@@ -509,6 +512,9 @@
     lua require('completion')
     lua require('lsp')
     lua require('statusline')
+
+    " show diagnostic on hover in popover cos the lines can be loooooooooooong
+    autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false })
 
     " easymotion replacement - file navigation
     lua require'hop'.setup()
