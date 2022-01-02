@@ -394,12 +394,19 @@
   "Plug 'kopischke/vim-fetch'
 
   " Faster keyboard nav within files
-  Plug 'easymotion/vim-easymotion'
-    let g:EasyMotion_do_mapping = 0
-    let g:EasyMotion_smartcase = 1
+  if has('nvim-0.5')
+    Plug 'phaazon/hop.nvim'
+      nmap s :HopWord<CR>
+  else
+    " Easymotion and LSP do not behave together very well
+    " https://github.com/easymotion/vim-easymotion/issues/402
+    Plug 'easymotion/vim-easymotion'
+      let g:EasyMotion_do_mapping = 0
+      let g:EasyMotion_smartcase = 1
 
-    " search whole file
-    nmap s <Plug>(easymotion-bd-w)
+      " search whole file
+      nmap s <Plug>(easymotion-bd-w)
+  endif
 
   " Statusbar
   if has('nvim-0.5')
@@ -502,4 +509,7 @@
     lua require('completion')
     lua require('lsp')
     lua require('statusline')
+
+    " easymotion replacement - file navigation
+    lua require'hop'.setup()
   endif
