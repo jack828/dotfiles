@@ -343,7 +343,6 @@
 
   " File navigator
   Plug 'scrooloose/nerdtree'
-  Plug 'jistr/vim-nerdtree-tabs'
     let NERDTreeShowHidden=1
     silent! nmap <Tab><Tab> :NERDTreeToggle<CR>
     silent! nmap <Leader>f :NERDTreeFind<CR>
@@ -352,9 +351,6 @@
   Plug 'scrooloose/nerdcommenter'
     " add space after comment char, e.g. // my comment
     let NERDSpaceDelims=1
-
-  " wildignore gitignored files
-  "Plug 'vim-scripts/gitignore'
 
   " Strip whitespace etc.
   Plug 'editorconfig/editorconfig-vim'
@@ -387,14 +383,9 @@
   " Show buffers as tabs
   Plug 'ap/vim-buftabline'
 
-  " let g:buftabline_numbers = 1
-
   " Copy current file path
   Plug 'bag-man/copypath.vim'
     nnoremap cp :CopyRelativePath<CR>
-
-  " :e file:108 (I enjoy manually looking for files)
-  "Plug 'kopischke/vim-fetch'
 
   " Faster keyboard nav within files
   if has('nvim-0.5')
