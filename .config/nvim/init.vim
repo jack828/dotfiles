@@ -281,32 +281,6 @@
 
     " remove terminals from the buffer list
     autocmd TermOpen * set nobuflisted
-
-    " Terminal Keymappings
-    nnoremap <a-j> <c-w>j
-    nnoremap <a-k> <c-w>k
-    nnoremap <a-h> <c-w>h
-    nnoremap <a-l> <c-w>l
-    vnoremap <a-j> <c-\><c-n><c-w>j
-    vnoremap <a-k> <c-\><c-n><c-w>k
-    vnoremap <a-h> <c-\><c-n><c-w>h
-    vnoremap <a-l> <c-\><c-n><c-w>l
-    inoremap <a-j> <c-\><c-n><c-w>j
-    inoremap <a-k> <c-\><c-n><c-w>k
-    inoremap <a-h> <c-\><c-n><c-w>h
-    inoremap <a-l> <c-\><c-n><c-w>l
-    cnoremap <a-j> <c-\><c-n><c-w>j
-    cnoremap <a-k> <c-\><c-n><c-w>k
-    cnoremap <a-h> <c-\><c-n><c-w>h
-    cnoremap <a-l> <c-\><c-n><c-w>l
-    tnoremap <Leader><Esc> <c-\><c-n>
-    tnoremap <a-j> <c-\><c-n><c-w>j
-    tnoremap <a-k> <c-\><c-n><c-w>k
-    tnoremap <a-h> <c-\><c-n><c-w>h
-    tnoremap <a-l> <c-\><c-n><c-w>l
-
-    " automatically enter insert mode
-    au WinEnter *pid:* call feedkeys('i')
   endif
 
 "" Plugins
