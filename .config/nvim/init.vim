@@ -313,6 +313,7 @@
     nnoremap \ :Ag!<SPACE>
 
   " Better nodejs support
+  " Used for opening file under cursor with gf
   Plug 'moll/vim-node', { 'for': 'javascript' }
 
   " File navigator
