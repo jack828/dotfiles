@@ -434,6 +434,10 @@
     set spelllang=en_gb
     set spellfile=$HOME/spell/en.utf-8.add
 
+
+  " fancy splash, because something is stopping the default from being shown
+  Plug 'mhinz/vim-startify'
+
   " LSP - install nvim 0.5+ and this will change your life
   if has('nvim-0.5')
     Plug 'neovim/nvim-lspconfig'
