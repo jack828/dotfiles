@@ -66,7 +66,7 @@ lsp_installer.on_server_ready(function(server)
           vim.lsp.protocol.make_client_capabilities()
         )
       }
-    elseif server.name == 'typescript' then
+    elseif server.name == 'tsserver' then
       opts = {
         capabilities = cmp_nvim_lsp.update_capabilities(
           vim.lsp.protocol.make_client_capabilities()
