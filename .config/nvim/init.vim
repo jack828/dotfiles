@@ -339,8 +339,8 @@
   endif
 
   " Autosave and autoread
-  au FocusLost,WinLeave * :silent! wall
-  au FocusGained,BufEnter * :silent! !
+  autocmd FocusLost,WinLeave * :silent! wall
+  autocmd FocusGained,BufEnter * :silent! !
 
   " Git integration
   Plug 'airblade/vim-gitgutter'
