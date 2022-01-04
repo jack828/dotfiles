@@ -2,7 +2,7 @@ local lualine = require('lualine')
 
 lualine.setup({
   options = {
-    theme = 'material',
+    theme = 'material-nvim',
     section_separators = { '', '' },
     component_separators = { '', '' },
     icons_enabled = true
