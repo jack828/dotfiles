@@ -1,4 +1,6 @@
-"" Basics
+""""
+" General Settings
+""""
   let maplocalleader = ","
   let mapleader = "\<Space>"
 
@@ -6,7 +8,7 @@
   if empty(glob("~/.config/nvim/autoload/plug.vim"))
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    auto VimEnter * PlugInstall
+    autocmd VimEnter * PlugInstall
   endif
 
   " Disable strange Vi defaults.
@@ -38,11 +40,12 @@
   " Enable search highlighting.
   set hlsearch
 
-  " Use `Ctrl-C` to clear the highlighting of :set hlsearch.
-  nnoremap <silent> <C-C> :nohlsearch<CR><C-L>
+  " Ignore case when searching.
+  set ignorecase
 
-  " I use # but rarely * (because # is fewer keypresses)
-  nnoremap # *
+  " Don't ignore case when search has capital letter
+  " (although also don't ignore case by default).
+  set smartcase
 
   " Always show window statuses, even if there's only one.
   set laststatus=2
@@ -98,7 +101,13 @@
   set viminfo^=!
 
   " Enable backup and undo files by default.
-  let s:dir = has('win32') ? '$APPDATA/Vim' : isdirectory($HOME.'/Library') ? '~/Library/Vim' : empty($XDG_DATA_HOME) ? '~/.local/share/vim' : '$XDG_DATA_HOME/vim'
+  let s:dir = has('win32')
+      \ ? '$APPDATA/Vim'
+      \ : isdirectory($HOME.'/Library')
+      \ ? '~/Library/Vim'
+      \ : empty($XDG_DATA_HOME)
+      \ ? '~/.local/share/vim'
+      \ : '$XDG_DATA_HOME/vim'
   let &backupdir = expand(s:dir) . '/backup//'
   let &undodir = expand(s:dir) . '/undo//'
   set undofile
@@ -107,9 +116,6 @@
   if &t_Co == 8 && $TERM !~# '^linux'
     set t_Co=16
   endif
-
-  " Y yanks from the cursor to the end of line as expected. See :help Y.
-  nnoremap Y y$
 
   " Automatically create directories for backup and undo files.
   if !isdirectory(expand(s:dir))
@@ -136,12 +142,6 @@
   set wrap linebreak
   set showbreak=" "
 
-  " Allow easy navigation between wrapped lines.
-  vmap j gj
-  vmap k gk
-  nmap j gj
-  nmap k gk
-
   " Show line numbers on the sidebar.
   set number
 
@@ -166,19 +166,8 @@
   " Show mode in statusbar, not separately.
   set noshowmode
 
-  " Ignore case when searching.
-  set ignorecase
-
-  " Don't ignore case when search has capital letter
-  " (although also don't ignore case by default).
-  set smartcase
-
   " Use dash as word separator.
   set iskeyword+=-
-
-  " Auto center on matched string.
-  noremap n nzz
-  noremap N Nzz
 
   " Set window title by default.
   set title
@@ -189,6 +178,17 @@
 
   " copy/paste to system clipboard
   set clipboard=unnamed
+
+  " show invisible characters
+  set list
+
+  " mor speed
+  set lazyredraw
+  set ttyfast
+
+""""
+" Mappings
+""""
   vnoremap <silent> y y`]
   vnoremap <silent> p p`]
   nnoremap <silent> p p`]
@@ -196,13 +196,16 @@
   nnoremap H ^
   nnoremap L $
 
+  " reduce pinky strain
   nnoremap <Leader>w :w<CR>
+
   " closes current buffer, but doesn't close the split that it is in
   nnoremap <Leader>q :bp\|bd #<CR>
 
   " buffer navigation fun
   nnoremap gh :bp<CR>
   nnoremap gl :bn<CR>
+  " sue me
   nnoremap g<Left> :bp<CR>
   nnoremap g<Right> :bn<CR>
 
@@ -217,16 +220,10 @@
   " Run file in node
   nnoremap <Leader>n <C-w>v :te node %<CR>
 
-  " show invisible characters
-  set list
-
   " Allow saving of files as sudo when I forgot to start vim using sudo.
   cmap w!! w !sudo tee > /dev/null %
 
-  " mor speed
-  set lazyredraw
-  set ttyfast
-
+  " Replace word under cursor and re-yank word under cursor
   nnoremap rp viwpyiw
 
   " this is going to hurt...
@@ -241,6 +238,27 @@
 
   " Close quickfix
   nmap <Insert> :ccl<CR>
+
+  " Use `Ctrl-C` to clear the highlighting of :set hlsearch.
+  nnoremap <silent> <C-C> :nohlsearch<CR><C-L>
+
+  " Search & highlight word under cursor
+  " I use # but rarely * (because # is fewer keypresses)
+  " # searches forward, which is what I prefer
+  nnoremap # *
+
+  " Y yanks from the cursor to the end of line as expected. See :help Y.
+  nnoremap Y y$
+
+  " Allow easy navigation between wrapped lines.
+  vmap j gj
+  vmap k gk
+  nmap j gj
+  nmap k gk
+
+  " Auto center on matched string.
+  noremap n nzz
+  noremap N Nzz
 
 "" Saved Macros
   " select function
@@ -283,7 +301,9 @@
     autocmd TermOpen * set nobuflisted
   endif
 
-"" Plugins
+""""
+" Plugins
+""""
   call plug#begin()
 
   " Wakatime
@@ -299,6 +319,7 @@
   Plug 'junegunn/fzf.vim'
     let g:fzf_layout = { 'down': '40%' }
 
+    " I've never gotten these to work...
     map <c-x><c-k> <Plug>(fzf-complete-word)
     imap <c-x><c-j> <Plug>(fzf-complete-file-ag)
     imap <c-x><c-l> <Plug>(fzf-complete-line)
