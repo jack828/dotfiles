@@ -319,8 +319,8 @@
   " File navigator
   Plug 'scrooloose/nerdtree'
     let NERDTreeShowHidden=1
-    silent! nmap <Tab><Tab> :NERDTreeToggle<CR>
-    silent! nmap <Leader>f :NERDTreeFind<CR>
+    nmap <silent> <Tab><Tab> :NERDTreeToggle<CR>
+    nmap <silent> <Leader>f :NERDTreeFind<CR>
 
   " Comment code
   Plug 'scrooloose/nerdcommenter'
