@@ -24,6 +24,8 @@ $ ./bin/setup
 
 ### TMUX
 
+This has only been tested on v2.6. (I'll upgrade to 3.x when you pay me to)
+
 Install TPM
 
 ```
@@ -61,7 +63,7 @@ Once in vim, install the [language servers](https://github.com/kabouzeid/nvim-ls
 
 #### LSP External Dependencies
 
-A number of progams suppliment LSP setup in either linting or formatting:
+A number of programs supplement LSP setup in either linting or formatting:
  - apt: shellshock
  - go: mvdan.cc/sh/v3/cmd/shfmt@latest
 
@@ -90,6 +92,8 @@ This assumes the following files are available and match the format expected:
 | /proc/net/wireless | Used to get wireless signal level |
 
 In addition to this you must be on Linux with a wireless driver compatible with ioctl `SIOCGIWESSID` to obtain ESSID.
+
+If you want accurate sunrise/sunset clock colours, edit `LAT` and `LNG` in `statusline.c`.
 
 ## Cheatsheet
 
