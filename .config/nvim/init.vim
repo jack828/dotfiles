@@ -265,30 +265,6 @@
   let @c = 'vf{%'
 
 "" Platform Specific
-  if has("nvim")
-    map <Leader>, :terminal tig status<CR>
-  endif
-
-  if has("unix")
-    let s:uname = system("uname -s")
-
-    " OS X
-    if s:uname == "Darwin\n"
-      if !has("nvim")
-        map <Leader>, :!gitup<CR><CR>
-      endif
-    endif
-
-    " Linux
-    if s:uname == "Linux"
-      if !has("nvim")
-        map <Leader>, :!meld<CR><CR>
-      endif
-    endif
-
-  endif
-
-"" Neovim
   if has('nvim')
     " use true colours in the terminal
     set termguicolors
