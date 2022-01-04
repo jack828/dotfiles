@@ -293,6 +293,7 @@
   " Fuzzy file search
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
+   " Replace awful centred modal with previously default behaviour
     let g:fzf_layout = { 'down': '40%' }
 
     " I've never gotten these to work...
@@ -303,7 +304,6 @@
     nnoremap <silent> <Leader>o :Files<CR>
     nnoremap <silent> <Leader>g :GFiles?<CR>
     nnoremap <silent> <Leader><Enter> :Buffers<CR>
-    nnoremap <Leader>o :FZF<CR>
 
   " Find in project
   Plug 'rking/ag.vim'
@@ -345,7 +345,7 @@
   " Git integration
   Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-fugitive'
-    nnoremap <Leader>b :Git blame<CR>
+    nnoremap <silent> <Leader>b :Git blame<CR>
 
   " Multiple cursors
   Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
@@ -362,7 +362,7 @@
   " Faster keyboard nav within files
   if has('nvim-0.5')
     Plug 'phaazon/hop.nvim'
-      nmap s :HopWord<CR>
+      nmap <silent> s :HopWord<CR>
   else
     " Easymotion and LSP do not behave together very well
     " https://github.com/easymotion/vim-easymotion/issues/402
