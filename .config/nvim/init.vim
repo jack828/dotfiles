@@ -260,6 +260,9 @@
   noremap n nzz
   noremap N Nzz
 
+  " stop the command popup window from appearing. literally why
+  map q: :q
+
 "" Saved Macros
   " select function
   let @c = 'vf{%'
@@ -467,9 +470,6 @@
   " Set spell colours _after_ colourscheme
   highlight SpelunkerSpellBad cterm=undercurl ctermfg=196 gui=undercurl guifg=#a70000
   highlight SpelunkerComplexOrCompoundWord cterm=undercurl ctermfg=196 gui=undercurl guifg=#a70000
-
-  " stop the command popup window from appearing. literally why
-  map q: :q
 
 " LUA
 " oooh shiny new lua
