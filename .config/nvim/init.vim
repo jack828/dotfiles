@@ -434,9 +434,12 @@
     set spelllang=en_gb
     set spellfile=$HOME/spell/en.utf-8.add
 
-
   " fancy splash, because something is stopping the default from being shown
   Plug 'mhinz/vim-startify'
+    " When opening a file, _don't_ change directory
+    let g:startify_change_to_dir = 1
+    " But do change to the VCS root!
+    let g:startify_change_to_vcs_root = 1
 
   " LSP - install nvim 0.5+ and this will change your life
   if has('nvim-0.5')
