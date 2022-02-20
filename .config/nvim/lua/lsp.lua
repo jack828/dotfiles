@@ -58,9 +58,21 @@ end
 lsp_installer.on_server_ready(function(server)
     local opts
 
-    if server.name == 'clangd' then
+    if server.name == 'arduino_language_server' then
       opts = {
-        filetypes = {"c", "cpp", "objc", "objcpp", "arduino", "ino"},
+        on_attach = on_attach,
+        capabilities = cmp_nvim_lsp.update_capabilities(
+          vim.lsp.protocol.make_client_capabilities()
+        ),
+        on_new_config = function (config, root_dir)
+            local partial_cmd = server:get_default_options().cmd
+            local MY_FQBN = "esp32:esp32:esp32"
+            config.cmd = vim.list_extend(partial_cmd, { "-fqbn", MY_FQBN })
+        end
+      }
+    elseif server.name == 'clangd' then
+      opts = {
+        filetypes = {"c", "cpp", "objc", "objcpp", "ino"},
         on_attach = on_attach,
         capabilities = cmp_nvim_lsp.update_capabilities(
           vim.lsp.protocol.make_client_capabilities()
