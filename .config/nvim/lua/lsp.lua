@@ -58,7 +58,7 @@ end
 lsp_installer.on_server_ready(function(server)
     local opts
 
-    if server.name == 'cpp' then
+    if server.name == 'clangd' then
       opts = {
         filetypes = {"c", "cpp", "objc", "objcpp", "arduino", "ino"},
         on_attach = on_attach,
