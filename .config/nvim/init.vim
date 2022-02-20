@@ -417,7 +417,7 @@
     nnoremap goa :BufOnly<CR>:bd<CR>
 
   " auto close brackets
-  Plug 'rstacruz/vim-closer'
+  Plug 'LunarWatcher/auto-pairs'
 
   " Colour previews
   Plug 'ap/vim-css-color'
