@@ -22,6 +22,34 @@ Deploy dotfiles
 $ ./bin/setup
 ```
 
+## Updating dotfiles
+
+After making a change in the repo, you can redeploy the changes simply with:
+
+```
+$ ./dotfiles deploy -v
+```
+
+And if you're using the spellfile, be sure to copy it back first:
+
+```
+$ cp ~/spell/en.utf-8.add ./spell/en.utf-8.add && ./dotfiles deploy -v
+```
+
+### Tools/Package Managers
+
+ - Font: Fira Code
+ - go
+ - rust (cargo)
+ - exa - ls replacement [Installation](https://the.exa.website/install)
+
+### Shell
+
+ - ZSH - through your distribution's package manager
+ - oh-my-zsh - [Installation](https://ohmyz.sh/#install)
+ - Prompt: Spaceship - Follow the `oh-my-zsh` git clone instructions on [Spaceship - Getting Started](https://spaceship-prompt.sh/getting-started/)
+ - Plugins: zsh-syntax-highlighting - [INSTALL.md](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#oh-my-zsh)
+
 ### TMUX
 
 This has only been tested on v2.6. (I'll upgrade to 3.x when you pay me to)
@@ -67,10 +95,21 @@ A number of programs supplement LSP setup in either linting or formatting:
  - apt: shellshock
  - go: mvdan.cc/sh/v3/cmd/shfmt@latest
 
+For `arduino_language_server`:
+ - Set up the [arduino-cli](https://raw.githubusercontent.com/arduino/arduino-cli)
+ - Add a [Makefile](https://github.com/jack828/esp32-logger/blob/arduino/Makefile) like this project
+ - Run `make compile`, and it will use the output for LSP
+
 #### NVIM 0.5 + Lua Issues
 
  - Prettier has a hissy fit when an IIFE is used and toggles formatting
  - Linting with `<leader>p` sometimes pastes in extra characters
+
+#### LSP usage
+
+`<CTRL>+<SPACE>` whilst in insert mode to show autocomplete.
+
+Hover and press `K` to view definition
 
 ## Secrets
 
