@@ -417,6 +417,8 @@
     nnoremap goa :BufOnly<CR>:bd<CR>
 
   " auto close brackets
+  " causes weird insertion errors on CR
+  " Plug 'rstacruz/vim-closer'
   Plug 'LunarWatcher/auto-pairs'
 
   " Colour previews
