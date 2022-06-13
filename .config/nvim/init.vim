@@ -215,6 +215,7 @@
 
   " Run tests using yarn
   " Requires a `yarn run-test` command in package.json
+  " TODO make it so we can re-run the tests in this panel with `r`
   nnoremap <Leader>m <C-w>v :te yarn run-test %<CR>
 
   " Run file in node
