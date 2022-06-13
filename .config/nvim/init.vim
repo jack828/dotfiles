@@ -331,15 +331,13 @@
   Plug 'editorconfig/editorconfig-vim'
 
   " Autocomplete
-  if has('nvim-0.5')
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'hrsh7th/cmp-buffer'
-    Plug 'hrsh7th/nvim-cmp'
-    Plug 'L3MON4D3/LuaSnip'
-    Plug 'saadparwaiz1/cmp_luasnip'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'L3MON4D3/LuaSnip'
+  Plug 'saadparwaiz1/cmp_luasnip'
 
-    set completeopt=menu,menuone,noselect
-  endif
+  set completeopt=menu,menuone,noselect
 
   " Autosave and autoread
   autocmd FocusLost,WinLeave * :silent! wall
@@ -363,45 +361,11 @@
     nnoremap cp :CopyRelativePath<CR>
 
   " Faster keyboard nav within files
-  if has('nvim-0.5')
-    Plug 'phaazon/hop.nvim'
-      nmap <silent> s :HopWord<CR>
-  else
-    " Easymotion and LSP do not behave together very well
-    " https://github.com/easymotion/vim-easymotion/issues/402
-    Plug 'easymotion/vim-easymotion'
-      let g:EasyMotion_do_mapping = 0
-      let g:EasyMotion_smartcase = 1
-
-      " search whole file
-      nmap s <Plug>(easymotion-bd-w)
-  endif
+  Plug 'phaazon/hop.nvim'
+    nmap <silent> s :HopWord<CR>
 
   " Statusbar
-  if has('nvim-0.5')
-    Plug 'nvim-lualine/lualine.nvim'
-  else
-    Plug 'itchyny/lightline.vim'
-      " I don't really know what most of this config does!
-      let g:lightline = {
-        \ 'colorscheme': 'papercolor',
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-        \ },
-        \ 'component': {
-        \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
-        \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-        \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-        \ },
-        \ 'component_visible_condition': {
-        \   'readonly': '(&filetype!="help"&& &readonly)',
-        \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-        \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-        \ },
-        \ 'separator': { 'left': '', 'right': '' },
-        \ 'subseparator': { 'left': '', 'right': '' }
-      \ }
-  endif
+  Plug 'nvim-lualine/lualine.nvim'
 
   " Add '.' powers to plugins
   Plug 'tpope/vim-repeat'
@@ -443,20 +407,14 @@
     " But do change to the VCS root!
     let g:startify_change_to_vcs_root = 1
 
-  " LSP - install nvim 0.5+ and this will change your life
-  if has('nvim-0.5')
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-    Plug 'ojroques/nvim-lspfuzzy'
-    Plug 'williamboman/nvim-lsp-installer'
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+  Plug 'ojroques/nvim-lspfuzzy'
+  Plug 'williamboman/nvim-lsp-installer'
 
-    " Colour scheme
-    Plug 'marko-cerovac/material.nvim'
-      let g:material_style = 'darker'
-  else
-    " Colour scheme (for losers not on 0.5+)
-    Plug 'NLKNguyen/papercolor-theme'
-  endif
+  " Colour scheme
+  Plug 'marko-cerovac/material.nvim'
+  let g:material_style = 'darker'
 
   " Every now and then you should check :StartupTime
   " Plug 'tweekmonster/startuptime.vim'
@@ -466,11 +424,7 @@
   " Set colour scheme
   set termguicolors
   set background=dark
-  if has('nvim-0.5')
-    colorscheme material
-  else
-    colorscheme papercolor
-  endif
+  colorscheme material
 
   " Set spell colours _after_ colourscheme
   highlight SpelunkerSpellBad cterm=undercurl ctermfg=196 gui=undercurl guifg=#a70000
@@ -479,15 +433,14 @@
 " LUA
 " oooh shiny new lua
 
-  if has('nvim-0.5')
-    lua require('treesitter')
-    lua require('completion')
-    lua require('lsp')
-    lua require('statusline')
+  lua require('treesitter')
+  lua require('completion')
+  lua require('lsp')
+  lua require('statusline')
+  lua require('plugins')
 
-    " show diagnostic on hover in popover cos the lines can be loooooooooooong
-    autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false })
+  " show diagnostic on hover in popover cos the lines can be loooooooooooong
+  autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false })
 
-    " easymotion replacement - file navigation
-    lua require'hop'.setup()
-  endif
+  " easymotion replacement - file navigation
+  lua require'hop'.setup()

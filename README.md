@@ -64,7 +64,7 @@ Inside TMUX, run `prefix + I` to install plugins.
 
 ### NVIM
 
-Install neovim nightly (>=0.5) and required packages
+Install neovim nightly (>=0.7) and required packages
  - apt: silversearcher-ag
  - pip: neovim msgpack
  - github: bat@^0.18.0
