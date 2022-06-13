@@ -416,6 +416,9 @@
   Plug 'marko-cerovac/material.nvim'
   let g:material_style = 'darker'
 
+  " Function context via Treesitter
+  Plug 'nvim-treesitter/nvim-treesitter-context'
+
   " Every now and then you should check :StartupTime
   " Plug 'tweekmonster/startuptime.vim'
 
