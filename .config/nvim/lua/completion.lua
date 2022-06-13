@@ -1,4 +1,5 @@
 local cmp = require('cmp')
+local cmpTypes = require('cmp.types')
 local luasnip = require('luasnip')
 
 local has_words_before = function()
@@ -13,6 +14,22 @@ cmp.setup({
     end
   },
   mapping = {
+    ['<Down>'] = cmp.mapping({
+      i = cmp.mapping.select_next_item({ behavior = cmpTypes.cmp.SelectBehavior.Select }),
+      c = function(fallback)
+        cmp.close()
+        vim.schedule(cmp.suspend())
+        fallback()
+      end,
+    }),
+    ['<Up>'] = cmp.mapping({
+      i = cmp.mapping.select_prev_item({ behavior = cmpTypes.cmp.SelectBehavior.Select }),
+      c = function(fallback)
+        cmp.close()
+        vim.schedule(cmp.suspend())
+        fallback()
+      end,
+    }),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
