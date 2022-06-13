@@ -27,13 +27,7 @@ $ ./bin/setup
 After making a change in the repo, you can redeploy the changes simply with:
 
 ```
-$ ./dotfiles deploy -v
-```
-
-And if you're using the spellfile, be sure to copy it back first:
-
-```
-$ cp ~/spell/en.utf-8.add ./spell/en.utf-8.add && ./dotfiles deploy -v
+$ make deploy
 ```
 
 ### Tools/Package Managers

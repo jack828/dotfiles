@@ -13,3 +13,6 @@ $(TARGET):
 
 clean:
 	rm -f $(TARGET)
+
+deploy:
+	cp ~/spell/en.utf-8.add ./spell/en.utf-8.add && ./dotfiles deploy -v
