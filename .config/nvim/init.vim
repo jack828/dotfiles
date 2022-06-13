@@ -390,8 +390,9 @@
   Plug 'ap/vim-css-color'
 
   " Register magic
-  Plug 'junegunn/vim-peekaboo'
-
+  Plug 'tversteeg/registers.nvim'
+    let g:registers_paste_in_normal_mode = 1
+"
   " Painless vim/tmux pane navigation
   Plug 'christoomey/vim-tmux-navigator'
 
