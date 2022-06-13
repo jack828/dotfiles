@@ -19,7 +19,7 @@ $ make
 Deploy dotfiles
 
 ```
-$ ./bin/setup
+$ make deploy
 ```
 
 ## Updating dotfiles
