@@ -64,11 +64,20 @@ lsp_installer.on_server_ready(function(server)
         capabilities = cmp_nvim_lsp.update_capabilities(
           vim.lsp.protocol.make_client_capabilities()
         ),
-        on_new_config = function (config, root_dir)
-            local partial_cmd = server:get_default_options().cmd
-            local MY_FQBN = "esp32:esp32:esp32"
-            config.cmd = vim.list_extend(partial_cmd, { "-fqbn", MY_FQBN })
-        end
+       cmd = {
+        "arduino-language-server",
+        "-fqbn",
+        "esp32:esp32:esp32",
+            "-clangd", "/usr/local/bin/clangd-15"
+      }
+        -- on_new_config = function (config, root_dir)
+            -- local partial_cmd = server:get_default_options().cmd
+            -- local MY_FQBN = "esp32:esp32:esp32"
+            -- config.cmd = vim.list_extend(partial_cmd, {
+            -- "-fqbn", MY_FQBN,
+            -- "-clangd", "/usr/bin/clangd-8"
+            -- })
+        -- end
       }
     elseif server.name == 'clangd' then
       opts = {
