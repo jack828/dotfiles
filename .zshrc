@@ -58,7 +58,7 @@
   # For Robo3T
     export PATH=/usr/local/robo3t/bin:$PATH
 
-  # Pip packages
+  # PIP and other general binaries
     export PATH=/home/jack/.local/bin:$PATH
 
   # Rust packages
