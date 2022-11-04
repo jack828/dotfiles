@@ -9,7 +9,9 @@ For when I get a new laptop and have no idea how to set anything I wanted up aga
  - Copy SSH key across (I know this is bad practice shhhh) - entire ~/.ssh folder
  - Install tmux and set it up (see dotfiles) - copy over sessions ~/.tmux/resurrect
  - Clone and setup dotfiles repo
-
+ - setup nave - `wget http://github.com/isaacs/nave/raw/main/nave.sh chmod +x ./nave.sh && mv nave.sh ~/.local/bin`
+ - purge inactive search entries in chrome (cos they're useless) https://superuser.com/a/1154955/1744868
+ - Setup mongo version manager `wget https://raw.githubusercontent.com/aheckmann/m/master/bin/m && chmod +x ./m && mv ./m ~/.local/bin`
 
 ## APT packages
 
