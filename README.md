@@ -36,7 +36,7 @@ $ make deploy
  - go
  - rust (cargo)
  - exa - ls replacement [Installation](https://the.exa.website/install)
- - fzf [Installation](https://github.com/junegunn/fzf#installation)
+ - fzf [Installation](https://github.com/junegunn/fzf#installation) - NOTE neovim might install this for you in `~/.fzf` so check that first and `./install` from there
 
 ### Shell
 
