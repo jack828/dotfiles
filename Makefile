@@ -5,11 +5,20 @@ CFLAGS=-Wall -Wno-unused-result -Os -fno-unwind-tables  -fno-stack-protector -fn
 LINKFLAGS=-lm
 STRIP=strip
 STRIPFLAGS=-s -R .comment -R .gnu.version --strip-unneeded -R .note.gnu.gold-version -R .note -R .note.gnu.build-id -R .note.ABI-tag
+DEBUGFLAGS=-ggdb -O0
 TARGET=statusline
 
 $(TARGET):
 	$(CC) $(TARGET).c $(CFLAGS) -o $(TARGET) $(LINKFLAGS)
 	$(STRIP) $(STRIPFLAGS) $(TARGET)
+
+# See https://askubuntu.com/a/1349048 for more info
+# make debug
+# gdb ./statusline_debug
+# r
+# bt (or `bt full`)
+debug:
+	$(CC) $(TARGET).c $(CFLAGS) -o $(TARGET).debug $(LINKFLAGS) $(DEBUGFLAGS)
 
 clean:
 	rm -f $(TARGET)
