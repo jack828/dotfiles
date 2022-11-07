@@ -15,8 +15,8 @@
 #define MEMORY_INFO_FILE "/proc/meminfo"
 #define FAN_STATUS_FILE "/proc/acpi/ibm/fan"
 #define WIREGUARD_INTERFACE_FILE "/proc/net/dev_snmp6/wg0"
-#define ETHERNET_INTERFACE "enp0s31f6"
-#define WIRELESS_INTERFACE "wlp3s0"
+#define ETHERNET_INTERFACE "enp1s0f0"
+#define WIRELESS_INTERFACE "wlp2s0"
 #define WIRELESS_FILE "/proc/net/wireless"
 
 // Not actually my location, but close enough
