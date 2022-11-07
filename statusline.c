@@ -1,4 +1,5 @@
 #include <ctype.h>
+#include <errno.h>
 #include <linux/wireless.h>
 #include <math.h>
 #include <stdio.h>
@@ -51,11 +52,20 @@ int8_t interfaceStatus(const char *interface) {
                   + 8                 // path end
                   + 1;                // null character
   char *interfaceStatusFilePath = malloc(length);
+  // malloc does not initialise allocated memory
+  // so it may contain junk
+  interfaceStatusFilePath[0] = '\0';
   strcat(interfaceStatusFilePath, "/sys/class/net/");
   strcat(interfaceStatusFilePath, interface);
   strcat(interfaceStatusFilePath, "/carrier");
+  // Implicitly ends with \0 after strcat
 
   FILE *statusFile = fopen(interfaceStatusFilePath, "r");
+  if (statusFile == NULL) {
+    fprintf(stderr, "\nfopen failed, errno = %d\n", errno);
+    return 0;
+  }
+
   char status[2];
   fgets(status, 2, statusFile);
   fclose(statusFile);
