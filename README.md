@@ -36,6 +36,7 @@ $ make deploy
  - go
  - rust (cargo)
  - exa - ls replacement [Installation](https://the.exa.website/install)
+ - fzf [Installation](https://github.com/junegunn/fzf#installation)
 
 ### Shell
 
@@ -90,7 +91,7 @@ A number of programs supplement LSP setup in either linting or formatting:
  - go: mvdan.cc/sh/v3/cmd/shfmt@latest
 
 For `arduino_language_server`:
- - Set up the [arduino-cli](https://raw.githubusercontent.com/arduino/arduino-cli)
+ - Set up the [arduino-cli](https://github.com/arduino/arduino-cli) - I set `BINDIR=~/.local/bin`
  - Add a [Makefile](https://github.com/jack828/esp32-logger/blob/arduino/Makefile) like this project
  - Run `make compile`, and it will use the output for LSP
 
