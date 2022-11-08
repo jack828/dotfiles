@@ -30,7 +30,7 @@ local on_attach = function(client, bufnr)
   -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
   -- Linting
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.documentFormattingProvider then
     buf_set_keymap("n", "<space>p", "<cmd>lua vim.lsp.buf.formatting_sync({}, 1000)<CR><cmd>w<CR>", opts)
     buf_set_keymap("n", "<space>P", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
     -- vim.cmd [[autocmd BufWritePre *.jsx,*.jsx lua vim.lsp.buf.formatting_sync(nil, 1500)]]
@@ -40,7 +40,7 @@ local on_attach = function(client, bufnr)
   -- end
 
   -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_exec([[
       highlight LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow guifg=black
       highlight LspReferenceText cterm=bold ctermbg=red guibg=LightYellow guifg=black
