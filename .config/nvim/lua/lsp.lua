@@ -61,9 +61,7 @@ lsp_installer.on_server_ready(function(server)
     if server.name == 'arduino_language_server' then
       opts = {
         on_attach = on_attach,
-        capabilities = cmp_nvim_lsp.update_capabilities(
-          vim.lsp.protocol.make_client_capabilities()
-        ),
+        capabilities = cmp_nvim_lsp.default_capabilities(),
        cmd = {
         "arduino-language-server",
         "-fqbn",
@@ -83,15 +81,11 @@ lsp_installer.on_server_ready(function(server)
       opts = {
         filetypes = {"c", "cpp", "objc", "objcpp", "ino"},
         on_attach = on_attach,
-        capabilities = cmp_nvim_lsp.update_capabilities(
-          vim.lsp.protocol.make_client_capabilities()
-        )
+        capabilities = cmp_nvim_lsp.default_capabilities()
       }
     elseif server.name == 'tsserver' then
       opts = {
-        capabilities = cmp_nvim_lsp.update_capabilities(
-          vim.lsp.protocol.make_client_capabilities()
-        ),
+        capabilities = cmp_nvim_lsp.default_capabilities(),
         on_attach = function(client, bufnr)
           client.resolved_capabilities.document_formatting = false
 
@@ -175,9 +169,7 @@ lsp_installer.on_server_ready(function(server)
 
       opts = {
         on_attach = on_attach,
-        capabilities = cmp_nvim_lsp.update_capabilities(
-          vim.lsp.protocol.make_client_capabilities()
-        ),
+        capabilities = cmp_nvim_lsp.default_capabilities(),
         init_options = {
           documentFormatting = true
         },
@@ -191,9 +183,7 @@ lsp_installer.on_server_ready(function(server)
     else
       opts = {
         on_attach = on_attach,
-        capabilities = cmp_nvim_lsp.update_capabilities(
-          vim.lsp.protocol.make_client_capabilities()
-        )
+        capabilities = cmp_nvim_lsp.default_capabilities()
       }
     end
 
