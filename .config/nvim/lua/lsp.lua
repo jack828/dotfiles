@@ -87,8 +87,8 @@ lsp_installer.on_server_ready(function(server)
       opts = {
         capabilities = cmp_nvim_lsp.default_capabilities(),
         on_attach = function(client, bufnr)
-          client.resolved_capabilities.document_formatting = false
-
+          -- client.resolved_capabilities.document_formatting = false -- nvim 0.7 and earlier
+          client.server_capabilities.documentFormattingProvider = false -- nvim 0.8 and later
           on_attach(client, bufnr)
         end
       }
