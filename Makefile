@@ -17,6 +17,9 @@ $(TARGET):
 # gdb ./statusline_debug
 # r
 # bt (or `bt full`)
+#
+# to set breakpoints:
+# break statusline.c:45
 debug:
 	$(CC) $(TARGET).c $(CFLAGS) -o $(TARGET).debug $(LINKFLAGS) $(DEBUGFLAGS)
 
