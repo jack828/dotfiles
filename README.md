@@ -120,7 +120,6 @@ This assumes the following files are available and match the format expected:
 | /sys/class/power_supply/BAT0/capacity | Battery % |
 | /sys/class/hwmon/hwmon1/temp1_input | CPU Temp (one core is good enough) |
 | /proc/loadavg | Load averages, only 1 min is used |
-| /proc/meminfo | Memory usage - expects Total mem on line 1, available on line 3 |
 | /proc/acpi/ibm/fan | Fan info, RPM on line 2 |
 | /proc/net/dev_snmp6/wg0 | Used to infer VPN status, using WireGuard |
 
@@ -128,6 +127,7 @@ In addition to this you must be on Linux with:
   - a wireless driver compatible with:
     - ioctl `SIOCGIWESSID` to obtain ESSID
     - ioctl `SIOCGIWSTATS` to obtain signal level
+  - A kernel that utilises `sys/sysinfo.h` correctly
 
 If you want accurate sunrise/sunset clock colours, edit `LAT` and `LNG` in `statusline.c`.
 

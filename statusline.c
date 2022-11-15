@@ -1,12 +1,14 @@
 #include <ctype.h>
 #include <errno.h>
-#include <linux/wireless.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <linux/wireless.h>
 #include <sys/ioctl.h>
 #include <sys/stat.h>
+#include <sys/sysinfo.h>
+#include <sys/types.h>
 #include <time.h>
 
 #define AC_STATUS_FILE "/sys/class/power_supply/AC/online"
@@ -157,23 +159,17 @@ int main() {
   /*
    * Memory Usage
    */
-  FILE *memoryFile = fopen(MEMORY_INFO_FILE, "r");
-  char *memoryTotalLine = NULL;
-  char *memoryFreeLine = NULL;
-  char *memoryAvailableLine = NULL;
-  size_t size = 0;
-  getline(&memoryTotalLine, &size, memoryFile);
-  /* We don't actually care about this one, but it's next */
-  getline(&memoryFreeLine, &size, memoryFile);
-  getline(&memoryAvailableLine, &size, memoryFile);
-  fclose(memoryFile);
 
-  stripNonDigits(memoryTotalLine, strlen(memoryTotalLine));
-  stripNonDigits(memoryAvailableLine, strlen(memoryAvailableLine));
-
-  double memoryTotal = strtod(memoryTotalLine, NULL);
-  double memoryAvailable = strtod(memoryAvailableLine, NULL);
-  double freeMemoryPercentage = (memoryAvailable / memoryTotal) * 100;
+  struct sysinfo sysInfo;
+  int err = sysinfo(&sysInfo);
+  if (err == -1) {
+    fprintf(stderr, "FAILED 1");
+    exit(1);
+  }
+  u_int64_t memoryTotal = (sysInfo.totalram * sysInfo.mem_unit);
+  u_int64_t memoryAvailable =
+      ((sysInfo.freeram + sysInfo.bufferram) * sysInfo.mem_unit);
+  double freeMemoryPercentage = ((double) memoryAvailable / memoryTotal) * 100;
   double usedMemoryPercentage = 100 - freeMemoryPercentage;
 
   fputs("#[bg=" DARK_BG "]", stdout);
@@ -193,6 +189,7 @@ int main() {
   FILE *fanFile = fopen(FAN_STATUS_FILE, "r");
   char *fanStatusLine = NULL;
   char *fanSpeedLine = NULL;
+  size_t size = 0;
   /* We don't actually care about this one, but it's first */
   getline(&fanStatusLine, &size, fanFile);
   getline(&fanSpeedLine, &size, fanFile);
@@ -228,16 +225,16 @@ int main() {
 
     // Open socket for ioctl
     if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
-      fprintf(stderr, "FAILED 1");
-      exit(1);
+      fprintf(stderr, "FAILED 2");
+      exit(2);
     }
 
     // Get SSID
     ssidReq.u.essid.pointer = ssid;
     ssidReq.u.essid.length = 32;
     if (ioctl(sockfd, SIOCGIWESSID, &ssidReq) == -1) {
-      fprintf(stderr, "FAILED 2");
-      exit(2);
+      fprintf(stderr, "FAILED 3");
+      exit(3);
     }
 
     struct iw_statistics *stats;
@@ -247,8 +244,8 @@ int main() {
     signalReq.u.data.length = sizeof(*stats);
     signalReq.u.data.flags = 1;
     if (ioctl(sockfd, SIOCGIWSTATS, &signalReq) == -1) {
-      fprintf(stderr, "FAILED 2");
-      exit(2);
+      fprintf(stderr, "FAILED 4");
+      exit(4);
     }
     if (((struct iw_statistics *)signalReq.u.data.pointer)->qual.updated &
         IW_QUAL_DBM) {
@@ -296,14 +293,14 @@ int main() {
   char month[10];
   char year[5];
   time_t rawtime;
-  struct tm *info;
+  struct tm *timeInfo;
 
   time(&rawtime);
-  info = localtime(&rawtime);
+  timeInfo = localtime(&rawtime);
 
-  strftime(day, sizeof(day), "%d", info);
-  strftime(month, sizeof(month), "%B", info);
-  strftime(year, sizeof(year), "%Y", info);
+  strftime(day, sizeof(day), "%d", timeInfo);
+  strftime(month, sizeof(month), "%B", timeInfo);
+  strftime(year, sizeof(year), "%Y", timeInfo);
 
   fprintf(stdout,
           "#[fg=colour146,bold,bg=" DARK_BG "] %s "
@@ -315,7 +312,7 @@ int main() {
    * Time 24HR
    */
   char time[6];
-  strftime(time, sizeof(time), "%R", info);
+  strftime(time, sizeof(time), "%R", timeInfo);
 
   // B REDY 4 SUM QUIK MAFFS
 
@@ -325,11 +322,11 @@ int main() {
   // tm_mon are indexed from 0
   // Needs to be INTEGER division hence the floor
   double d =
-      (367 * (info->tm_year + 1900) -
-       floor((7 * ((info->tm_year + 1900) +
-                   floor(((info->tm_mon + 1) + 9) / 12.0))) /
+      (367 * (timeInfo->tm_year + 1900) -
+       floor((7 * ((timeInfo->tm_year + 1900) +
+                   floor(((timeInfo->tm_mon + 1) + 9) / 12.0))) /
              4.0) +
-       floor((275 * (info->tm_mon + 1)) / 9.0) + (info->tm_mday) - 730530);
+       floor((275 * (timeInfo->tm_mon + 1)) / 9.0) + (timeInfo->tm_mday) - 730530);
 
   // Sun rise/set - https://stjarnhimlen.se/comp/riset.html
   // Sun's orbital elements from https://stjarnhimlen.se/comp/ppcomp.html#4.1
@@ -365,9 +362,9 @@ int main() {
   double GMST0 = sunMeanLongitude + 180.0;
 
   double universalTime =
-      (info->tm_hour -
-       info->tm_gmtoff / 3600.0) // remove offset (seconds) from hours
-      + (info->tm_min / 60.0);
+      (timeInfo->tm_hour -
+       timeInfo->tm_gmtoff / 3600.0) // remove offset (seconds) from hours
+      + (timeInfo->tm_min / 60.0);
   double localSiderealTime = GMST0 + (universalTime * 15.04107) + LNG;
 
   double localHourAngle = localSiderealTime - rightAscension;
