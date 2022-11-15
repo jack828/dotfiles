@@ -1,10 +1,10 @@
 #include <ctype.h>
 #include <errno.h>
+#include <linux/wireless.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <linux/wireless.h>
 #include <sys/ioctl.h>
 #include <sys/stat.h>
 #include <sys/sysinfo.h>
@@ -14,13 +14,10 @@
 #define AC_STATUS_FILE "/sys/class/power_supply/AC/online"
 #define BATTERY_LEVEL_FILE "/sys/class/power_supply/BAT0/capacity"
 #define CPU_TEMP_FILE "/sys/class/hwmon/hwmon1/temp1_input"
-#define LOAD_AVG_FILE "/proc/loadavg"
-#define MEMORY_INFO_FILE "/proc/meminfo"
 #define FAN_STATUS_FILE "/proc/acpi/ibm/fan"
 #define WIREGUARD_INTERFACE_FILE "/proc/net/dev_snmp6/wg0"
 #define ETHERNET_INTERFACE "enp1s0f0"
 #define WIRELESS_INTERFACE "wlp2s0"
-#define WIRELESS_FILE "/proc/net/wireless"
 
 // Not actually my location, but close enough
 #define LAT 55.116889
@@ -146,30 +143,29 @@ int main() {
   fprintf(stdout, " %d°C ", cpuTemp);
   resetStyles();
 
-  /*
-   * Load Avg
-   */
-  FILE *loadAvgFile = fopen(LOAD_AVG_FILE, "r");
-  char loadAvg[5];
-  fgets(loadAvg, 5, loadAvgFile);
-  fclose(loadAvgFile);
-
-  fprintf(stdout, "#[fg=" WHITE ",bg=" LIGHT_BG "] %s ", loadAvg);
-
-  /*
-   * Memory Usage
-   */
-
+  /* sysinfo struct used for multiple things */
   struct sysinfo sysInfo;
   int err = sysinfo(&sysInfo);
   if (err == -1) {
     fprintf(stderr, "FAILED 1");
     exit(1);
   }
+
+  /*
+   * Load Avg
+   */
+  float loadAvgnew = sysInfo.loads[0] / (float)(1 << SI_LOAD_SHIFT);
+
+  fprintf(stdout, "#[fg=" WHITE ",bg=" LIGHT_BG "] %2.2f ", loadAvgnew);
+
+  /*
+   * Memory Usage
+   */
+
   u_int64_t memoryTotal = (sysInfo.totalram * sysInfo.mem_unit);
   u_int64_t memoryAvailable =
       ((sysInfo.freeram + sysInfo.bufferram) * sysInfo.mem_unit);
-  double freeMemoryPercentage = ((double) memoryAvailable / memoryTotal) * 100;
+  double freeMemoryPercentage = ((double)memoryAvailable / memoryTotal) * 100;
   double usedMemoryPercentage = 100 - freeMemoryPercentage;
 
   fputs("#[bg=" DARK_BG "]", stdout);
@@ -321,12 +317,12 @@ int main() {
   // tm_year is indexed from 1900
   // tm_mon are indexed from 0
   // Needs to be INTEGER division hence the floor
-  double d =
-      (367 * (timeInfo->tm_year + 1900) -
-       floor((7 * ((timeInfo->tm_year + 1900) +
-                   floor(((timeInfo->tm_mon + 1) + 9) / 12.0))) /
-             4.0) +
-       floor((275 * (timeInfo->tm_mon + 1)) / 9.0) + (timeInfo->tm_mday) - 730530);
+  double d = (367 * (timeInfo->tm_year + 1900) -
+              floor((7 * ((timeInfo->tm_year + 1900) +
+                          floor(((timeInfo->tm_mon + 1) + 9) / 12.0))) /
+                    4.0) +
+              floor((275 * (timeInfo->tm_mon + 1)) / 9.0) +
+              (timeInfo->tm_mday) - 730530);
 
   // Sun rise/set - https://stjarnhimlen.se/comp/riset.html
   // Sun's orbital elements from https://stjarnhimlen.se/comp/ppcomp.html#4.1
