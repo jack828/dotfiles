@@ -13,7 +13,7 @@
 
 #define AC_STATUS_FILE "/sys/class/power_supply/AC/online"
 #define BATTERY_LEVEL_FILE "/sys/class/power_supply/BAT0/capacity"
-#define CPU_TEMP_FILE "/sys/class/hwmon/hwmon1/temp1_input"
+#define CPU_TEMP_FILE "/sys/class/hwmon/hwmon5/temp1_input"
 #define FAN_STATUS_FILE "/proc/acpi/ibm/fan"
 #define WIREGUARD_INTERFACE_FILE "/proc/net/dev_snmp6/wg0"
 #define ETHERNET_INTERFACE "enp1s0f0"

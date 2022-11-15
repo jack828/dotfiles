@@ -118,7 +118,7 @@ This assumes the following files are available and match the format expected:
 |------|-----|
 | /sys/class/power_supply/AC/online | `'1'` if AC is connected |
 | /sys/class/power_supply/BAT0/capacity | Battery % |
-| /sys/class/hwmon/hwmon1/temp1_input | CPU Temp (one core is good enough) |
+| /sys/class/hwmon/hwmon5/temp1_input | CPU Temp (make sure this is the right one) |
 | /proc/acpi/ibm/fan | Fan info, RPM on line 2 |
 | /proc/net/dev_snmp6/wg0 | Used to infer VPN status, using WireGuard |
 
