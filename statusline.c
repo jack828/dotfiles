@@ -214,73 +214,62 @@ int main() {
     // TODO any neat stats we can get?
     fputs("#[fg=" GREEN "] WIRED ↑ ", stdout);
   } else if (wirelessStatus) {
-    FILE *wirelessFile = fopen(WIRELESS_FILE, "r");
-    char *wirelessHeaderLine = NULL;
-    char *wirelessInterfaceLine = NULL;
-    size_t wirelessSize = 0;
-    /* Two header lines */
-    getline(&wirelessHeaderLine, &wirelessSize, wirelessFile);
-    getline(&wirelessHeaderLine, &wirelessSize, wirelessFile);
+    // Communicate using ioctl to get information
+    struct iwreq ssidReq, signalReq;
+    int sockfd;
+    char *ssid[32];
 
-    // TODO support more than one interface, we blindly assume that the one we
-    // care about is the first and only
-    getline(&wirelessInterfaceLine, &wirelessSize, wirelessFile);
-    // In my case, this line looks like this:
-    // wlp3s0: 0000   67.  -43.  -256        0      0      0      0    303 0
-    //
-    // Since we only care about the 4th column (-43)
-    // If we split the string by ".", we only need index 1, and we can discard
-    // unwanted data.
-    fclose(wirelessFile);
+    // Allocate memory for the request
+    memset(&ssidReq, 0, sizeof(struct iwreq));
+    memset(&signalReq, 0, sizeof(struct iwreq));
+    // Assign our interface name to the request
+    sprintf(ssidReq.ifr_name, WIRELESS_INTERFACE);
+    sprintf(signalReq.ifr_name, WIRELESS_INTERFACE);
 
-    if (strlen(wirelessInterfaceLine) == 0) {
-      // Should not really get here buuut
-      fputs("#[fg=" RED ",reverse] OFFLINE ↓ ", stdout);
-    } else {
-      // RSSI (signal quality in dBm) first
-      char *token = strtok(wirelessInterfaceLine, "."); // index 0
-      token = strtok(NULL, ".");                        // index 1
-      stripNonDigits(token, strlen(token));
-
-      // This is a negative number, but we discard the `-`
-      int signal = atoi(token);
-
-      struct iwreq wreq;
-      int sockfd;
-      char *id[32];
-
-      // Allocate memory for the request
-      memset(&wreq, 0, sizeof(struct iwreq));
-      // Assign our interface name to the request
-      sprintf(wreq.ifr_name, WIRELESS_INTERFACE);
-
-      // Open socket for ioctl
-      if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
-        fprintf(stderr, "FAILED 1");
-        exit(1);
-      }
-
-      wreq.u.essid.pointer = id;
-      wreq.u.essid.length = 32;
-      if (ioctl(sockfd, SIOCGIWESSID, &wreq) == -1) {
-        fprintf(stderr, "FAILED 2");
-        exit(2);
-      }
-
-      if (signal > 70) {
-        fputs("#[fg=" RED "]", stdout);
-      } else if (signal > 60) {
-        fputs("#[fg=" ORANGE "]", stdout);
-      } else if (signal > 50) {
-        fputs("#[fg=" YELLOW "]", stdout);
-      } else {
-        fputs("#[fg=" GREEN "]", stdout);
-      }
-      fputc(' ', stdout);
-      fwrite(wreq.u.essid.pointer, 1, wreq.u.essid.length, stdout);
-      fprintf(stdout, " %d", signal);
-      fputs("#[fg=" GREEN "] ↑ ", stdout);
+    // Open socket for ioctl
+    if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
+      fprintf(stderr, "FAILED 1");
+      exit(1);
     }
+
+    // Get SSID
+    ssidReq.u.essid.pointer = ssid;
+    ssidReq.u.essid.length = 32;
+    if (ioctl(sockfd, SIOCGIWESSID, &ssidReq) == -1) {
+      fprintf(stderr, "FAILED 2");
+      exit(2);
+    }
+
+    struct iw_statistics *stats;
+    int8_t signal = 0;
+
+    signalReq.u.data.pointer = (struct iw_statistics *)malloc(sizeof(*stats));
+    signalReq.u.data.length = sizeof(*stats);
+    signalReq.u.data.flags = 1;
+    if (ioctl(sockfd, SIOCGIWSTATS, &signalReq) == -1) {
+      fprintf(stderr, "FAILED 2");
+      exit(2);
+    }
+    if (((struct iw_statistics *)signalReq.u.data.pointer)->qual.updated &
+        IW_QUAL_DBM) {
+      // signal is measured in dBm and is valid for us to use
+      signal =
+          ((struct iw_statistics *)signalReq.u.data.pointer)->qual.level - 256;
+    }
+    if (signal > 70) {
+      fputs("#[fg=" RED "]", stdout);
+    } else if (signal > 60) {
+      fputs("#[fg=" ORANGE "]", stdout);
+    } else if (signal > 50) {
+      fputs("#[fg=" YELLOW "]", stdout);
+    } else {
+      fputs("#[fg=" GREEN "]", stdout);
+    }
+    fputc(' ', stdout);
+    fwrite(ssidReq.u.essid.pointer, 1, ssidReq.u.essid.length, stdout);
+
+    fprintf(stdout, " %d", signal);
+    fputs("#[fg=" GREEN "] ↑ ", stdout);
   } else {
     fputs("#[fg=" RED ",reverse] OFFLINE ↓ ", stdout);
   }
