@@ -66,7 +66,7 @@ lsp_installer.on_server_ready(function(server)
         "arduino-language-server",
         "-fqbn",
         "esp32:esp32:esp32",
-            "-clangd", "/usr/local/bin/clangd-15"
+            "-clangd", "/usr/bin/clangd"
       }
         -- on_new_config = function (config, root_dir)
             -- local partial_cmd = server:get_default_options().cmd
