@@ -13,4 +13,5 @@ bin/
 .config/kitty/
 .config/nvim/
 .config/efm-langserver/
+.config/lazygit/
 spell
