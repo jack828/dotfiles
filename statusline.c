@@ -154,9 +154,9 @@ int main() {
   /*
    * Load Avg
    */
-  float loadAvgnew = sysInfo.loads[0] / (float)(1 << SI_LOAD_SHIFT);
+  float loadAvg = sysInfo.loads[0] / (float)(1 << SI_LOAD_SHIFT);
 
-  fprintf(stdout, "#[fg=" WHITE ",bg=" LIGHT_BG "] %2.2f ", loadAvgnew);
+  fprintf(stdout, "#[fg=" WHITE ",bg=" LIGHT_BG "] %2.2f ", loadAvg);
 
   /*
    * Memory Usage
