@@ -324,9 +324,7 @@
     nmap <silent> <Leader>f :NERDTreeFind<CR>
 
   " Comment code
-  Plug 'scrooloose/nerdcommenter'
-    " add space after comment char, e.g. // my comment
-    let NERDSpaceDelims=1
+  Plug 'numToStr/Comment.nvim'
 
   " Strip whitespace etc.
   Plug 'editorconfig/editorconfig-vim'
@@ -448,7 +446,18 @@
   autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false })
 
   " easymotion replacement - file navigation
-  lua require'hop'.setup()
+  lua require('hop').setup()
 
   " for 'tversteeg/registers.nvim'
-  lua require'registers'.setup()
+  lua require('registers').setup()
+
+  " for  'numToStr/Comment.nvim'
+  lua require('Comment').setup({
+    \ toggler = {
+    \     line = '<leader>c'
+    \ },
+    \ opleader = {
+    \     line = '<leader>c'
+    \ }
+  \ })
+
