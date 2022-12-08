@@ -4,6 +4,9 @@
   username = jack828
   signingkey = 5078DE7F5C4CA72B
 
+[init]
+  defaultBranch = master
+
 [diff]
   algorithm = histogram
 
