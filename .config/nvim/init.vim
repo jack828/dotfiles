@@ -449,3 +449,6 @@
 
   " easymotion replacement - file navigation
   lua require'hop'.setup()
+
+  " for 'tversteeg/registers.nvim'
+  lua require'registers'.setup()
