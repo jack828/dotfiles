@@ -186,6 +186,8 @@
   set lazyredraw
   set ttyfast
 
+  " .h files are c, .hpp are c++
+  let g:c_syntax_for_h=1
 """"
 " Mappings
 """"
