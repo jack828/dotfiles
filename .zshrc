@@ -32,7 +32,9 @@
 # Android SDK
   export ANDROID_HOME=/home/jack/Android/Sdk/
   export PATH=${PATH}:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$ANDROID_HOME/build-tools
-  export PATH=${PATH}:/opt/gradle/gradle-4.6/bin
+  # manually download gradle and extract here
+  export PATH=${PATH}:/opt/gradle/bin
+  export JAVA_HOME=/usr/lib/jvm/java-18-openjdk-amd64/
 
 # NodeJS
   # Allow locally installed npm packages to be in path
