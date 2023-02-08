@@ -217,3 +217,8 @@ fopen
 fgetc
 fopen
 fgets
+prev
+strcat
+strrchr
+strcat
+strcat
