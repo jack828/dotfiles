@@ -454,12 +454,4 @@
   lua require('registers').setup()
 
   " for  'numToStr/Comment.nvim'
-  lua require('Comment').setup({
-    \ toggler = {
-    \     line = '<leader>c'
-    \ },
-    \ opleader = {
-    \     line = '<leader>c'
-    \ }
-  \ })
-
+  lua require('comment')
