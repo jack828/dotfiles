@@ -11,17 +11,17 @@ services:
     ports:
       - 27017:27017
     restart: unless-stopped
-  mongodb3:
-    image: mongo:3.6.23
-    container_name: mongodb3
-    environment:
-      - PUID=1000
-      - PGID=1000
-    volumes:
-      - /home/jack/databases/3:/data/db
-    ports:
-      - 27013:27017
-    restart: unless-stopped
+  # mongodb3:
+  #   image: mongo:3.6.23
+  #   container_name: mongodb3
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #   volumes:
+  #     - /home/jack/databases/3:/data/db
+  #   ports:
+  #     - 27013:27017
+  #   restart: unless-stopped
   mongodb4:
     image: mongo:4.2.17
     container_name: mongodb4
@@ -33,3 +33,17 @@ services:
     ports:
       - 27014:27017
     restart: unless-stopped
+  # mongodb2:
+  #   image: mongo:2.6.11
+  #   container_name: mongodb2
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #   volumes:
+  #     - /home/jack/databases/2:/data/db
+  #   ports:
+  #     - 27012:27017
+  #   restart: unless-stopped
+
+## For mongo-wrangler in above shells
+# apt update && apt install -y curl zstd && ln -s /usr/bin/mongosh /usr/bin/mongo
