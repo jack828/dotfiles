@@ -67,7 +67,7 @@ lsp_installer.on_server_ready(function(server)
         "-fqbn",
         "esp32:esp32:esp32",
         "-clangd", "/usr/bin/clangd",
-        "-cli", "~/.local/bin/arduino-cli"
+        "-cli", "~/.local/bin/arduino-cli",
         "-cli-config", "~/.arduino15/arduino-cli.yaml"
       }
       -- i dont remember what this was trying to do ?
