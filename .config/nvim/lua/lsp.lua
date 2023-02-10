@@ -67,8 +67,8 @@ lsp_installer.on_server_ready(function(server)
         "-fqbn",
         "esp32:esp32:esp32",
         "-clangd", "/usr/bin/clangd",
-        "-cli", "~/.local/bin/arduino-cli",
-        "-cli-config", "~/.arduino15/arduino-cli.yaml"
+        "-cli", "/home/jack/.local/bin/arduino-cli",
+        "-cli-config", "/home/jack/.arduino15/arduino-cli.yaml"
       }
       -- i dont remember what this was trying to do ?
         -- on_new_config = function (config, root_dir)
