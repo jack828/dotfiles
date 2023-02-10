@@ -66,8 +66,11 @@ lsp_installer.on_server_ready(function(server)
         "arduino-language-server",
         "-fqbn",
         "esp32:esp32:esp32",
-            "-clangd", "/usr/bin/clangd"
+        "-clangd", "/usr/bin/clangd",
+        "-cli", "~/.local/bin/arduino-cli"
+        "-cli-config", "~/.arduino15/arduino-cli.yaml"
       }
+      -- i dont remember what this was trying to do ?
         -- on_new_config = function (config, root_dir)
             -- local partial_cmd = server:get_default_options().cmd
             -- local MY_FQBN = "esp32:esp32:esp32"
