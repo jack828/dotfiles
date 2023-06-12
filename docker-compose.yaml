@@ -11,6 +11,17 @@ services:
     ports:
       - 27017:27017
     restart: unless-stopped
+  mongodb5:
+    image: mongo:5.0.11
+    container_name: mongodb5
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /home/jack/databases/5:/data/db
+    ports:
+      - 27015:27017
+    restart: unless-stopped
   # mongodb3:
   #   image: mongo:3.6.23
   #   container_name: mongodb3
