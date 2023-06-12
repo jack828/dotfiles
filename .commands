@@ -20,3 +20,10 @@ wp () {
     curl "https://wirepusher.com/send?id=$WIRE_PUSHER_ID&title=$1&message=$2"
   fi
 }
+
+# Merge branches into others
+function mergeinto () {
+  currentbranch=$(git rev-parse --abbrev-ref HEAD)
+  git switch $@
+  git merge $currentbranch
+}
