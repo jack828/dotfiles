@@ -7,7 +7,7 @@ directories:
   downloads: /home/jack/.arduino15/staging
   user: /home/jack/Arduino
 library:
-  enable_unsafe_install: false
+  enable_unsafe_install: true
 logging:
   file: ""
   format: text
