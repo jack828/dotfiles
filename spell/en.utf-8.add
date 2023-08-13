@@ -189,14 +189,12 @@ stat
 strftime
 localtime
 strtok
-strlen
 strtod
 elasticsearch
 gtag
 Pressable
 webpack
 esbuild-loader
-graphql
 graphql
 fputc
 fwrite
@@ -209,8 +207,6 @@ ioctl
 memset
 iwreq
 atoi
-strtok
-strtok
 strlen
 fclose
 fopen
@@ -221,4 +217,8 @@ prev
 strcat
 strrchr
 strcat
-strcat
+addons
+mongoWranglerAddon
+mongo
+addon
+hwid
