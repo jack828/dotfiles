@@ -31,8 +31,7 @@ local on_attach = function(client, bufnr)
 
   -- Linting
   if client.server_capabilities.documentFormattingProvider then
-    buf_set_keymap("n", "<space>p", "<cmd>lua vim.lsp.buf.formatting_sync({}, 1000)<CR><cmd>w<CR>", opts)
-    buf_set_keymap("n", "<space>P", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    buf_set_keymap("n", "<space>p", "<cmd>lua vim.lsp.buf.format()<CR><cmd>w<CR>", opts)
     -- vim.cmd [[autocmd BufWritePre *.jsx,*.jsx lua vim.lsp.buf.formatting_sync(nil, 1500)]]
   end
   -- elseif client.resolved_capabilities.document_range_formatting then
