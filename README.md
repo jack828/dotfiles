@@ -57,6 +57,18 @@ $ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 Inside TMUX, run `prefix + I` to install plugins.
 
+#### >3 Upgrade problems
+
+```
+/Users/jack/.tmux.conf:12: invalid option: status-attr
+/Users/jack/.tmux.conf:16: invalid option: window-status-fg
+/Users/jack/.tmux.conf:21: invalid option: window-status-current-fg
+/Users/jack/.tmux.conf:26: invalid option: pane-border-fg
+/Users/jack/.tmux.conf:27: invalid option: pane-active-border-fg
+/Users/jack/.tmux.conf:30: invalid option: message-bg
+/Users/jack/.tmux.conf:31: invalid option: message-fg
+```
+
 ### NVIM
 
 Install neovim nightly (>=0.8.1) and required packages
