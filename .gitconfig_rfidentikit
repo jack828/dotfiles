@@ -1,0 +1,5 @@
+[user]
+  email = jack.burgess@rfidentikit.com
+
+[pull]
+  rebase = true

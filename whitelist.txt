@@ -1,4 +1,5 @@
 .gitconfig
+.gitconfig_rfidentikit
 .gitignore_global
 .tmux.conf
 statusline

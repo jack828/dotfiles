@@ -45,3 +45,6 @@
 
 [commit]
   gpgsign = true
+
+[includeIf "gitdir:~/rfidentikit/"]
+  path = ~/.gitconfig_rfidentikit
