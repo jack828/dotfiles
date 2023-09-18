@@ -4,7 +4,6 @@ Some stolen from:
  - [balaclark](https://github.com/balaclark/dotfiles)
  - [benjaminparnell](https://github.com/benjaminparnell/dotfiles)
  - [asheboy](https://github.com/Asheboy/dotfiles)
- - [Miguel M](https://git.parata.xyz/eot/dotfiles/) (top quality dotfiles)
 
 Huge thank you's to the vim-ers and tmux-ers at [Clock Limited](https://github.com/clocklimited) for the support in getting my setup working smoothly.
 
@@ -32,7 +31,7 @@ $ make deploy
 
 ### Tools/Package Managers
 
- - Font: Fira Code
+ - Font: FiraCode Nerd Font [Nerd Fonts](https://www.nerdfonts.com/)
  - go
  - rust (cargo)
  - exa - ls replacement [Installation](https://the.exa.website/install)
