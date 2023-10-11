@@ -17,3 +17,4 @@ bin/
 .config/lazygit/
 .arduino15/arduino-cli.yaml
 spell
+.editorconfig
