@@ -319,11 +319,15 @@
   " Used for opening file under cursor with gf
   Plug 'moll/vim-node', { 'for': 'javascript' }
 
+  " Fancy icons (requires patched font)
+  Plug 'nvim-tree/nvim-web-devicons'
+
   " File navigator
-  Plug 'scrooloose/nerdtree'
-    let NERDTreeShowHidden=1
-    nmap <silent> <Tab><Tab> :NERDTreeToggle<CR>
-    nmap <silent> <Leader>f :NERDTreeFind<CR>
+  Plug 'MunifTanjim/nui.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v3.x' }
+      nmap <silent> <Tab><Tab> :Neotree filesystem position=left action=focus toggle<CR>
+      nmap <silent> <Leader>f :Neotree filesystem position=left action=focus reveal<CR>
 
   " Comment code
   Plug 'numToStr/Comment.nvim'
@@ -453,5 +457,28 @@
   " for 'tversteeg/registers.nvim'
   lua require('registers').setup()
 
-  " for  'numToStr/Comment.nvim'
+  " for 'numToStr/Comment.nvim'
   lua require('comment')
+
+  " for 'nvim-tree/nvim-web-devicons'
+  lua require('nvim-web-devicons').setup({})
+
+  " for 'nvim-neo-tree/neo-tree.nvim'
+  lua require('neo-tree').setup({
+  \   close_if_last_window = true,
+  \   window = {
+  \     width = 30
+  \   },
+  \   filesystem = {
+  \     filtered_items = {
+  \       hide_dotfiles = false,
+  \       hide_gitignored = false,
+  \       never_show = {
+  \         ".git",
+  \         ".DS_Store",
+  \         "thumbs.db"
+  \       }
+  \     }
+  \   }
+  \ })
+
