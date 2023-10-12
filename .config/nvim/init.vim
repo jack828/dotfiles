@@ -467,7 +467,33 @@
   lua require('neo-tree').setup({
   \   close_if_last_window = true,
   \   window = {
-  \     width = 30
+  \     width = 30,
+  \     mappings = {
+  \       ["a"] = {
+  \         "add",
+  \         config = {
+  \           show_path = "relative"
+  \         }
+  \       },
+  \       ["A"] = {
+  \         "add_directory",
+  \         config = {
+  \           show_path = "relative"
+  \         }
+  \       },
+  \       ["c"] = {
+  \         "copy",
+  \         config = {
+  \           show_path = "relative"
+  \         }
+  \       },
+  \       ["m"] = {
+  \         "move",
+  \         config = {
+  \           show_path = "relative"
+  \         }
+  \       }
+  \     }
   \   },
   \   filesystem = {
   \     filtered_items = {
