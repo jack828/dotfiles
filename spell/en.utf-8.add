@@ -44,7 +44,6 @@ mailto
 tech
 uk
 idp
-p
 Lite
 COM
 onboarder
@@ -222,3 +221,13 @@ mongoWranglerAddon
 mongo
 addon
 hwid
+mdns_ntohs
+mdns
+sockaddr
+addr
+ifdef
+malloc
+calloc
+hashmap
+jsonrpcserver
+qemu
