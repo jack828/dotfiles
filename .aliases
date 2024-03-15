@@ -26,3 +26,7 @@ alias cowsayr='cowsay -f $(shuf -en1 /usr/share/cowsay/cows/*.cow)'
 # Fuzzy branch switching
 # zsh only
 alias gb='print -z gco $(git branch --sort=-committerdate | grep -v "^\*" | fzf --height=20% --reverse --info=inline)'
+
+# Docker compose
+alias dcd='docker compose down --remove-orphans'
+alias dcu='docker compose up'
