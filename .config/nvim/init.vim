@@ -269,6 +269,8 @@
 "" Saved Macros
   " select function
   let @c = 'vf{%'
+  " generate UUID and paste
+  let @u = ":let @* = system('uuidgen')[:-2]\<CR>p"
 
 "" Platform Specific
   if has('nvim')
