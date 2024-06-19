@@ -85,7 +85,7 @@ $ sudo snap install go --classic
 $ <download and install github packages>
 ```
 
-Once in vim, install the [language servers](https://github.com/kabouzeid/nvim-lspinstall#bundled-installers):
+Once in vim, the language servers should be installed automatically. If not, refer to `lsp.lua`, and manually install using:
 
 ```
 :LspInstall tsserver cssls yamlls clangd bashls html jsonls vimls arduino_language_server
@@ -105,11 +105,6 @@ For `arduino_language_server`:
  - Set up the [arduino-cli](https://github.com/arduino/arduino-cli) - I set `BINDIR=~/.local/bin`
  - Add a [Makefile](https://github.com/jack828/esp32-logger/blob/arduino/Makefile) like this project
  - Run `make compile`, and it will use the output for LSP
-
-#### NVIM 0.5 + Lua Issues
-
- - Prettier has a hissy fit when an IIFE is used and toggles formatting
- - Linting with `<leader>p` sometimes pastes in extra characters
 
 #### LSP usage
 

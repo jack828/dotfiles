@@ -415,10 +415,12 @@
     " But do change to the VCS root!
     let g:startify_change_to_vcs_root = 1
 
-  Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
   Plug 'ojroques/nvim-lspfuzzy'
-  Plug 'williamboman/nvim-lsp-installer'
+
+  Plug 'williamboman/mason.nvim'
+  Plug 'williamboman/mason-lspconfig.nvim'
+  Plug 'neovim/nvim-lspconfig'
 
   " Colour scheme
   Plug 'marko-cerovac/material.nvim'
