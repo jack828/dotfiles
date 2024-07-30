@@ -1,21 +1,10 @@
-# eval "$(thefuck --alias fuck)"
-alias fuck='TF_CMD=$(TF_ALIAS=fuck PYTHONIOENCODING=utf-8 TF_SHELL_ALIASES=$(alias) thefuck $(fc -ln -1 | tail -n 1)) && eval $TF_CMD && print -s $TF_CMD'
-
 unalias l
 alias l="exa -abghl --git --color=automatic"
 
 # yep
 alias nivm=nvim
 alias mivn=nvim
-
-# Clock SSH Config updater
-SSHConfigBase='~/.ssh/config.base'
-SSHConfigRepo='~/Clock/SSHConfiguration/'
-SSHConfig='~/.ssh/config'
-alias updatesshconfig="cd $SSHConfigRepo && git pull && \
-  cat $SSHConfigRepo/ssh_config.d/* > $SSHConfig && \
-  cat $SSHConfigBase >> $SSHConfig && cd ~\
-"
+alias vim=nvim
 
 # So graphicsmagick works
 unalias gm

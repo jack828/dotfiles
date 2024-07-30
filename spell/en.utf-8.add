@@ -231,3 +231,4 @@ calloc
 hashmap
 jsonrpcserver
 qemu
+awslocal
