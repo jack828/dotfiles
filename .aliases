@@ -4,6 +4,8 @@ alias l="exa -abghl --git --color=automatic"
 # yep
 alias nivm=nvim
 alias mivn=nvim
+alias vnim=nvim
+alias nvum=nvim
 alias vim=nvim
 
 # So graphicsmagick works

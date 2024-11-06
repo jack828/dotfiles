@@ -232,3 +232,6 @@ hashmap
 jsonrpcserver
 qemu
 awslocal
+Cognito
+cognito
+uuid
