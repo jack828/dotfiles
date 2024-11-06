@@ -1,0 +1,18 @@
+CompileFlags:
+  Add: [
+    -xc,
+    -Wall,
+    -Wextra,
+    -Werror=pedantic,
+    -Wundef,
+    -Wshadow,
+    -Wformat=2,
+    -Wfloat-equal,
+    -Wunreachable-code,
+    -Wpedantic,
+    -std=gnu17,
+    -Wunused-parameter,
+    -Wno-error=unused-parameter,
+    -Wno-strict-prototypes
+  ]
+
