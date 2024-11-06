@@ -88,13 +88,13 @@ void stripNonDigits(char *input, int length) {
   strcpy(input, output);
 }
 
-void resetStyles() { fputs("#[default]", stdout); }
+void resetStyles() { printf("#[default]"); }
 
 int main() {
   /*
    * Power
    */
-  fputs("#[bg=" LIGHT_BG "]", stdout);
+  printf("#[bg=" LIGHT_BG "]");
 
   FILE *acStatusFile = fopen(AC_STATUS_FILE, "r");
   char acStatus = fgetc(acStatusFile);
@@ -109,24 +109,24 @@ int main() {
   int batteryLevel = atoi(batteryLevelString);
 
   if (acStatus == '1') {
-    fputs("#[fg=" GREEN ",bold] AC ⌁ ", stdout);
+    printf("#[fg=" GREEN ",bold] AC ⌁ ");
     if (batteryLevel < 75) {
       if (batteryLevel > 50) {
-        fputs("#[fg=" ORANGE "]", stdout);
+        printf("#[fg=" ORANGE "]");
       } else {
-        fputs("#[fg=" RED "]", stdout);
+        printf("#[fg=" RED "]");
       }
-      fprintf(stdout, "(%2d %%) ", batteryLevel);
+      printf("(%2d %%) ", batteryLevel);
     }
   } else {
     if (batteryLevel > 75) {
-      fputs("#[fg=" GREEN "]", stdout);
+      printf("#[fg=" GREEN "]");
     } else if (batteryLevel > 50) {
-      fputs("#[fg=" ORANGE "]", stdout);
+      printf("#[fg=" ORANGE "]");
     } else {
-      fputs("#[fg=" RED ",reverse]", stdout);
+      printf("#[fg=" RED ",reverse]");
     }
-    fprintf(stdout, " %2d %% ", batteryLevel);
+    printf(" %2d %% ", batteryLevel);
   }
   resetStyles();
 
@@ -140,15 +140,15 @@ int main() {
 
   int cpuTemp = atoi(cpuTempString);
 
-  fputs("#[bg=" DARK_BG "]", stdout);
+  printf("#[bg=" DARK_BG "]");
   if (cpuTemp > 80) {
-    fputs("#[fg=" RED ",reverse]", stdout);
+    printf("#[fg=" RED ",reverse]");
   } else if (cpuTemp > 50) {
-    fputs("#[fg=" ORANGE "]", stdout);
+    printf("#[fg=" ORANGE "]");
   } else {
-    fputs("#[fg=" GREEN "]", stdout);
+    printf("#[fg=" GREEN "]");
   }
-  fprintf(stdout, " %d°C ", cpuTemp);
+  printf(" %d°C ", cpuTemp);
   resetStyles();
 
   /* sysinfo struct used for multiple things */
@@ -164,7 +164,7 @@ int main() {
    */
   float loadAvg = sysInfo.loads[0] / (float)(1 << SI_LOAD_SHIFT);
 
-  fprintf(stdout, "#[fg=" WHITE ",bg=" LIGHT_BG "] %2.2f ", loadAvg);
+  printf("#[fg=" WHITE ",bg=" LIGHT_BG "] %2.2f ", loadAvg);
 
   /*
    * Memory Usage
@@ -176,15 +176,15 @@ int main() {
   double freeMemoryPercentage = ((double)memoryAvailable / memoryTotal) * 100;
   double usedMemoryPercentage = 100 - freeMemoryPercentage;
 
-  fputs("#[bg=" DARK_BG "]", stdout);
+  printf("#[bg=" DARK_BG "]");
   if (usedMemoryPercentage > 75) {
-    fputs("#[fg=" RED ",reverse]", stdout);
+    printf("#[fg=" RED ",reverse]");
   } else if (usedMemoryPercentage > 50) {
-    fputs("#[fg=" ORANGE "]", stdout);
+    printf("#[fg=" ORANGE "]");
   } else {
-    fputs("#[fg=" GREEN "]", stdout);
+    printf("#[fg=" GREEN "]");
   }
-  fprintf(stdout, " %2.f%% ", usedMemoryPercentage);
+  printf(" %2.f%% ", usedMemoryPercentage);
   resetStyles();
 
   /*
@@ -202,18 +202,18 @@ int main() {
   stripNonDigits(fanSpeedLine, strlen(fanSpeedLine));
   int fanSpeed = atoi(fanSpeedLine);
 
-  fprintf(stdout, "#[fg=" WHITE ",bg=" LIGHT_BG "] %4d ", fanSpeed);
+  printf("#[fg=" WHITE ",bg=" LIGHT_BG "] %4d ", fanSpeed);
 
   /*
    * Network Status
    */
-  fprintf(stdout, "#[fg=" WHITE ",bg=" DARK_BG "]");
+  printf("#[fg=" WHITE ",bg=" DARK_BG "]");
 
   int8_t ethernetStatus = interfaceStatus(ETHERNET_INTERFACE);
   int8_t wirelessStatus = interfaceStatus(WIRELESS_INTERFACE);
   if (ethernetStatus) {
     // TODO any neat stats we can get?
-    fputs("#[fg=" GREEN "] WIRED ↑ ", stdout);
+    printf("#[fg=" GREEN "] WIRED ↑ ");
   } else if (wirelessStatus) {
     // Communicate using ioctl to get information
     struct iwreq ssidReq, signalReq;
@@ -258,35 +258,35 @@ int main() {
           ((struct iw_statistics *)signalReq.u.data.pointer)->qual.level - 256;
     }
     if (signal > 70) {
-      fputs("#[fg=" RED "]", stdout);
+      printf("#[fg=" RED "]");
     } else if (signal > 60) {
-      fputs("#[fg=" ORANGE "]", stdout);
+      printf("#[fg=" ORANGE "]");
     } else if (signal > 50) {
-      fputs("#[fg=" YELLOW "]", stdout);
+      printf("#[fg=" YELLOW "]");
     } else {
-      fputs("#[fg=" GREEN "]", stdout);
+      printf("#[fg=" GREEN "]");
     }
-    fputc(' ', stdout);
+    printf(" ");
     fwrite(ssidReq.u.essid.pointer, 1, ssidReq.u.essid.length, stdout);
 
-    fprintf(stdout, " %d", signal);
-    fputs("#[fg=" GREEN "] ↑ ", stdout);
+    printf(" %d", signal);
+    printf("#[fg=" GREEN "] ↑ ");
   } else {
-    fputs("#[fg=" RED ",reverse] OFFLINE ↓ ", stdout);
+    printf("#[fg=" RED ",reverse] OFFLINE ↓ ");
   }
   resetStyles();
 
   /*
    * VPN Status
    */
-  fputs("#[bg=" LIGHT_BG ",bold]", stdout);
+  printf("#[bg=" LIGHT_BG ",bold]");
 
   struct stat buffer;
   int exists = stat(WIREGUARD_INTERFACE_FILE, &buffer);
   if (exists == 0) {
-    fputs("#[fg=" GREEN "] VPN ↑ ", stdout);
+    printf("#[fg=" GREEN "] VPN ↑ ");
   } else {
-    fputs("#[fg=" RED "] VPN ↓ ", stdout);
+    printf("#[fg=" RED "] VPN ↓ ");
   }
   resetStyles();
 
@@ -306,11 +306,10 @@ int main() {
   strftime(month, sizeof(month), "%B", timeInfo);
   strftime(year, sizeof(year), "%Y", timeInfo);
 
-  fprintf(stdout,
-          "#[fg=colour146,bold,bg=" DARK_BG "] %s "
-          "#[fg=colour176,bold,bg=" DARK_BG "]%s, "
-          "#[fg=colour173,bold,bg=" DARK_BG "]%s#[fg=default] ",
-          day, month, year);
+  printf("#[fg=colour146,bold,bg=" DARK_BG "] %s "
+         "#[fg=colour176,bold,bg=" DARK_BG "]%s, "
+         "#[fg=colour173,bold,bg=" DARK_BG "]%s#[fg=default] ",
+         day, month, year);
 
   /*
    * Time 24HR
@@ -405,7 +404,7 @@ int main() {
     bgColour = "colour4"; // #00AFFF
   }
 
-  fprintf(stdout, "#[fg=%s,bold,bg=%s] %s ", textColour, bgColour, time);
+  printf("#[fg=%s,bold,bg=%s] %s ", textColour, bgColour, time);
 
   return 0;
 }

@@ -432,6 +432,9 @@
   " Every now and then you should check :StartupTime
   " Plug 'tweekmonster/startuptime.vim'
 
+  " Auto-disconnect LSP servers
+  " Plug 'zeioth/garbage-day.nvim'
+
   call plug#end()
 
   " Set colour scheme
