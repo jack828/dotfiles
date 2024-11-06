@@ -10,7 +10,7 @@ TARGET=statusline
 
 .phony: statusline clean debug deploy valgrind
 
-$(TARGET):
+$(TARGET): $(TARGET).c
 	$(CC) $(TARGET).c $(CFLAGS) -o $(TARGET) $(LINKFLAGS)
 	$(STRIP) $(STRIPFLAGS) $(TARGET)
 
