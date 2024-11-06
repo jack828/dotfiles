@@ -27,9 +27,9 @@
 #define PI 3.1415926535897932384
 #define RADEG (180.0 / PI)
 #define DEGRAD (PI / 180.0)
-#define sind(x) sin((x)*DEGRAD)
-#define cosd(x) cos((x)*DEGRAD)
-#define tand(x) tan((x)*DEGRAD)
+#define sind(x) sin((x) * DEGRAD)
+#define cosd(x) cos((x) * DEGRAD)
+#define tand(x) tan((x) * DEGRAD)
 #define atand(x) (RADEG * atan(x))
 #define asind(x) (RADEG * asin(x))
 #define acosd(x) (RADEG * acos(x))
@@ -100,17 +100,25 @@ int main() {
   char acStatus = fgetc(acStatusFile);
   fclose(acStatusFile);
 
+  FILE *batteryLevelFile = fopen(BATTERY_LEVEL_FILE, "r");
+
+  char batteryLevelString[4];
+  fgets(batteryLevelString, 4, batteryLevelFile);
+  fclose(batteryLevelFile);
+
+  int batteryLevel = atoi(batteryLevelString);
+
   if (acStatus == '1') {
     fputs("#[fg=" GREEN ",bold] AC ⌁ ", stdout);
+    if (batteryLevel < 75) {
+      if (batteryLevel > 50) {
+        fputs("#[fg=" ORANGE "]", stdout);
+      } else {
+        fputs("#[fg=" RED "]", stdout);
+      }
+      fprintf(stdout, "(%2d %%) ", batteryLevel);
+    }
   } else {
-    FILE *batteryLevelFile = fopen(BATTERY_LEVEL_FILE, "r");
-
-    char batteryLevelString[4];
-    fgets(batteryLevelString, 4, batteryLevelFile);
-    fclose(batteryLevelFile);
-
-    int batteryLevel = atoi(batteryLevelString);
-
     if (batteryLevel > 75) {
       fputs("#[fg=" GREEN "]", stdout);
     } else if (batteryLevel > 50) {
