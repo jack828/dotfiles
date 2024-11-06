@@ -50,10 +50,7 @@ int8_t interfaceStatus(const char *interface) {
                   + strlen(interface) // interface
                   + 8                 // path end
                   + 1;                // null character
-  char *interfaceStatusFilePath = malloc(length);
-  // malloc does not initialise allocated memory
-  // so it may contain junk
-  interfaceStatusFilePath[0] = '\0';
+  char *interfaceStatusFilePath = calloc(length, sizeof(char));
   strcat(interfaceStatusFilePath, "/sys/class/net/");
   strcat(interfaceStatusFilePath, interface);
   strcat(interfaceStatusFilePath, "/carrier");
