@@ -54,6 +54,9 @@
   export ESP_OPEN_RTOS_PATH=$HOME/esp8266/esp-open-rtos
 
 # Applications
+  # AWS CLI
+    export AWS_PAGER=""
+
   # Mongodb
     export PATH=~/.mongodb/versions/mongodb-current/bin:$PATH
 
