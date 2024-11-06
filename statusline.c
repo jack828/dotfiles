@@ -199,7 +199,9 @@ int main() {
   free(fanStatusLine);
   free(fanSpeedLine);
 
-  printf("#[fg=" WHITE ",bg=" LIGHT_BG "] %4d ", fanSpeed);
+  printf("#[fg=" WHITE ",bg=" LIGHT_BG "] %4d ",
+         // after wake from sleep this seems to be the value
+         fanSpeed == 65535 ? 0 : fanSpeed);
 
   /*
    * Network Status
