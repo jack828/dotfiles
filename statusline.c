@@ -205,6 +205,10 @@ int main() {
 
   /*
    * Network Status
+   * TODO broken on 5.15.0
+   * https://unix.stackexchange.com/q/724019/548295
+   * Tried with nl80211, same result
+   * nl example https://github.com/bmegli/wifi-scan
    */
   printf("#[fg=" WHITE ",bg=" DARK_BG "]");
 
