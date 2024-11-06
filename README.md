@@ -169,4 +169,6 @@ Plugins:
 | `prefix + z` | Zoom/unzoom a pane |
 | `prefix + C-s` | Save sessions |
 | `prefix + C-r` | Restore sessions |
+| `prefix + [` | Swap split right |
+| `prefix + ]` | Swap split left |
 | `prefix + ` | todo... |
