@@ -14,6 +14,7 @@
 #define AC_STATUS_FILE "/sys/class/power_supply/AC/online"
 #define BATTERY_LEVEL_FILE "/sys/class/power_supply/BAT0/capacity"
 #define CPU_TEMP_FILE "/sys/class/hwmon/hwmon6/temp1_input"
+#define CPU_TEMP_FACTOR 1000
 #define FAN_STATUS_FILE "/proc/acpi/ibm/fan"
 #define WIREGUARD_INTERFACE_FILE "/proc/net/dev_snmp6/wg0"
 #define ETHERNET_INTERFACE "enp1s0f0"
@@ -88,25 +89,25 @@ void stripNonDigits(char *input, int length) {
 
 void resetStyles() { printf("#[default]"); }
 
+int fileToNumber(char *filename) {
+  FILE *file = fopen(filename, "r");
+  int buflen = 64;
+  char string[buflen];
+  fgets(string, buflen, file);
+  fclose(file);
+  return atoi(string);
+}
+
 int main() {
   /*
    * Power
    */
   printf("#[bg=" LIGHT_BG "]");
 
-  FILE *acStatusFile = fopen(AC_STATUS_FILE, "r");
-  char acStatus = fgetc(acStatusFile);
-  fclose(acStatusFile);
+  int acStatus = fileToNumber(AC_STATUS_FILE);
+  int batteryLevel = fileToNumber(BATTERY_LEVEL_FILE);
 
-  FILE *batteryLevelFile = fopen(BATTERY_LEVEL_FILE, "r");
-
-  char batteryLevelString[4];
-  fgets(batteryLevelString, 4, batteryLevelFile);
-  fclose(batteryLevelFile);
-
-  int batteryLevel = atoi(batteryLevelString);
-
-  if (acStatus == '1') {
+  if (acStatus == 1) {
     printf("#[fg=" GREEN ",bold] AC ⌁ ");
     if (batteryLevel < 75) {
       if (batteryLevel > 50) {
@@ -131,12 +132,7 @@ int main() {
   /*
    * CPU Temp
    */
-  FILE *cpuTempFile = fopen(CPU_TEMP_FILE, "r");
-  char cpuTempString[3];
-  fgets(cpuTempString, 3, cpuTempFile);
-  fclose(cpuTempFile);
-
-  int cpuTemp = atoi(cpuTempString);
+  int cpuTemp = fileToNumber(CPU_TEMP_FILE) / CPU_TEMP_FACTOR;
 
   printf("#[bg=" DARK_BG "]");
   if (cpuTemp > 80) {
@@ -280,6 +276,9 @@ int main() {
 
   /*
    * VPN Status
+   * TODO support multiple vpns
+   *  - AWS
+   *  - Mullvad
    */
   printf("#[bg=" LIGHT_BG ",bold]");
 
