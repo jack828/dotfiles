@@ -8,6 +8,8 @@ STRIPFLAGS=-s -R .comment -R .gnu.version --strip-unneeded -R .note.gnu.gold-ver
 DEBUGFLAGS=-ggdb -O0
 TARGET=statusline
 
+.phony: statusline clean debug deploy valgrind
+
 $(TARGET):
 	$(CC) $(TARGET).c $(CFLAGS) -o $(TARGET) $(LINKFLAGS)
 	$(STRIP) $(STRIPFLAGS) $(TARGET)
@@ -22,6 +24,16 @@ $(TARGET):
 # break statusline.c:45
 debug:
 	$(CC) $(TARGET).c $(CFLAGS) -o $(TARGET).debug $(LINKFLAGS) $(DEBUGFLAGS)
+
+valgrind: debug
+	valgrind \
+		--tool=memcheck \
+		--leak-check=full \
+		--track-origins=yes \
+		--leak-resolution=high \
+		--show-reachable=yes \
+		--trace-children=yes \
+		./$(TARGET).debug
 
 clean:
 	rm -f $(TARGET)

@@ -72,7 +72,7 @@ int8_t interfaceStatus(const char *interface) {
 
 // Modify input string and only keep [0-9]
 void stripNonDigits(char *input, int length) {
-  char *output = malloc(length);
+  char *output = calloc(length, sizeof(char));
   int index = 0;
   char *sPtr = input;
 
@@ -83,6 +83,7 @@ void stripNonDigits(char *input, int length) {
   }
 
   strcpy(input, output);
+  free(output);
 }
 
 void resetStyles() { printf("#[default]"); }
@@ -199,6 +200,9 @@ int main() {
   stripNonDigits(fanSpeedLine, strlen(fanSpeedLine));
   int fanSpeed = atoi(fanSpeedLine);
 
+  free(fanStatusLine);
+  free(fanSpeedLine);
+
   printf("#[fg=" WHITE ",bg=" LIGHT_BG "] %4d ", fanSpeed);
 
   /*
@@ -253,6 +257,7 @@ int main() {
       // signal is measured in dBm and is valid for us to use
       signal =
           ((struct iw_statistics *)signalReq.u.data.pointer)->qual.level - 256;
+      free(signalReq.u.data.pointer);
     }
     if (signal > 70) {
       printf("#[fg=" RED "]");
