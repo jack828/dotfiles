@@ -46,6 +46,11 @@
 #define DARK_BG "colour236"  // #3A3A3A
 #define TEXT WHITE
 
+int8_t interfaceStatus(const char *interface);
+void stripNonDigits(char *input, int length);
+void resetStyles();
+int fileToNumber(char *filename);
+
 int8_t interfaceStatus(const char *interface) {
   int8_t length = 15                  // path start
                   + strlen(interface) // interface
@@ -57,18 +62,7 @@ int8_t interfaceStatus(const char *interface) {
   strcat(interfaceStatusFilePath, "/carrier");
   // Implicitly ends with \0 after strcat
 
-  FILE *statusFile = fopen(interfaceStatusFilePath, "r");
-  if (statusFile == NULL) {
-    fprintf(stderr, "\nfopen failed, errno = %d\n", errno);
-    return 0;
-  }
-
-  char status[2];
-  fgets(status, 2, statusFile);
-  fclose(statusFile);
-  free(interfaceStatusFilePath);
-
-  return atoi(status);
+  return fileToNumber(interfaceStatusFilePath);
 }
 
 // Modify input string and only keep [0-9]
