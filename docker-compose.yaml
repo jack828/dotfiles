@@ -1,27 +1,16 @@
 version: "3.8"
 services:
-  mongodb:
-    image: mongo:6.0.2
-    container_name: mongodb
-    environment:
-      - PUID=1000
-      - PGID=1000
-    volumes:
-      - /home/jack/databases/6:/data/db
-    ports:
-      - 127.0.0.1:27017:27017
-    restart: unless-stopped
-  mongodb5:
-    image: mongo:5.0.11
-    container_name: mongodb5
-    environment:
-      - PUID=1000
-      - PGID=1000
-    volumes:
-      - /home/jack/databases/5:/data/db
-    ports:
-      - 127.0.0.1:27015:27017
-    restart: unless-stopped
+  # mongodb2:
+  #   image: mongo:2.6.11
+  #   container_name: mongodb2
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #   volumes:
+  #     - /home/jack/databases/2:/data/db
+  #   ports:
+  #     - 127.0.0.1:27012:27017
+  #   restart: unless-stopped
   # mongodb3:
   #   image: mongo:3.6.23
   #   container_name: mongodb3
@@ -33,38 +22,49 @@ services:
   #   ports:
   #     - 127.0.0.1:27013:27017
   #   restart: unless-stopped
-  mongodb4:
-    image: mongo:4.2.17
-    container_name: mongodb4
-    environment:
-      - PUID=1000
-      - PGID=1000
-    volumes:
-      - /home/jack/databases/4:/data/db
-    ports:
-      - 127.0.0.1:27014:27017
-    restart: unless-stopped
-  mongodb7:
-    image: mongo:7
-    container_name: mongodb7
-    environment:
-      - PUID=1000
-      - PGID=1000
-    volumes:
-      - /home/jack/databases/7:/data/db
-    ports:
-      - 127.0.0.1:27011:27017
-    restart: unless-stopped
-  # mongodb2:
-  #   image: mongo:2.6.11
-  #   container_name: mongodb2
+  # mongodb4:
+  #   image: mongo:4.2.17
+  #   container_name: mongodb4
   #   environment:
   #     - PUID=1000
   #     - PGID=1000
   #   volumes:
-  #     - /home/jack/databases/2:/data/db
+  #     - /home/jack/databases/4:/data/db
   #   ports:
-  #     - 127.0.0.1:27012:27017
+  #     - 127.0.0.1:27014:27017
+  #   restart: unless-stopped
+  # mongodb5:
+  #   image: mongo:5.0.11
+  #   container_name: mongodb5
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #   volumes:
+  #     - /home/jack/databases/5:/data/db
+  #   ports:
+  #     - 127.0.0.1:27015:27017
+  #   restart: unless-stopped
+  mongodb:
+    image: mongo:6.0.2
+    container_name: mongodb
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /home/jack/databases/6:/data/db
+    ports:
+      - 127.0.0.1:27017:27017
+    restart: unless-stopped
+  # mongodb7:
+  #   image: mongo:7
+  #   container_name: mongodb7
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #   volumes:
+  #     - /home/jack/databases/7:/data/db
+  #   ports:
+  #     - 127.0.0.1:27011:27017
   #   restart: unless-stopped
 
 ## For mongo-wrangler in above shells
