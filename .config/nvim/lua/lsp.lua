@@ -63,7 +63,7 @@ mason_lspconfig.setup({
     "dockerls",
     "docker_compose_language_service",
     "efm",
-    "tsserver",
+    "ts_ls",
     "cssls",
     "clangd",
     "bashls",
@@ -80,6 +80,29 @@ local opts = {
   on_attach = on_attach,
   capabilities = cmp_nvim_lsp.default_capabilities(),
 }
+
+require("typescript-tools").setup({
+  on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false
+    opts.on_attach(client, bufnr)
+  end,
+  capabilities = opts.capabilities,
+  settings = {
+    tsserver_file_preferences = function(ft)
+      return {
+        -- no idea if these are doing anything to make it """better"""
+        includeInlayParameterNameHints = "all",
+        includeCompletionsForModuleExports = true,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      }
+    end
+  }
+})
+
 -- setup installed language servers
 mason_lspconfig.setup_handlers({
   -- The first entry (without a key) will be the default handler
@@ -124,15 +147,8 @@ mason_lspconfig.setup_handlers({
     })
   end,
 
-  ["tsserver"] = function()
-    lspconfig["tsserver"].setup({
-      on_attach = function(client, bufnr)
-        -- client.resolved_capabilities.document_formatting = false -- nvim 0.7 and earlier
-        client.server_capabilities.documentFormattingProvider = false -- nvim 0.8 and later
-        opts.on_attach(client, bufnr)
-      end,
-      capabilities = opts.capabilities,
-    })
+  ["ts_ls"] = function()
+    -- managed by typescript-tools
   end,
 
   ["efm"] = function()

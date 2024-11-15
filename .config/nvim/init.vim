@@ -324,9 +324,11 @@
   " Fancy icons (requires patched font)
   Plug 'nvim-tree/nvim-web-devicons'
 
+  " Lua utils, common plugin dependency
+  Plug 'nvim-lua/plenary.nvim'
+
   " File navigator
   Plug 'MunifTanjim/nui.nvim'
-  Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v3.x' }
       nmap <silent> <Tab><Tab> :Neotree filesystem position=left action=focus toggle<CR>
       nmap <silent> <Leader>f :Neotree filesystem position=left action=focus reveal<CR>
@@ -425,6 +427,7 @@
   " Colour scheme
   Plug 'marko-cerovac/material.nvim'
   let g:material_style = 'darker'
+  Plug 'pmizio/typescript-tools.nvim'
 
   " Function context via Treesitter
   Plug 'nvim-treesitter/nvim-treesitter-context'
