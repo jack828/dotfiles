@@ -330,7 +330,9 @@
   " File navigator
   Plug 'MunifTanjim/nui.nvim'
   Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v3.x' }
+      " Toggle file browser
       nmap <silent> <Tab><Tab> :Neotree filesystem position=left action=focus toggle<CR>
+      " Reveal current file in browser
       nmap <silent> <Leader>f :Neotree filesystem position=left action=focus reveal<CR>
 
   " Comment code
@@ -369,7 +371,8 @@
   Plug 'bag-man/copypath.vim'
     nnoremap cp :CopyRelativePath<CR>
 
-  " Faster keyboard nav within files
+  " Faster keyboard navigation within files
+  " Lua version of easymotion
   Plug 'phaazon/hop.nvim'
     nmap <silent> s :HopWord<CR>
 
@@ -384,9 +387,9 @@
 
   " Close all other buffers
   Plug 'schickling/vim-bufonly'
-  " Close all but current
+    " Close all but current
     nnoremap go :BufOnly<CR>
-  " Close all
+    " Close all
     nnoremap goa :BufOnly<CR>:bd<CR>
 
   " auto close brackets
@@ -417,6 +420,7 @@
     " But do change to the VCS root!
     let g:startify_change_to_vcs_root = 1
 
+  " LSP and related magicks
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
   Plug 'ojroques/nvim-lspfuzzy'
 
@@ -424,13 +428,14 @@
   Plug 'williamboman/mason-lspconfig.nvim'
   Plug 'neovim/nvim-lspconfig'
 
-  " Colour scheme
-  Plug 'marko-cerovac/material.nvim'
-  let g:material_style = 'darker'
   Plug 'pmizio/typescript-tools.nvim'
 
   " Function context via Treesitter
   Plug 'nvim-treesitter/nvim-treesitter-context'
+
+  " Colour scheme
+  Plug 'marko-cerovac/material.nvim'
+  let g:material_style = 'darker'
 
   " Every now and then you should check :StartupTime
   " Plug 'tweekmonster/startuptime.vim'
