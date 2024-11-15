@@ -294,9 +294,12 @@
   Plug 'wakatime/vim-wakatime'
 
   " Language support
-  Plug 'sheerun/vim-polyglot'
-    " interferes with treesitter indents
+    " chrisbra/csv.vim scroll performance is poor without this
+    let g:csv_nomap_up=1
+    let g:csv_nomap_down=1
+    " 'autoindent' interferes with treesitter indents
     let g:polyglot_disabled = ['autoindent']
+  Plug 'sheerun/vim-polyglot'
 
   " Fuzzy file search
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
