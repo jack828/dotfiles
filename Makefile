@@ -8,7 +8,7 @@ STRIPFLAGS=-s -R .comment -R .gnu.version --strip-unneeded -R .note.gnu.gold-ver
 DEBUGFLAGS=-ggdb -O0
 TARGET=statusline
 
-.phony: statusline clean debug deploy valgrind
+.phony: statusline clean debug deploy valgrind update-nvim
 
 $(TARGET): $(TARGET).c
 	$(CC) $(TARGET).c $(CFLAGS) -o $(TARGET) $(LINKFLAGS)
@@ -22,7 +22,7 @@ $(TARGET): $(TARGET).c
 #
 # to set breakpoints:
 # break statusline.c:45
-debug:
+debug: $(TARGET).c
 	$(CC) $(TARGET).c $(CFLAGS) -o $(TARGET).debug $(LINKFLAGS) $(DEBUGFLAGS)
 
 valgrind: debug
@@ -42,3 +42,8 @@ deploy:
 	cp ~/spell/en.utf-8.add ./spell/en.utf-8.add \
 		&& ./dotfiles deploy -v \
 		&& cp ./statusline ~/statusline
+
+update-nvim:
+	wget https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -O ~/.local/bin/nvim \
+		&& chmod u+x ~/.local/bin/nvim \
+		&& rm ~/.local/state/nvim/lsp.log
