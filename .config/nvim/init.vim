@@ -406,7 +406,7 @@
   " Register magic
   Plug 'tversteeg/registers.nvim'
     let g:registers_paste_in_normal_mode = 1
-"
+
   " Painless vim/tmux pane navigation
   Plug 'christoomey/vim-tmux-navigator'
 
@@ -425,12 +425,16 @@
 
   " LSP and related magicks
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+  " Use FZF for output windows (it's better)
   Plug 'ojroques/nvim-lspfuzzy'
 
+  " LSP manager
   Plug 'williamboman/mason.nvim'
   Plug 'williamboman/mason-lspconfig.nvim'
+  " Default LSP configuration
   Plug 'neovim/nvim-lspconfig'
 
+  " Better typescript-language-server in Lua
   Plug 'pmizio/typescript-tools.nvim'
 
   " Function context via Treesitter
