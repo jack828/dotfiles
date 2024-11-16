@@ -88,7 +88,7 @@ require("typescript-tools").setup({
   end,
   capabilities = opts.capabilities,
   settings = {
-    tsserver_max_memory = 256, -- MB
+    tsserver_max_memory = 1024, -- MB
     tsserver_file_preferences = function(ft)
       return {
         -- no idea if these are doing anything to make it """better"""
