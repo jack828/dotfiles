@@ -58,6 +58,10 @@ Inside TMUX, run `prefix + I` to install plugins.
 
 #### >3 Upgrade problems
 
+UTF-8 characters render as underscores
+
+Does not start after running `tmux`, just hangs. Killing the process makes it do a bunch of other stuff (tpm related), but otherwise unusable. Have to open another window and re-run tmux.
+
 ```
 /Users/jack/.tmux.conf:12: invalid option: status-attr
 /Users/jack/.tmux.conf:16: invalid option: window-status-fg
@@ -70,15 +74,14 @@ Inside TMUX, run `prefix + I` to install plugins.
 
 ### NVIM
 
-Install neovim nightly (>=0.8.1) and required packages
+Install neovim nightly (>=0.10.2) and required packages
  - apt: silversearcher-ag
  - pip: neovim msgpack
  - github: bat@^0.18.0
  - snap: go
 
 ```
-$ chmod u+x ./nvim.appimage
-$ mv ./nvim.appimage ~/.local/bin/nvim
+$ make update-nvim
 $ sudo apt install -y silversearcher-ag python3-pip
 $ pip3 install neovim msgpack --upgrade
 $ sudo snap install go --classic
@@ -88,7 +91,7 @@ $ <download and install github packages>
 Once in vim, the language servers should be installed automatically. If not, refer to `lsp.lua`, and manually install using:
 
 ```
-:LspInstall tsserver cssls yamlls clangd bashls html jsonls vimls arduino_language_server
+:LspInstall ts_ls cssls yamlls clangd bashls html jsonls vimls arduino_language_server
 ...etc...
 
 # This one is for linting
