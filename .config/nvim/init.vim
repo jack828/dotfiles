@@ -266,6 +266,10 @@
   " stop the command popup window from appearing. literally why
   map q: :q
 
+  " for rfidentikit
+  autocmd BufRead,BufNewFile *.macro set filetype=htmldjango
+  autocmd BufRead,BufNewFile */ui/*.html set filetype=htmldjango
+
 "" Saved Macros
   " select function
   let @c = 'vf{%'
