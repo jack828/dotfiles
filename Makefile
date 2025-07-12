@@ -44,6 +44,6 @@ deploy:
 		&& cp ./statusline ~/statusline
 
 update-nvim:
-	wget https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -O ~/.local/bin/nvim \
+	wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage -O ~/.local/bin/nvim \
 		&& chmod u+x ~/.local/bin/nvim \
-		&& rm ~/.local/state/nvim/lsp.log
+		&& rm -f ~/.local/state/nvim/lsp.log
