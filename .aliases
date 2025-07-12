@@ -1,5 +1,5 @@
 unalias l
-alias l="exa -abghl --git --color=automatic"
+alias l="eza -abghl --git --color=automatic"
 
 # yep
 alias nivm=nvim
