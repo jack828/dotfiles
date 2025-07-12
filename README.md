@@ -33,16 +33,24 @@ $ make deploy
 
  - Font: FiraCode Nerd Font [Nerd Fonts](https://www.nerdfonts.com/)
  - go
- - rust (cargo)
- - exa - ls replacement [Installation](https://the.exa.website/install)
+ - rust (for cargo) - [Installation](https://rustup.rs/)
+ - eza - ls replacement [Installation](https://eza.rocks/) ~~exa - ls replacement [Installation](https://the.exa.website/install)~~ 
  - fzf [Installation](https://github.com/junegunn/fzf#installation) - NOTE neovim might install this for you in `~/.fzf` so check that first and `./install` from there
 
 ### Shell
 
  - ZSH - through your distribution's package manager
- - oh-my-zsh - [Installation](https://ohmyz.sh/#install)
+ - oh-my-zsh - [Installation using cargo](https://ohmyz.sh/#install)
  - Prompt: Spaceship - Follow the `oh-my-zsh` git clone instructions on [Spaceship - Getting Started](https://spaceship-prompt.sh/getting-started/)
  - Plugins: zsh-syntax-highlighting - [INSTALL.md](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#oh-my-zsh)
+
+### Programs
+
+ - Kitty - [Installation](https://sw.kovidgoyal.net/kitty/binary/#binary-install), then follow the [Desktop Integration for Linux](https://sw.kovidgoyal.net/kitty/binary/#desktop-integration-on-linux)
+ - gnome-tweaks (apt install) - Keyboard -> Additional Layout Options
+   - -> Caps Lock Behaviour -> Make Caps Lock an additional Esc
+   - -> Ctrl Position -> Swap Left Alt with Left Ctrl
+
 
 ### TMUX
 
