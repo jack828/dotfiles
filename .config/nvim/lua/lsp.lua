@@ -221,6 +221,7 @@ mason_lspconfig.setup_handlers({
       jade = { pugLint },
       json = { jsonLint, prettierJson },
       html = { prettierHtml },
+      htmldjango = { prettier },
       css = { prettierCss },
       lua = { luacheck },
       sh = { shellcheck, shfmt },
