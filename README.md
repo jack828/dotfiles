@@ -31,16 +31,17 @@ $ make deploy
 
 ### Tools/Package Managers
 
- - Font: FiraCode Nerd Font [Nerd Fonts](https://www.nerdfonts.com/)
- - go
+ - Font: FiraCode Nerd Font [Nerd Fonts](https://www.nerdfonts.com/) - put files in `~/.local/share/fonts`
+ - go (apt is probably good enough)
  - rust (for cargo) - [Installation](https://rustup.rs/)
- - eza - ls replacement [Installation](https://eza.rocks/) ~~exa - ls replacement [Installation](https://the.exa.website/install)~~ 
+ - eza - ls replacement [Installation](https://eza.rocks/) (exa is unmaintained ~~exa - ls replacement [Installation](https://the.exa.website/install)~~)
  - fzf [Installation](https://github.com/junegunn/fzf#installation) - NOTE neovim might install this for you in `~/.fzf` so check that first and `./install` from there
+ - pip `sudo apt install python3-pip`
 
 ### Shell
 
  - ZSH - through your distribution's package manager
- - oh-my-zsh - [Installation using cargo](https://ohmyz.sh/#install)
+ - oh-my-zsh - [Installation](https://ohmyz.sh/#install)
  - Prompt: Spaceship - Follow the `oh-my-zsh` git clone instructions on [Spaceship - Getting Started](https://spaceship-prompt.sh/getting-started/)
  - Plugins: zsh-syntax-highlighting - [INSTALL.md](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#oh-my-zsh)
 
@@ -50,6 +51,7 @@ $ make deploy
  - gnome-tweaks (apt install) - Keyboard -> Additional Layout Options
    - -> Caps Lock Behaviour -> Make Caps Lock an additional Esc
    - -> Ctrl Position -> Swap Left Alt with Left Ctrl
+ - Lazygit [Installation](https://github.com/jesseduffield/lazygit#installation) (use "pull from github releases" if <25.04)
 
 
 ### TMUX
@@ -66,10 +68,6 @@ Inside TMUX, run `prefix + I` to install plugins.
 
 #### >3 Upgrade problems
 
-UTF-8 characters render as underscores
-
-Does not start after running `tmux`, just hangs. Killing the process makes it do a bunch of other stuff (tpm related), but otherwise unusable. Have to open another window and re-run tmux.
-
 ```
 /Users/jack/.tmux.conf:12: invalid option: status-attr
 /Users/jack/.tmux.conf:16: invalid option: window-status-fg
@@ -82,14 +80,15 @@ Does not start after running `tmux`, just hangs. Killing the process makes it do
 
 ### NVIM
 
-Install neovim nightly (>=0.10.2) and required packages
+Install neovim nightly (>=0.8.1) and required packages
  - apt: silversearcher-ag
  - pip: neovim msgpack
  - github: bat@^0.18.0
  - snap: go
 
 ```
-$ make update-nvim
+$ chmod u+x ./nvim.appimage
+$ mv ./nvim.appimage ~/.local/bin/nvim
 $ sudo apt install -y silversearcher-ag python3-pip
 $ pip3 install neovim msgpack --upgrade
 $ sudo snap install go --classic
@@ -99,7 +98,7 @@ $ <download and install github packages>
 Once in vim, the language servers should be installed automatically. If not, refer to `lsp.lua`, and manually install using:
 
 ```
-:LspInstall ts_ls cssls yamlls clangd bashls html jsonls vimls arduino_language_server
+:LspInstall tsserver cssls yamlls clangd bashls html jsonls vimls arduino_language_server
 ...etc...
 
 # This one is for linting
@@ -109,7 +108,7 @@ Once in vim, the language servers should be installed automatically. If not, ref
 #### LSP External Dependencies
 
 A number of programs supplement LSP setup in either linting or formatting:
- - apt: shellshock
+ - apt: shellcheck
  - go: mvdan.cc/sh/v3/cmd/shfmt@latest
 
 For `arduino_language_server`:
