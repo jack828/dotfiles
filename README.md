@@ -52,6 +52,10 @@ $ make deploy
    - -> Caps Lock Behaviour -> Make Caps Lock an additional Esc
    - -> Ctrl Position -> Swap Left Alt with Left Ctrl
  - Lazygit [Installation](https://github.com/jesseduffield/lazygit#installation) (use "pull from github releases" if <25.04)
+ - Docker [Use the script](https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script)
+ - VLC - apt install
+ - Obsidian [Installation](https://help.obsidian.md/install) - flatpack was used last time
+ - Mullvad VPN [Installation](https://mullvad.net/en/download/vpn/linux)
 
 
 ### TMUX
