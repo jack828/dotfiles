@@ -1,4 +1,4 @@
-<img width="923" height="519" alt="image" src="https://github.com/user-attachments/assets/5a6ba8a7-3e60-468c-ba4c-e931022a83dc" /># dotfiles
+# dotfiles
 
 Some stolen from:
  - [balaclark](https://github.com/balaclark/dotfiles)
