@@ -53,6 +53,7 @@ $ make deploy
    - -> Caps Lock Behaviour -> Make Caps Lock an additional Esc
    - -> Ctrl Position -> Swap Left Alt with Left Ctrl
    - -> Key sequence to kill the X server -> untick
+ - If using budgie, make it so workspaces are across all monitors `gsettings set org.gnome.mutter workspaces-only-on-primary false`
  - Lazygit [Installation](https://github.com/jesseduffield/lazygit#installation) (use "pull from github releases" if <25.04)
  - Docker [Use the script](https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script)
  - VLC - apt install
