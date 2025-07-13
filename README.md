@@ -1,4 +1,4 @@
-# dotfiles
+<img width="923" height="519" alt="image" src="https://github.com/user-attachments/assets/5a6ba8a7-3e60-468c-ba4c-e931022a83dc" /># dotfiles
 
 Some stolen from:
  - [balaclark](https://github.com/balaclark/dotfiles)
@@ -44,6 +44,7 @@ $ make deploy
  - oh-my-zsh - [Installation](https://ohmyz.sh/#install)
  - Prompt: Spaceship - Follow the `oh-my-zsh` git clone instructions on [Spaceship - Getting Started](https://spaceship-prompt.sh/getting-started/)
  - Plugins: zsh-syntax-highlighting - [INSTALL.md](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#oh-my-zsh)
+ - tmux - >=3.4 - apt is fine
 
 ### Programs
 
@@ -51,16 +52,21 @@ $ make deploy
  - gnome-tweaks (apt install) - Keyboard -> Additional Layout Options
    - -> Caps Lock Behaviour -> Make Caps Lock an additional Esc
    - -> Ctrl Position -> Swap Left Alt with Left Ctrl
+   - -> Key sequence to kill the X server -> untick
  - Lazygit [Installation](https://github.com/jesseduffield/lazygit#installation) (use "pull from github releases" if <25.04)
  - Docker [Use the script](https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script)
  - VLC - apt install
  - Obsidian [Installation](https://help.obsidian.md/install) - flatpack was used last time
  - Mullvad VPN [Installation](https://mullvad.net/en/download/vpn/linux)
+ - Flameshot [Download](https://flameshot.org/#download)
+   - Download appimage, chmod, move to `~/.local/bin/flameshot`
+   - Disable screenshot keyboard shortcuts
+   - Add custom shortcut `/home/jack/.local/bin/flameshot gui`
 
 
 ### TMUX
 
-This has only been tested on v2.6. (I'll upgrade to 3.x when you pay me to)
+Now with >3.4 support! When transferring, do **NOT** copy `~/.tmux/plugins`, only the `~/.tmux/resurrect` directory!
 
 Install TPM
 
@@ -69,18 +75,6 @@ $ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
 Inside TMUX, run `prefix + I` to install plugins.
-
-#### >3 Upgrade problems
-
-```
-/Users/jack/.tmux.conf:12: invalid option: status-attr
-/Users/jack/.tmux.conf:16: invalid option: window-status-fg
-/Users/jack/.tmux.conf:21: invalid option: window-status-current-fg
-/Users/jack/.tmux.conf:26: invalid option: pane-border-fg
-/Users/jack/.tmux.conf:27: invalid option: pane-active-border-fg
-/Users/jack/.tmux.conf:30: invalid option: message-bg
-/Users/jack/.tmux.conf:31: invalid option: message-fg
-```
 
 ### NVIM
 
