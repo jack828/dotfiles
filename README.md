@@ -62,6 +62,7 @@ $ make deploy
    - Download appimage, chmod, move to `~/.local/bin/flameshot`
    - Disable screenshot keyboard shortcuts
    - Add custom shortcut `/home/jack/.local/bin/flameshot gui`
+ - xclip
 
 
 ### TMUX
