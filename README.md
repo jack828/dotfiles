@@ -54,7 +54,7 @@ $ make deploy
    - -> Ctrl Position -> Swap Left Alt with Left Ctrl
    - -> Key sequence to kill the X server -> untick
  - If using budgie, make it so workspaces are across all monitors `gsettings set org.gnome.mutter workspaces-only-on-primary false`
- - Lazygit [Installation](https://github.com/jesseduffield/lazygit#installation) (use "pull from github releases" if <25.04)
+ - Lazygit [Installation](https://github.com/jesseduffield/lazygit#installation) (use "pull from github releases" if below 25.04)
  - Docker [Use the script](https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script)
  - VLC - apt install
  - Obsidian [Installation](https://help.obsidian.md/install) - flatpack was used last time
@@ -64,11 +64,13 @@ $ make deploy
    - Disable screenshot keyboard shortcuts
    - Add custom shortcut `/home/jack/.local/bin/flameshot gui`
  - xclip
+ - Android SDK - `apt install android-sdk`
+ - yarn [Installation](https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable), make sure to use `--no-install-recommends` to prevent nodejs package installed - handled with nave
 
 
 ### TMUX
 
-Now with >3.4 support! When transferring, do **NOT** copy `~/.tmux/plugins`, only the `~/.tmux/resurrect` directory!
+Now with >=3.4 support! When transferring, do **NOT** copy `~/.tmux/plugins`, only the `~/.tmux/resurrect` directory!
 
 Install TPM
 
