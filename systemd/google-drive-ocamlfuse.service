@@ -1,0 +1,15 @@
+# /etc/systemd/system/google-drive-ocamlfuse.service
+[Unit]
+Description=FUSE filesystem over Google Drive
+After=network.target
+
+[Service]
+User=jack
+Group=jack
+ExecStart=google-drive-ocamlfuse -label default /home/jack/GoogleDrive
+ExecStop=fusermount -u /home/jack/GoogleDrive
+Restart=always
+Type=forking
+
+[Install]
+WantedBy=multi-user.target

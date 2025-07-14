@@ -75,6 +75,8 @@ $ make deploy
  `wget https://download.java.net/java/GA/jdk18.0.2/f6ad4b4450fd4d298113270ec84f30ee/9/GPL/openjdk-18.0.2_linux-x64_bin.tar.gz`
    - `tar xvf openjdk-18.0.2_linux-x64_bin.tar.gz`
    - `sudo mv jdk-18.0.2 /usr/lib/jvm/java-18-openjdk-amd64`
+ - google-drive-ocamlfuse [install using ppa](https://github.com/astrada/google-drive-ocamlfuse#installation)
+   - copy the systemd unit file and enable
 
 
 ### TMUX
