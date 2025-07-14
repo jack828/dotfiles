@@ -64,8 +64,17 @@ $ make deploy
    - Disable screenshot keyboard shortcuts
    - Add custom shortcut `/home/jack/.local/bin/flameshot gui`
  - xclip
- - Android SDK - `apt install android-sdk`
+ - Android SDK
+   - Download the [command line tools](https://developer.android.com/studio#command-line-tools-only)
+   - Extract to `/home/jack/android-sdk`, so that the structure is like `/home/jack/android-sdk/cmdline-tools/latest/bin/sdkmanager`
+   - Run `$ANDROID_HOME/cmdline-tools/bin/sdkmanager --licenses`
+   - Run `$ANDROID_HOME/cmdline-tools/bin/sdkmanager "platform-tools" "platforms;android-33" "build-tools;30.0.3"`
  - yarn [Installation](https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable), make sure to use `--no-install-recommends` to prevent nodejs package installed - handled with nave
+ - Java 18
+   - download OpenJDK 18 from the archive <https://jdk.java.net/archive/>
+ `wget https://download.java.net/java/GA/jdk18.0.2/f6ad4b4450fd4d298113270ec84f30ee/9/GPL/openjdk-18.0.2_linux-x64_bin.tar.gz`
+   - `tar xvf openjdk-18.0.2_linux-x64_bin.tar.gz`
+   - `sudo mv jdk-18.0.2 /usr/lib/jvm/java-18-openjdk-amd64`
 
 
 ### TMUX

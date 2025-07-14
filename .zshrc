@@ -30,8 +30,8 @@
   setopt INC_APPEND_HISTORY # Write to the history file immediately, not when the shell exits.
 
 # Android SDK
-  export ANDROID_HOME=/usr/lib/android-sdk/
-  export PATH=${PATH}:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$ANDROID_HOME/build-tools
+  export ANDROID_HOME=/home/jack/android-sdk
+  export PATH=${PATH}:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$ANDROID_HOME/build-tools:$ANDROID_HOME/cmdline-tools/latest/bin
   # manually download gradle and extract here
   export PATH=${PATH}:/opt/gradle/bin
   export JAVA_HOME=/usr/lib/jvm/java-18-openjdk-amd64/
