@@ -236,3 +236,5 @@ Cognito
 cognito
 uuid
 verticies
+datastore
+hwid
