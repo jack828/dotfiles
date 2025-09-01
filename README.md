@@ -63,6 +63,7 @@ $ make deploy
    - Download appimage, chmod, move to `~/.local/bin/flameshot`
    - Disable screenshot keyboard shortcuts
    - Add custom shortcut `/home/jack/.local/bin/flameshot gui`
+   - Add a startup program in the whatever place `/home/jack/.local/bin/flameshot`
  - xclip
  - Android SDK
    - Download the [command line tools](https://developer.android.com/studio#command-line-tools-only)
@@ -125,7 +126,7 @@ A number of programs supplement LSP setup in either linting or formatting:
  - go: mvdan.cc/sh/v3/cmd/shfmt@latest
 
 For `arduino_language_server`:
- - Set up the [arduino-cli](https://github.com/arduino/arduino-cli) - I set `BINDIR=~/.local/bin`
+ - Set up the [arduino-cli](#Arduino)
  - Add a [Makefile](https://github.com/jack828/esp32-logger/blob/arduino/Makefile) like this project
  - Run `make compile`, and it will use the output for LSP
 
@@ -195,3 +196,20 @@ Plugins:
 | `prefix + [` | Swap split right |
 | `prefix + ]` | Swap split left |
 | `prefix + ` | todo... |
+
+## Arduino Setup
+
+Install CLI [arduino-cli](https://github.com/arduino/arduino-cli) - I set `BINDIR=~/.local/bin`
+
+Update and install boards:
+
+```
+arduino-cli core update-index
+arduino-cli core install esp32:esp32
+```
+
+Allow serial monitor access
+
+```
+sudo usermod -aG dialout $USER
+```
