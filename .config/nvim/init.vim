@@ -378,7 +378,7 @@
 
   " Faster keyboard navigation within files
   " Lua version of easymotion
-  Plug 'phaazon/hop.nvim'
+  Plug 'smoka7/hop.nvim'
     nmap <silent> s :HopWord<CR>
 
   " Statusbar
