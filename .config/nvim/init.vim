@@ -433,8 +433,8 @@
   Plug 'ojroques/nvim-lspfuzzy'
 
   " LSP manager
-  Plug 'mason-org/mason.nvim', { 'branch': 'v1.x' }
-  Plug 'mason-org/mason-lspconfig.nvim', { 'branch': 'v1.x' }
+  Plug 'mason-org/mason.nvim', { 'branch': 'main' }
+  Plug 'mason-org/mason-lspconfig.nvim', { 'branch': 'main' }
   " Default LSP configuration
   Plug 'neovim/nvim-lspconfig'
 

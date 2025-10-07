@@ -58,7 +58,11 @@ end
 mason.setup({})
 
 mason_lspconfig.setup({
-  -- A list of servers to automatically install if they're not already installed
+  automatic_enable =  {
+    exclude = {
+      "ts_ls"
+    }
+  },
   ensure_installed = {
     "dockerls",
     "docker_compose_language_service",
@@ -73,7 +77,9 @@ mason_lspconfig.setup({
     "yamlls",
     "arduino_language_server",
     "terraformls",
-  },
+    "tailwindcss",
+    "lua_ls"
+  }
 })
 
 local opts = {
@@ -104,142 +110,114 @@ require("typescript-tools").setup({
   }
 })
 
--- setup installed language servers
-mason_lspconfig.setup_handlers({
-  -- The first entry (without a key) will be the default handler
-  -- and will be called for each installed server that doesn't have
-  -- a dedicated handler.
-  function(server_name) -- Default handler (optional)
-    lspconfig[server_name].setup {
-      on_attach = opts.on_attach,
-      capabilities = opts.capabilities,
-    }
-  end,
+-- Set default root markers for all clients
+vim.lsp.config('*', {
+  root_markers = { '.git' },
+  on_attach = opts.on_attach,
+  capabilities = opts.capabilities,
+})
 
-  ["arduino_language_server"] = function()
-    lspconfig["arduino_language_server"].setup({
-      on_attach = opts.on_attach,
-      capabilities = opts.capabilities,
-      cmd = {
-        "arduino-language-server",
-        "-fqbn",
-        "esp32:esp32:esp32",
-        "-clangd", "/usr/bin/clangd",
-        "-cli", "/home/jack/.local/bin/arduino-cli",
-        "-cli-config", "/home/jack/.arduino15/arduino-cli.yaml"
-      }
-      -- i dont remember what this was trying to do ?
-        -- on_new_config = function (config, root_dir)
-            -- local partial_cmd = server:get_default_options().cmd
-            -- local MY_FQBN = "esp32:esp32:esp32"
-            -- config.cmd = vim.list_extend(partial_cmd, {
-            -- "-fqbn", MY_FQBN,
-            -- "-clangd", "/usr/bin/clangd-8"
-            -- })
-        -- end
-    })
-  end,
+vim.lsp.config('arduino_language_server', {
+  cmd = {
+    "arduino-language-server",
+    "-fqbn",
+    "esp32:esp32:esp32",
+    "-clangd", "/usr/bin/clangd",
+    "-cli", "/home/jack/.local/bin/arduino-cli",
+    "-cli-config", "/home/jack/.arduino15/arduino-cli.yaml"
+  }
+  -- i dont remember what this was trying to do ?
+    -- on_new_config = function (config, root_dir)
+        -- local partial_cmd = server:get_default_options().cmd
+        -- local MY_FQBN = "esp32:esp32:esp32"
+        -- config.cmd = vim.list_extend(partial_cmd, {
+        -- "-fqbn", MY_FQBN,
+        -- "-clangd", "/usr/bin/clangd-8"
+        -- })
+    -- end
+})
 
-  ["clangd"] = function()
-    lspconfig["clangd"].setup({
-      on_attach = opts.on_attach,
-      capabilities = opts.capabilities,
-      filetypes = { "c", "cpp", "objc", "objcpp", "ino" },
-    })
-  end,
+vim.lsp.config('clangd', {
+  filetypes = { "c", "cpp", "objc", "objcpp", "ino" },
+})
 
-  ["ts_ls"] = function()
-    -- managed by typescript-tools
-  end,
+--   -- managed by typescript-tools
+--   -- TODO needs to be updated
+--   https://github.com/pmizio/typescript-tools.nvim/pull/366
+-- vim.lsp.config('ts_ls', {
+--   on_attach = opts.on_attach,
+--   capabilities = opts.capabilities,
+-- })
 
-  ["efm"] = function()
-    local eslint = {
-      lintCommand = './node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}',
-      lintIgnoreExitCode = true,
-      lintStdin = true,
-      lintFormats = { '%f:%l:%c: %m' }
-    }
-    -- TODO
-    local stylint = {
-      lintCommand = './node_modules/.bin/stylint ${INPUT}',
-      lintIgnoreExitCode = true,
-      lintStdin = true,
-      lintFormats = { '%f:%l:%c: %m' }
-    }
-    local prettier = {
-      formatCommand = './node_modules/.bin/prettier --config-precedence prefer-file --stdin-filepath ${INPUT}',
-      formatStdin = true
-    }
-    local prettierHtml = {
-      formatCommand = './node_modules/.bin/prettier --write ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser html --stdin-filepath ${INPUT}',
-      formatStdin = true
-    }
-    local prettierCss = {
-      formatCommand = './node_modules/.bin/prettier --write ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser css --stdin-filepath ${INPUT}',
-      formatStdin = true
-    }
-    local prettierJson = {
-      formatCommand = './node_modules/.bin/prettier --write ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser json --stdin-filepath ${INPUT}',
-      formatStdin = true
-    }
-    local pugLint = {
-      lintCommand = './node_modules/.bin/pug-lint --reporter inline',
-      lintIgnoreExitCode = true,
-      lintFormats = { '%f:%l:%c %m' },
-      rootMarkers = { '.pug-lintrc', '.pug-lintrc.js', '.pug-lintrc.json' }
-    }
-    local jsonLint = {
-      lintCommand = 'jq .',
-      lintStdin = true,
-      lintIgnoreExitCode = true,
-    }
-    local luacheck = {
-      lintCommand = 'luacheck --globals vim --filename ${INPUT} --formatter plain -',
-      lintStdin = true,
-      lintFormats = { '%f:%l:%c: %m' }
-    }
-    local shellcheck = {
-      lintCommand = 'shellcheck -f gcc -x',
-      lintSource = 'shellcheck',
-      lintFormats = {
-        '%f:%l:%c: %trror: %m',
-        '%f:%l:%c: %tarning: %m',
-        '%f:%l:%c: %tote: %m',
-      }
-    }
-    local shfmt = {
-      formatCommand = 'shfmt -ci -s -bn -i 2',
-      formatStdin = true
-    }
+vim.lsp.config('tailwindcss', {})
 
-    local languages = {
-      javascript = { eslint, prettier },
-      javascriptreact = { eslint, prettier },
-      typescript = { eslint, prettier },
-      typescriptreact = { eslint, prettier },
-      pug = { pugLint },
-      jade = { pugLint },
-      json = { jsonLint, prettierJson },
-      html = { prettierHtml },
-      htmldjango = { prettier },
-      css = { prettierCss },
-      lua = { luacheck },
-      sh = { shellcheck, shfmt },
-      zsh = { shellcheck, shfmt }
-    }
+local eslint = {
+  lintCommand = './node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}',
+  lintIgnoreExitCode = true,
+  lintStdin = true,
+  lintFormats = { '%f:%l:%c: %m' }
+}
+local prettier = {
+  formatCommand = './node_modules/.bin/prettier --config-precedence prefer-file --stdin-filepath ${INPUT}',
+  formatStdin = true
+}
+local prettierHtml = {
+  formatCommand = './node_modules/.bin/prettier --write ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser html --stdin-filepath ${INPUT}',
+  formatStdin = true
+}
+local prettierCss = {
+  formatCommand = './node_modules/.bin/prettier --write ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser css --stdin-filepath ${INPUT}',
+  formatStdin = true
+}
+local prettierJson = {
+  formatCommand = './node_modules/.bin/prettier --write ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser json --stdin-filepath ${INPUT}',
+  formatStdin = true
+}
+local jsonLint = {
+  lintCommand = 'jq .',
+  lintStdin = true,
+  lintIgnoreExitCode = true,
+}
+local luacheck = {
+  lintCommand = 'luacheck --globals vim --filename ${INPUT} --formatter plain -',
+  lintStdin = true,
+  lintFormats = { '%f:%l:%c: %m' }
+}
+local shellcheck = {
+  lintCommand = 'shellcheck -f gcc -x',
+  lintSource = 'shellcheck',
+  lintFormats = {
+    '%f:%l:%c: %trror: %m',
+    '%f:%l:%c: %tarning: %m',
+    '%f:%l:%c: %tote: %m',
+  }
+}
+local shfmt = {
+  formatCommand = 'shfmt -ci -s -bn -i 2',
+  formatStdin = true
+}
+local languages = {
+  javascript = { eslint, prettier },
+  javascriptreact = { eslint, prettier },
+  typescript = { eslint, prettier },
+  typescriptreact = { eslint, prettier },
+  json = { jsonLint, prettierJson },
+  html = { prettierHtml },
+  htmldjango = { prettier },
+  css = { prettierCss },
+  lua = { luacheck },
+  sh = { shellcheck, shfmt },
+  zsh = { shellcheck, shfmt }
+}
 
-    lspconfig["efm"].setup({
-      on_attach = opts.on_attach,
-      capabilities = opts.capabilities,
-      init_options = {
-        documentFormatting = true
-      },
-      settings = {
-        rootMarkers = { '.git/' },
-        lintDebounce = 1000000000, -- 1s in nanoseconds
-        languages = languages
-      },
-      filetypes = vim.tbl_keys(languages),
-    })
-  end,
+vim.lsp.config('efm', {
+  init_options = {
+    documentFormatting = true
+  },
+  settings = {
+    rootMarkers = { '.git/' },
+    lintDebounce = 1000000000, -- 1s in nanoseconds
+    languages = languages
+  },
+  filetypes = vim.tbl_keys(languages),
 })
