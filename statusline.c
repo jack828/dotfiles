@@ -109,7 +109,7 @@ int main() {
       } else {
         printf("#[fg=" RED "]");
       }
-      printf("(%2d %%) ", batteryLevel);
+      printf("(%2d%%) ", batteryLevel);
     }
   } else {
     if (batteryLevel > 75) {
@@ -119,7 +119,7 @@ int main() {
     } else {
       printf("#[fg=" RED ",reverse]");
     }
-    printf(" %2d %% ", batteryLevel);
+    printf(" %2d%% ", batteryLevel);
   }
   resetStyles();
 
