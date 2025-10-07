@@ -17,6 +17,7 @@
 #define CPU_TEMP_FACTOR 1000
 #define FAN_STATUS_FILE "/proc/acpi/ibm/fan"
 #define WIREGUARD_INTERFACE_FILE "/proc/net/dev_snmp6/wg0"
+#define MULLVAD_INTERFACE_FILE "/proc/net/dev_snmp6/wg0-mullvad"
 #define ETHERNET_INTERFACE "enp1s0f0"
 #define WIRELESS_INTERFACE "wlp2s0"
 
