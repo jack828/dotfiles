@@ -324,18 +324,19 @@
   Plug 'rking/ag.vim'
     nnoremap \ :Ag!<SPACE>
 
+  " TODO seems old and outdated
   " Better nodejs support
   " Used for opening file under cursor with gf
   Plug 'moll/vim-node', { 'for': 'javascript' }
 
-  " Fancy icons (requires patched font)
-  Plug 'nvim-tree/nvim-web-devicons'
-
   " Lua utils, common plugin dependency
   Plug 'nvim-lua/plenary.nvim'
 
-  " File navigator
+  " UI Lib
   Plug 'MunifTanjim/nui.nvim'
+  " Fancy icons (requires patched font)
+  Plug 'nvim-tree/nvim-web-devicons'
+  " File navigator
   Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v3.x' }
       " Toggle file browser
       nmap <silent> <Tab><Tab> :Neotree filesystem position=left action=focus toggle<CR>
@@ -344,9 +345,6 @@
 
   " Comment code
   Plug 'numToStr/Comment.nvim'
-
-  " Strip whitespace etc.
-  Plug 'editorconfig/editorconfig-vim'
 
   " Autocomplete
   Plug 'hrsh7th/cmp-nvim-lsp'
