@@ -99,6 +99,7 @@ Install neovim nightly (>=0.8.1) and required packages
  - pip: neovim msgpack
  - github: bat@^0.18.0
  - snap: go
+ - cargo: tree-sitter-cli
 
 ```
 $ chmod u+x ./nvim.appimage
@@ -106,6 +107,7 @@ $ mv ./nvim.appimage ~/.local/bin/nvim
 $ sudo apt install -y silversearcher-ag python3-pip
 $ pip3 install neovim msgpack --upgrade
 $ sudo snap install go --classic
+$ cargo install --locked tree-sitter-cli
 $ <download and install github packages>
 ```
 
