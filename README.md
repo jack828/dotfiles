@@ -79,6 +79,13 @@ $ make deploy
  - google-drive-ocamlfuse [install using ppa](https://github.com/astrada/google-drive-ocamlfuse#installation)
    - copy the systemd unit file and enable
 
+### Development
+
+ - GCC, `strip`
+ - clangd tools:
+   - `wget -qO /home/jack/.local/bin/clang-tidy https://github.com/cpp-linter/clang-tools-static-binaries/releases/latest/download/clang-tidy-21_linux-amd64 && chmod a+x /home/jack/.local/bin/clang-tidy`
+   - `wget -qO /home/jack/.local/bin/clang-format https://github.com/cpp-linter/clang-tools-static-binaries/releases/latest/download/clang-format-21_linux-amd64 && chmod a+x /home/jack/.local/bin/clang-format`
+
 
 ### TMUX
 

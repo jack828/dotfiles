@@ -196,6 +196,20 @@ local shfmt = {
   formatCommand = 'shfmt -ci -s -bn -i 2',
   formatStdin = true
 }
+local clangtidy = {
+  formatCommand = "clang-tidy -fix '${INPUT}'",
+  formatStdin = false
+}
+local clangformat = {
+  prefix = 'clang-format',
+  lintSource = 'efm/clang-format',
+  lintCommand = 'clang-format --dry-run "${INPUT}"',
+  lintIgnoreExitCode = true,
+  lintStdin = false,
+  lintFormats = { '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m' },
+  rootMarkers = {},
+}
+
 local languages = {
   javascript = { eslint, prettier },
   javascriptreact = { eslint, prettier },
@@ -207,7 +221,8 @@ local languages = {
   css = { prettierCss },
   lua = { luacheck },
   sh = { shellcheck, shfmt },
-  zsh = { shellcheck, shfmt }
+  zsh = { shellcheck, shfmt },
+  c = { clangtidy, clangformat }
 }
 
 vim.lsp.config('efm', {
